@@ -1,0 +1,96 @@
+{
+  "id": "system-design-fundamentals",
+  "company": null,
+  "role": "Software Engineer",
+  "level": "Mid-Senior",
+  "type": "system-design",
+  "difficulty": "senior",
+  "language": "English",
+  "jobDescription": "Generic system design interview preparation covering fundamental concepts, common patterns, and classic problems. Suitable for mid-level to senior engineering roles at any company.",
+  "systemPromptOverride": "You are a system design interviewer. Guide the candidate through a structured approach: (1) Requirements clarification, (2) Capacity estimation, (3) High-level design, (4) Detailed component design, (5) Scalability and trade-offs. Push the candidate to think about edge cases, failure modes, monitoring, and operational concerns. Evaluate breadth of knowledge across storage, compute, networking, and caching layers.",
+  "questionBank": [
+    {
+      "category": "system-design",
+      "question": "Design a URL shortener like bit.ly that handles 100M new URLs per month.",
+      "hints": [
+        "Hash function vs counter approach",
+        "Read-heavy workload",
+        "Analytics requirements"
+      ],
+      "idealAnswer": "Write path: generate short code (base62 encoding of auto-increment ID or hash), store mapping in database. Read path: lookup short code, 301/302 redirect. Storage: key-value store (DynamoDB/Redis) for fast lookups. Scale: cache popular URLs in Redis, partition by short code prefix. Analytics: async event logging to a streaming pipeline. Handle: custom aliases, expiration, rate limiting for creation. Capacity: 100M/month = ~40 writes/sec, reads likely 100x = 4000/sec. Storage: 500 bytes per URL * 100M * 12 months * 5 years = ~3TB."
+    },
+    {
+      "category": "system-design",
+      "question": "Design a distributed message queue like Kafka.",
+      "hints": [
+        "Partitioning strategy",
+        "Replication for durability",
+        "Consumer group coordination"
+      ],
+      "idealAnswer": "Topics divided into partitions, each an ordered, immutable log. Producers write to partition based on key hash. Partitions replicated across brokers (leader + followers). Consumers in a consumer group: each partition assigned to exactly one consumer (rebalancing on group changes). Offset management: consumers track their position per partition. Durability: write-ahead log, configurable acks (leader only vs all replicas). Retention: time-based or size-based. Key components: controller for metadata, ZooKeeper/KRaft for coordination. Handle: consumer lag monitoring, dead letter queues, exactly-once semantics with idempotent producers."
+    },
+    {
+      "category": "system-design",
+      "question": "Design a web crawler that can crawl 1 billion pages per month.",
+      "hints": [
+        "Politeness and rate limiting",
+        "URL frontier prioritization",
+        "Deduplication of content"
+      ],
+      "idealAnswer": "Seed URL -> URL Frontier (priority queue with politeness constraints per domain) -> Fetcher (distributed workers with rate limiting per domain) -> Content Parser (extract links, text) -> Dedup (content hash + URL dedup via bloom filter) -> Storage (raw HTML in object storage, parsed data in search index). Scale: 1B pages/month = ~400 pages/sec, distributed across many workers. DNS caching to reduce lookups. Robots.txt parser and cache. Handle: redirect chains, JavaScript rendering (headless browser pool for dynamic pages), traps (infinite calendars, session IDs in URLs), and freshness (recrawl scheduling based on page change frequency)."
+    },
+    {
+      "category": "system-design",
+      "question": "Design a notification system that sends push notifications, emails, and SMS to millions of users.",
+      "hints": [
+        "Template system for message content",
+        "Priority queues for different urgency levels",
+        "User preference management"
+      ],
+      "idealAnswer": "API receives notification requests with user ID, template, channel preference, and priority. Notification service: resolve user preferences (opt-in channels, quiet hours), render template with user data, route to channel-specific queues. Channel workers: push notification (APNs, FCM), email (SES/SendGrid), SMS (Twilio). Priority: separate queues for critical (security alerts) vs normal (marketing). Rate limiting: per-user and global to prevent spam. Tracking: delivery receipts, open tracking, click tracking. Handle: retry with exponential backoff per channel, fallback channels (push fails -> SMS), batching for efficiency, and analytics dashboard."
+    },
+    {
+      "category": "system-design",
+      "question": "Design a rate limiter for an API gateway handling 1M requests per second.",
+      "hints": [
+        "Token bucket vs sliding window",
+        "Distributed rate limiting with Redis",
+        "Per-user vs global limits"
+      ],
+      "idealAnswer": "Algorithm: token bucket for smooth rate limiting. Per-user state: tokens_remaining and last_refill_timestamp. Distributed: store state in Redis with Lua scripts for atomic check-and-decrement. Sliding window for more accurate counting: use Redis sorted sets with timestamp scores. Multi-tier: global rate limit -> per-API-key -> per-endpoint. Handle: burst allowance (token bucket max), response headers (X-RateLimit-*), graceful degradation when Redis is down (local in-memory fallback or allow traffic), and different limits for different API tiers."
+    },
+    {
+      "category": "system-design",
+      "question": "Design a real-time chat application like Slack or Discord supporting channels, DMs, and file sharing.",
+      "hints": [
+        "WebSocket connection management",
+        "Message ordering and delivery guarantees",
+        "Online presence system"
+      ],
+      "idealAnswer": "Connection layer: WebSocket connections to a gateway fleet, load-balanced with session affinity. Message flow: client -> gateway -> message service -> persist to database -> fan-out to channel subscribers' gateways. Storage: messages in a partitioned database (by channel, time-ordered), files in object storage. Presence: heartbeat-based, publish status changes via pub/sub. Features: message threading (parent_id), reactions (denormalized count + list), search (Elasticsearch index), file preview generation (async worker). Handle: offline message delivery (push notification + catch-up sync), message editing/deletion (soft delete, propagate update), and read receipts (per-user watermark per channel)."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 1,
+    "stages": ["System Design Interview (45-60 min)"],
+    "timeline": "N/A",
+    "tips": [
+      "Always start by clarifying requirements — functional and non-functional",
+      "Do back-of-the-envelope calculations for capacity, storage, and bandwidth",
+      "Draw a clear high-level architecture before diving into details",
+      "Discuss trade-offs explicitly — there are no perfect solutions",
+      "Address the CAP theorem where applicable",
+      "Don't forget operational concerns: monitoring, alerting, deployment, and disaster recovery"
+    ]
+  },
+  "salaryRange": null,
+  "tags": [
+    "system-design",
+    "architecture",
+    "distributed-systems",
+    "scalability",
+    "all-companies"
+  ],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}

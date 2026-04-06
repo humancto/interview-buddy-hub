@@ -1,0 +1,102 @@
+{
+  "id": "microsoft-l62-backend",
+  "company": "Microsoft",
+  "companyLogo": "https://logo.clearbit.com/microsoft.com",
+  "role": "Backend Engineer",
+  "level": "L62 (Senior)",
+  "type": "technical",
+  "difficulty": "senior",
+  "language": "English",
+  "jobDescription": "As a Senior Software Engineer (L62) at Microsoft, you will design and build cloud-scale backend services powering Azure, Microsoft 365, Teams, or other product groups. You will work with C#/.NET, TypeScript, or Java to build microservices running on Azure Kubernetes Service and Azure Service Fabric. Responsibilities include designing distributed services with high availability, implementing RESTful and gRPC APIs, optimizing database performance (Cosmos DB, SQL Server), driving engineering excellence through code reviews and design documents, and mentoring junior engineers. Requirements: 5-8 years backend experience, strong C# or Java skills, experience with cloud services (Azure preferred), distributed systems knowledge, CI/CD pipelines, and monitoring (Application Insights, Grafana). Preferred: Experience with Azure-native services, .NET internals, performance optimization, and security-first design.",
+  "systemPromptOverride": "You are a Microsoft interviewer. Microsoft values a growth mindset — assess candidates on their ability to learn and adapt, not just current knowledge. Technical interviews should probe for depth and the ability to reason about trade-offs. Microsoft emphasizes inclusive design and accessibility. For behavioral questions, focus on collaboration, growth mindset, and customer obsession. Coding interviews allow the candidate's preferred language.",
+  "questionBank": [
+    {
+      "category": "technical",
+      "question": "Design a globally distributed, multi-tenant SaaS platform on Azure. How would you handle tenant isolation, scaling, and data residency?",
+      "hints": [
+        "Consider silo vs pool model",
+        "Think about noisy neighbor problems",
+        "Discuss data residency regulations like GDPR"
+      ],
+      "idealAnswer": "Hybrid approach: pool model for small tenants (shared infrastructure with logical isolation via tenant ID), silo model for enterprise tenants (dedicated resources). Data residency: deploy stamps in regional Azure regions, route traffic via Azure Front Door with geo-routing rules. Tenant isolation: row-level security in databases, separate encryption keys per tenant (Azure Key Vault), network isolation via VNETs for silo tenants. Scaling: autoscale based on per-tenant metrics, implement throttling and fair-share scheduling. Use Azure Cosmos DB with partition key by tenant for natural data isolation."
+    },
+    {
+      "category": "coding",
+      "question": "Implement a concurrent task scheduler that executes tasks respecting dependencies (a DAG) with a configurable concurrency limit.",
+      "hints": [
+        "Topological sort for ordering",
+        "Use a semaphore for concurrency control",
+        "Track completed dependencies with a counter"
+      ],
+      "idealAnswer": "Build a dependency graph and compute in-degree for each task. Use a semaphore (SemaphoreSlim in C#) to limit concurrency. Maintain a thread-safe queue of ready tasks (in-degree = 0). Process: dequeue a ready task, acquire semaphore, execute asynchronously, on completion decrement in-degree of dependents and enqueue any that reach 0. Use Task.WhenAll on all task completions. Handle exceptions by optionally canceling dependent tasks. Detect cycles during initialization via topological sort."
+    },
+    {
+      "category": "technical",
+      "question": "How would you migrate a monolithic .NET Framework application to .NET 8 microservices on Azure?",
+      "hints": [
+        "Strangler fig pattern",
+        "Identify bounded contexts",
+        "Consider data migration strategy"
+      ],
+      "idealAnswer": "Phase 1: Analyze and map the monolith into bounded contexts using domain-driven design. Phase 2: Implement the strangler fig pattern — route traffic through an API gateway, gradually extracting services. Start with the least coupled, highest-value domain. Phase 3: For each service extraction, create a new .NET 8 service, implement anti-corruption layer for data translation, run in parallel with feature flags, cut over when stable. Use Azure Service Bus for async communication between new services and monolith. Migrate data incrementally using change data capture. Deploy on AKS with Dapr for service mesh capabilities."
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you received critical feedback. How did you respond and what did you change?",
+      "hints": [
+        "Demonstrate growth mindset",
+        "Show self-awareness",
+        "Describe concrete behavioral changes"
+      ],
+      "idealAnswer": "Describe receiving specific, constructive feedback (e.g., from a review, manager, or peer). Show initial reaction was to listen and understand, not get defensive. Explain how you reflected on the feedback, identified specific areas to improve, and took concrete actions. Share the measurable outcome of those changes. This demonstrates Microsoft's core value of growth mindset."
+    },
+    {
+      "category": "system-design",
+      "question": "Design Microsoft Teams' real-time messaging system supporting 300 million monthly active users.",
+      "hints": [
+        "Consider WebSocket management at scale",
+        "Think about message ordering guarantees",
+        "Discuss presence and typing indicators"
+      ],
+      "idealAnswer": "Connection layer: WebSocket connections managed by a fleet of gateway servers, with sticky sessions via Azure SignalR Service or custom solution. Message flow: client sends message to gateway, routed to message service, persisted to partitioned message store (Cosmos DB), fan-out to recipients' gateways. Ordering: per-conversation sequence numbers with vector clocks for conflict resolution. Presence: heartbeat-based presence service with pub/sub for status updates (Redis Pub/Sub or Event Grid). Typing indicators: ephemeral, not persisted, use a fire-and-forget channel. Handle offline users with push notifications (APNs, FCM) and catch-up sync on reconnect."
+    },
+    {
+      "category": "coding",
+      "question": "Implement a function that finds the median of two sorted arrays in O(log(min(n,m))) time.",
+      "hints": [
+        "Binary search on the smaller array",
+        "Partition both arrays such that left halves combine to form the lower half",
+        "Handle edge cases with empty arrays"
+      ],
+      "idealAnswer": "Binary search on the smaller array. Find a partition i in nums1 and corresponding partition j = (n+m+1)/2 - i in nums2 such that all elements in the left partitions are less than all in the right. Check: maxLeft1 <= minRight2 and maxLeft2 <= minRight1. If maxLeft1 > minRight2, move i left; if maxLeft2 > minRight1, move i right. Handle edge cases with -infinity and +infinity sentinels. Time O(log(min(n,m))), Space O(1)."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 4,
+    "stages": [
+      "Recruiter Screen + Online Assessment",
+      "Phone Screen with Hiring Manager",
+      "Virtual Onsite (3-4 rounds: coding, system design, behavioral)",
+      "As-Appropriate Interview (skip-level with senior leader)"
+    ],
+    "timeline": "3-6 weeks",
+    "tips": [
+      "Microsoft allows you to code in any language — choose your strongest",
+      "Growth mindset is assessed in every round — show learning agility",
+      "The 'As-Appropriate' round with a senior leader evaluates culture fit and long-term potential",
+      "Microsoft values inclusive design — mention accessibility in system design",
+      "Prepare examples of collaboration across diverse teams",
+      "Research the specific product group — Microsoft is very diverse across divisions"
+    ]
+  },
+  "salaryRange": {
+    "currency": "USD",
+    "base": [155000, 210000],
+    "totalComp": [270000, 430000],
+    "source": "levels.fyi",
+    "year": 2026
+  },
+  "tags": ["csharp", "dotnet", "azure", "distributed-systems", "microservices"],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}

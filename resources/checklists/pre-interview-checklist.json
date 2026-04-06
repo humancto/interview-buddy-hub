@@ -1,0 +1,178 @@
+{
+  "id": "pre-interview-checklist",
+  "title": "Pre-Interview Checklist",
+  "description": "Complete checklist for the day before and day of your interview. Covers technical prep, logistics, and mental preparation.",
+  "updatedAt": "2026-04-06",
+  "sections": [
+    {
+      "title": "1 Week Before",
+      "items": [
+        {
+          "task": "Review the job description and identify key requirements",
+          "priority": "high"
+        },
+        {
+          "task": "Research the company: recent news, products, engineering blog, culture",
+          "priority": "high"
+        },
+        {
+          "task": "Prepare 10-15 STAR stories covering different competencies",
+          "priority": "high"
+        },
+        {
+          "task": "Practice 2-3 system design problems end-to-end",
+          "priority": "high"
+        },
+        {
+          "task": "Review your resume and be ready to discuss every bullet point",
+          "priority": "medium"
+        },
+        {
+          "task": "Prepare thoughtful questions for each interviewer",
+          "priority": "medium"
+        },
+        {
+          "task": "Confirm interview schedule, format (virtual/onsite), and interviewer names",
+          "priority": "high"
+        },
+        {
+          "task": "Test your coding environment (if virtual): IDE, screen sharing, audio/video",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "title": "Day Before",
+      "items": [
+        {
+          "task": "Review your STAR stories one final time — don't try to memorize, just refresh",
+          "priority": "high"
+        },
+        {
+          "task": "Lay out clothes (business casual unless told otherwise)",
+          "priority": "medium"
+        },
+        {
+          "task": "Charge all devices: laptop, phone, backup charger",
+          "priority": "high"
+        },
+        {
+          "task": "Set up your interview space: clean background, good lighting, quiet room",
+          "priority": "high"
+        },
+        {
+          "task": "Test internet connection speed (minimum 10 Mbps up/down for video)",
+          "priority": "high"
+        },
+        {
+          "task": "Prepare water, snacks, notepad, and pen",
+          "priority": "medium"
+        },
+        {
+          "task": "Review the company's core values and recent announcements",
+          "priority": "medium"
+        },
+        {
+          "task": "Get a good night's sleep — 7-8 hours minimum",
+          "priority": "high"
+        },
+        { "task": "Set 2 alarms for the morning", "priority": "medium" }
+      ]
+    },
+    {
+      "title": "Morning Of",
+      "items": [
+        {
+          "task": "Eat a balanced breakfast with protein (avoid heavy foods)",
+          "priority": "medium"
+        },
+        {
+          "task": "Review your notes for 15-20 minutes — no more (avoid cramming)",
+          "priority": "medium"
+        },
+        {
+          "task": "Light exercise or stretching to reduce anxiety",
+          "priority": "low"
+        },
+        {
+          "task": "Shower and dress professionally — it affects your mindset even on video",
+          "priority": "medium"
+        },
+        {
+          "task": "Close unnecessary browser tabs and applications",
+          "priority": "high"
+        },
+        {
+          "task": "Silence phone and disable notifications on computer",
+          "priority": "high"
+        },
+        {
+          "task": "Open the video call link 10 minutes early to verify everything works",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "title": "During the Interview",
+      "items": [
+        {
+          "task": "Smile and make eye contact (look at the camera, not the screen)",
+          "priority": "high"
+        },
+        {
+          "task": "Think out loud — explain your reasoning as you work",
+          "priority": "high"
+        },
+        {
+          "task": "Clarify requirements before diving into solutions",
+          "priority": "high"
+        },
+        {
+          "task": "Ask questions when stuck — interviewers want to help",
+          "priority": "high"
+        },
+        {
+          "task": "Manage your time — check in with the interviewer on pacing",
+          "priority": "medium"
+        },
+        {
+          "task": "Take a breath before answering behavioral questions — structure your response",
+          "priority": "medium"
+        },
+        {
+          "task": "Write clean code with meaningful variable names",
+          "priority": "high"
+        },
+        {
+          "task": "Test your solution with examples before saying you're done",
+          "priority": "high"
+        }
+      ]
+    },
+    {
+      "title": "After the Interview",
+      "items": [
+        {
+          "task": "Send a brief thank-you email to your recruiter within 24 hours",
+          "priority": "medium"
+        },
+        {
+          "task": "Write down the questions you were asked while they're fresh",
+          "priority": "high"
+        },
+        {
+          "task": "Note what went well and what you'd improve for self-reflection",
+          "priority": "medium"
+        },
+        {
+          "task": "Don't obsess over perceived mistakes — interviewers weigh the full picture",
+          "priority": "medium"
+        },
+        {
+          "task": "Follow up with your recruiter if you haven't heard back within the stated timeline",
+          "priority": "medium"
+        }
+      ]
+    }
+  ]
+}

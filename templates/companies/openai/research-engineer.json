@@ -1,0 +1,121 @@
+{
+  "id": "openai-research-engineer",
+  "company": "OpenAI",
+  "companyLogo": "https://logo.clearbit.com/openai.com",
+  "role": "Research Engineer",
+  "level": "Senior",
+  "type": "technical",
+  "difficulty": "expert",
+  "language": "English",
+  "jobDescription": "As a Research Engineer at OpenAI, you will bridge the gap between cutting-edge AI research and production systems. You will implement, optimize, and scale large language models and other frontier AI systems. You will work with Python, PyTorch, CUDA, and distributed training frameworks to train models with hundreds of billions of parameters across thousands of GPUs. Responsibilities include implementing novel architectures from research papers, optimizing training infrastructure for efficiency, building evaluation frameworks, developing tooling for researchers, and contributing to safety and alignment research. Requirements: 4+ years software engineering with strong ML/systems background, expert Python and PyTorch skills, experience with distributed training (FSDP, DeepSpeed, Megatron), understanding of transformer architectures and attention mechanisms, proficiency in CUDA/GPU programming. Preferred: Publications in ML venues (NeurIPS, ICML, ICLR), experience training models >10B parameters, knowledge of RLHF, constitutional AI, and interpretability research.",
+  "systemPromptOverride": "You are an OpenAI interviewer. OpenAI looks for research engineers who combine strong software engineering with deep ML understanding. Assess both the candidate's ability to implement complex systems and their understanding of the underlying mathematics and theory. Probe on: training stability, optimization techniques, distributed computing challenges, and alignment considerations. Ask about how they would debug training runs and handle failure modes at scale. OpenAI values intellectual curiosity, rigor, and alignment with the mission of safe AGI development.",
+  "questionBank": [
+    {
+      "category": "technical",
+      "question": "Explain the transformer architecture in detail. What are the key innovations and why does self-attention work?",
+      "hints": [
+        "Discuss multi-head attention mechanism",
+        "Explain positional encoding approaches",
+        "Compare with RNNs and CNNs for sequence modeling"
+      ],
+      "idealAnswer": "The transformer uses self-attention to compute representations by attending to all positions in the input simultaneously (vs sequential RNN processing). Key components: Query/Key/Value projections compute attention weights via scaled dot-product (QK^T/sqrt(d_k)), softmax, then weighted sum of values. Multi-head attention allows attending to different representation subspaces. Position information via sinusoidal encoding or learned embeddings (RoPE for modern models). Layer normalization and residual connections for training stability. FFN layers provide non-linearity and parameter capacity. Advantages: O(1) sequential operations for any-distance dependencies, highly parallelizable training."
+    },
+    {
+      "category": "technical",
+      "question": "How would you scale training of a 70B parameter language model across 512 GPUs? Discuss parallelism strategies.",
+      "hints": [
+        "Data parallelism, tensor parallelism, pipeline parallelism",
+        "Consider communication overhead",
+        "Discuss memory optimization techniques"
+      ],
+      "idealAnswer": "Use 3D parallelism: (1) Tensor Parallelism (TP=8 within a node) — split attention heads and FFN layers across GPUs within a node to minimize inter-node communication. (2) Pipeline Parallelism (PP=4 across nodes) — partition layers across pipeline stages with micro-batching to minimize bubble time. (3) Data Parallelism (DP=16 across remaining dimension) — replicate the pipeline and sync gradients with ZeRO-1/2 optimization. Memory: activation checkpointing (recompute during backward pass), mixed precision (BF16 forward/backward, FP32 master weights), ZeRO-3 for optimizer state sharding. Communication: overlap gradient all-reduce with computation, use NCCL with NVLink intra-node and InfiniBand inter-node."
+    },
+    {
+      "category": "coding",
+      "question": "Implement a basic version of Flash Attention in Python/PyTorch pseudo-code. Explain why it's more memory efficient.",
+      "hints": [
+        "Tiled computation to reduce HBM access",
+        "Online softmax computation",
+        "Consider the memory hierarchy: SRAM vs HBM"
+      ],
+      "idealAnswer": "Standard attention materializes the NxN attention matrix in HBM (O(N^2) memory). Flash Attention tiles Q, K, V into blocks that fit in SRAM, computing attention block-by-block using online softmax (tracking running max and sum). For each Q block, iterate over K,V blocks: compute local attention scores, update running softmax statistics, accumulate output. Never materialize the full attention matrix. Memory: O(N) vs O(N^2). Speed: reduced HBM reads/writes (IO-bound operation). The backward pass recomputes attention from Q,K,V instead of storing it. Key insight: the memory hierarchy bottleneck is HBM bandwidth, not compute."
+    },
+    {
+      "category": "technical",
+      "question": "Explain RLHF (Reinforcement Learning from Human Feedback) and its challenges. How would you implement it?",
+      "hints": [
+        "Reward model training from comparisons",
+        "PPO vs DPO for policy optimization",
+        "Discuss reward hacking and alignment tax"
+      ],
+      "idealAnswer": "RLHF pipeline: (1) Supervised fine-tuning (SFT) on high-quality demonstrations. (2) Train a reward model on human preference comparisons (Bradley-Terry model: P(a>b) = sigmoid(r(a) - r(b))). (3) Optimize the policy using PPO with the reward model, with KL penalty against the SFT model to prevent reward hacking. Challenges: reward model overoptimization (Goodhart's law), distributional shift, reward hacking, annotation quality and consistency, computational cost of PPO. Alternatives: DPO (Direct Preference Optimization) eliminates the explicit reward model by directly optimizing the policy from preferences. RLAIF uses AI feedback for scalable oversight."
+    },
+    {
+      "category": "coding",
+      "question": "Implement an efficient KV-cache for autoregressive generation. How does it interact with grouped-query attention and paged attention?",
+      "hints": [
+        "Cache key and value tensors from previous tokens",
+        "Handle batch dimension and variable sequence lengths",
+        "Consider memory management for long sequences"
+      ],
+      "idealAnswer": "Store K,V tensors per layer, growing by one position each generation step. With GQA (Grouped-Query Attention): K,V have fewer heads than Q, reducing cache size by the group ratio. Implementation: pre-allocate max-length buffers, track current position per sequence. For paged attention (vLLM): allocate KV cache in fixed-size pages (blocks), use a page table to map logical positions to physical pages. This enables: (1) non-contiguous memory, (2) memory sharing across beams/parallel samples, (3) dynamic memory allocation, and (4) efficient batching of variable-length sequences."
+    },
+    {
+      "category": "behavioral",
+      "question": "How do you think about AI safety in the context of building more capable systems? How would you approach a situation where a capability improvement might introduce safety risks?",
+      "hints": [
+        "Show genuine engagement with alignment",
+        "Discuss concrete safety measures",
+        "Balance capability and safety"
+      ],
+      "idealAnswer": "Demonstrate understanding of the capability-safety tension. Discuss concrete approaches: red-teaming and adversarial evaluation before deployment, implementing guardrails and content filters, monitoring for misuse patterns, iterative deployment with safety evaluations at each stage. Show familiarity with alignment techniques (RLHF, constitutional AI, interpretability). Emphasize the importance of slowing down when safety is uncertain and the principle of 'deploy only when benefits clearly outweigh risks.'"
+    },
+    {
+      "category": "technical",
+      "question": "A training run with 256 GPUs shows degraded throughput after 2 days. How would you diagnose and fix the issue?",
+      "hints": [
+        "Check for stragglers and hardware failures",
+        "Monitor GPU utilization, memory, network",
+        "Consider data pipeline bottlenecks"
+      ],
+      "idealAnswer": "Systematic diagnosis: (1) Check GPU health — nvidia-smi for temp, ECC errors, clock throttling. Identify stragglers with per-GPU iteration time monitoring. (2) Check network — InfiniBand error counters, NCCL debug logs for collective operation timing. (3) Check data pipeline — data loader throughput, disk I/O, CPU utilization for preprocessing. (4) Check memory — gradual memory leak via CUDA memory snapshot. (5) Training dynamics — loss spikes causing gradient explosions and recomputation. Common causes: failing GPU (ECC errors), degraded InfiniBand link, data pipeline not keeping up with increased sequence lengths, checkpoint saving blocking training. Fix: replace faulty hardware, add async checkpointing, prefetch data pipeline."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 5,
+    "stages": [
+      "Recruiter Screen",
+      "Technical Phone Screen (coding + ML fundamentals)",
+      "Take-Home or Live Coding (systems implementation)",
+      "Onsite (4 rounds: ML depth, systems design, coding, culture/mission fit)",
+      "Team Match Conversations"
+    ],
+    "timeline": "4-8 weeks",
+    "tips": [
+      "OpenAI expects depth in both ML theory and systems engineering",
+      "Be prepared to discuss recent ML papers and their implications",
+      "Practice implementing model components from scratch (attention, normalization, optimizers)",
+      "Show genuine interest in AI safety and alignment — it's core to the mission",
+      "Systems design questions will focus on ML infrastructure, not typical web systems",
+      "Demonstrate the ability to read, understand, and implement from research papers"
+    ]
+  },
+  "salaryRange": {
+    "currency": "USD",
+    "base": [250000, 370000],
+    "totalComp": [500000, 900000],
+    "source": "levels.fyi",
+    "year": 2026
+  },
+  "tags": [
+    "python",
+    "pytorch",
+    "transformers",
+    "distributed-training",
+    "cuda",
+    "ml-research",
+    "llm"
+  ],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}

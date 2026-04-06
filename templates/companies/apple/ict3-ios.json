@@ -1,0 +1,113 @@
+{
+  "id": "apple-ict3-ios",
+  "company": "Apple",
+  "companyLogo": "https://logo.clearbit.com/apple.com",
+  "role": "iOS Engineer",
+  "level": "ICT3 (Mid-Senior)",
+  "type": "technical",
+  "difficulty": "senior",
+  "language": "English",
+  "jobDescription": "As an iOS Engineer (ICT3) at Apple, you will build features for Apple's flagship applications and frameworks used by hundreds of millions of devices. You will work with Swift and Objective-C, UIKit and SwiftUI, and Apple's internal tooling. Responsibilities include implementing pixel-perfect UI from design specs, optimizing app performance and battery life, writing comprehensive unit and UI tests, collaborating with hardware teams on new device capabilities, and maintaining backward compatibility. Requirements: 4-7 years iOS development, expert-level Swift, deep understanding of UIKit and SwiftUI, experience with Core Data, Core Animation, and Combine/async-await. Strong understanding of memory management (ARC), multithreading (GCD, structured concurrency), and app architecture patterns (MVVM, TCA). Preferred: Objective-C proficiency, experience with Metal/Core ML, accessibility expertise, and contributions to open-source Swift projects.",
+  "systemPromptOverride": "You are an Apple interviewer. Apple's culture values secrecy, craftsmanship, and attention to detail. Probe deeply on iOS platform knowledge — candidates should understand the system at a framework level, not just surface API usage. Ask about performance profiling with Instruments, memory management nuances, and pixel-perfect UI implementation. Apple values candidates who care deeply about user experience and privacy.",
+  "questionBank": [
+    {
+      "category": "technical",
+      "question": "Explain Swift's memory management model. How does ARC work, and what are the common pitfalls?",
+      "hints": [
+        "Strong, weak, and unowned references",
+        "Retain cycles in closures",
+        "Autorelease pools in bridged code"
+      ],
+      "idealAnswer": "ARC (Automatic Reference Counting) tracks strong references at compile time and inserts retain/release calls. Strong references increment the count, weak references don't (and become nil when object deallocates), unowned references don't but assume the object is alive (crash if not). Common pitfalls: retain cycles in closures (use [weak self] or [unowned self] capture lists), delegate patterns (should be weak), timer references, and NotificationCenter observers. Tools: Instruments' Leaks and Allocations for detection."
+    },
+    {
+      "category": "technical",
+      "question": "How would you architect a complex iOS app? Compare MVVM, TCA (The Composable Architecture), and Clean Architecture.",
+      "hints": [
+        "Consider testability",
+        "Think about state management",
+        "Discuss navigation patterns"
+      ],
+      "idealAnswer": "MVVM: View observes ViewModel via Combine/ObservableObject, ViewModel contains business logic and transforms Model data. Good testability but navigation and dependency injection need additional patterns. TCA: Unidirectional data flow with Reducer composing smaller reducers. Excellent testability with TestStore, built-in dependency injection, but steeper learning curve and performance overhead for very large state. Clean Architecture: separates into layers (Entity, Use Case, Interface Adapters, Frameworks) with dependency inversion. Most flexible but most boilerplate. For Apple's scale, recommend modular architecture with SPM packages per feature."
+    },
+    {
+      "category": "coding",
+      "question": "Implement a custom UICollectionView layout that displays items in a Pinterest-style waterfall grid.",
+      "hints": [
+        "Override prepare() to pre-calculate frames",
+        "Track column heights",
+        "Implement layoutAttributesForElements(in:)"
+      ],
+      "idealAnswer": "Subclass UICollectionViewLayout. In prepare(), iterate all items, assigning each to the shortest column. Calculate frame using column width, item aspect ratio (from delegate), and current column height. Cache all UICollectionViewLayoutAttributes. Override collectionViewContentSize to return max column height. Override layoutAttributesForElements(in:) to return cached attributes intersecting the rect. Override layoutAttributesForItem(at:) for individual lookup. Handle invalidation on bounds change for rotation support."
+    },
+    {
+      "category": "technical",
+      "question": "How does SwiftUI's diffing algorithm work? How does it decide when to recreate vs update views?",
+      "hints": [
+        "Structural identity vs explicit identity",
+        "Body property and view graph",
+        "@State vs @Binding vs @ObservedObject lifecycle"
+      ],
+      "idealAnswer": "SwiftUI maintains a view graph separate from the view structs. It uses structural identity (position in the view tree) and explicit identity (@id, ForEach identifiers) to match views across updates. When a parent body is re-evaluated, SwiftUI diffs the new tree against the old one. Same type at same position = update (keeps state). Different type or position = destroy and recreate. @State is owned by the view node in the graph (persists across body re-evaluations but not recreation). @ObservedObject is re-created when the view struct is, so use @StateObject for ownership."
+    },
+    {
+      "category": "coding",
+      "question": "Implement a thread-safe, generic cache with LRU eviction and time-based expiration in Swift.",
+      "hints": [
+        "Use NSLock or actor for thread safety",
+        "Combine dictionary with doubly linked list",
+        "Consider using Swift concurrency actors"
+      ],
+      "idealAnswer": "Use a Swift actor for thread safety. Internally, a dictionary maps keys to linked list nodes containing value and expiration timestamp. LRU maintained via doubly linked list. On access, check expiration — if expired, remove and return nil, otherwise move to front. On insert, if at capacity, evict from tail. Use a periodic cleanup task (Task.detached with sleep) to remove expired entries proactively. Expose async get/set API. Consider using NSCache as underlying storage for memory pressure handling."
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a product you worked on where you pushed for a better user experience despite it being harder to implement.",
+      "hints": [
+        "Show attention to detail",
+        "Demonstrate user empathy",
+        "Quantify the UX improvement"
+      ],
+      "idealAnswer": "Describe a specific situation where the easier technical path led to a worse UX. Show how you advocated for the user, prototyped the better solution, and convinced stakeholders with user research or data. Demonstrate the craftsmanship and attention to detail Apple values."
+    },
+    {
+      "category": "technical",
+      "question": "How would you debug and optimize an iOS app that has janky scrolling? Walk through your profiling approach.",
+      "hints": [
+        "Use Instruments: Time Profiler, Core Animation",
+        "Check for main thread work",
+        "Image decoding and cell reuse"
+      ],
+      "idealAnswer": "Start with Instruments' Core Animation template to identify dropped frames. Check frame rate with CADisplayLink. Common causes: main thread image decoding (move to background queue, use thumbnail API), expensive Auto Layout (simplify constraints, use manual layout for complex cells), off-screen rendering (avoid cornerRadius + masksToBounds on scrolling cells, use pre-rendered images), cell preparation work (prefetch with UICollectionViewDataSourcePrefetching), and transparency compositing (use opaque backgrounds). Profile with Time Profiler to find hot spots."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 5,
+    "stages": [
+      "Recruiter Screen",
+      "Technical Phone Screen (coding + iOS knowledge)",
+      "Onsite (4-5 rounds: 2 coding, 1 iOS deep-dive, 1 system design, 1 behavioral)",
+      "Hiring Manager Review",
+      "Offer"
+    ],
+    "timeline": "4-8 weeks",
+    "tips": [
+      "Apple is extremely secretive — don't expect details about the team or project until late in the process",
+      "Deep iOS platform knowledge is valued more than general CS — know the frameworks inside out",
+      "Practice coding in Swift without autocomplete or an IDE",
+      "Be prepared to discuss UI/UX opinions — Apple cares about design sensibility in engineers",
+      "Expect questions about accessibility, privacy, and performance optimization",
+      "Research the specific Apple team/product area you're interviewing for"
+    ]
+  },
+  "salaryRange": {
+    "currency": "USD",
+    "base": [155000, 220000],
+    "totalComp": [280000, 450000],
+    "source": "levels.fyi",
+    "year": 2026
+  },
+  "tags": ["swift", "ios", "uikit", "swiftui", "objective-c", "mobile"],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}

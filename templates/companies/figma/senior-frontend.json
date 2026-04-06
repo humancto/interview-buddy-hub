@@ -1,0 +1,111 @@
+{
+  "id": "figma-senior-frontend",
+  "company": "Figma",
+  "companyLogo": "https://logo.clearbit.com/figma.com",
+  "role": "Frontend Engineer",
+  "level": "Senior",
+  "type": "technical",
+  "difficulty": "senior",
+  "language": "English",
+  "jobDescription": "As a Senior Frontend Engineer at Figma, you will build the world's most collaborative design tool — a real-time, multiplayer application running entirely in the browser. You will work with TypeScript, React, WebGL/WebGPU, WebAssembly, and CRDTs to push the boundaries of what's possible on the web platform. Responsibilities include building and optimizing the design editor canvas (WebGL-rendered), implementing real-time collaboration features, developing Figma's component and design system libraries, optimizing performance for documents with 10,000+ layers, and contributing to Figma's plugin platform. Requirements: 5+ years frontend experience, expert TypeScript skills, experience with canvas/WebGL rendering or game engines, deep understanding of browser performance optimization, experience with real-time collaborative systems. Preferred: Experience with WebAssembly, CRDTs, custom rendering engines, and design tools.",
+  "systemPromptOverride": "You are a Figma interviewer. Figma is a deeply technical product that pushes web platform boundaries. Interviews assess: ability to build complex, performant browser applications, understanding of rendering pipelines and GPU programming, experience with real-time collaboration, and strong product sense for developer/designer tools. Figma values craft, collaboration, and pushing technical boundaries. For coding, expect practical problems related to geometry, rendering, or data structures for visual editing. Push candidates to think about performance at scale (huge documents, many collaborators).",
+  "questionBank": [
+    {
+      "category": "technical",
+      "question": "How would you implement a high-performance 2D rendering engine in the browser for a design tool like Figma?",
+      "hints": [
+        "WebGL vs Canvas 2D API vs WebGPU",
+        "Scene graph and dirty rectangle optimization",
+        "GPU batching strategies"
+      ],
+      "idealAnswer": "Use WebGL for GPU-accelerated rendering. Scene graph: tree of renderable nodes with transform matrices. Rendering pipeline: (1) Traverse scene graph, compute world transforms (matrix multiplication down the tree). (2) Frustum culling — skip nodes entirely outside the viewport. (3) Layer sorting by z-index. (4) Batch draw calls by shader/texture to minimize GPU state changes. (5) Dirty rectangle tracking — only re-render regions that changed. (6) Use instanced rendering for repeated elements (e.g., grid dots). Optimizations: texture atlasing for icons/images, SDF (signed distance field) rendering for resolution-independent vector shapes, and off-screen rendering to texture for complex groups. Handle: zoom/pan with transform matrix, retina display scaling, and hit testing with spatial index."
+    },
+    {
+      "category": "technical",
+      "question": "Explain CRDTs and how they enable real-time collaboration without a central server as the sole authority.",
+      "hints": [
+        "State-based vs operation-based CRDTs",
+        "Convergence guarantees",
+        "Specific CRDTs for design tools (trees, text)"
+      ],
+      "idealAnswer": "CRDTs (Conflict-free Replicated Data Types) are data structures that can be updated independently and concurrently, and always converge to the same state when synced. Two types: state-based (merge function on full states, must be a join-semilattice) and operation-based (broadcast operations, must be commutative for concurrent ops). For design tools: use a tree CRDT for the layer hierarchy (handle concurrent moves, reparenting), a register CRDT for property values (last-writer-wins with Lamport timestamps), and a sequence CRDT (RGA or Yjs) for text content. Challenges: memory overhead of tombstones for deletions, garbage collection of old state, and handling undo/redo per-user with operation tracking."
+    },
+    {
+      "category": "coding",
+      "question": "Implement a spatial indexing structure (R-tree or quadtree) for efficiently finding which design elements are within a selection rectangle or under the cursor.",
+      "hints": [
+        "Bounding box intersection for range queries",
+        "Handle overlapping elements",
+        "Consider dynamic updates as elements move"
+      ],
+      "idealAnswer": "R-tree: each node stores a bounding box encompassing all children. Leaf nodes contain element references with their bounding boxes. Search: start at root, recursively visit children whose bounding boxes intersect the query rectangle. Insert: find the leaf node requiring least bounding box expansion, insert there, split if overflow. Delete: remove from leaf, condense tree if underflow. For a design tool, support: point queries (cursor hover — find all elements containing point), range queries (selection rectangle), and dynamic updates (elements moving/resizing — remove and re-insert). Consider bulk loading for initial document load. Time: O(log n) average for queries."
+    },
+    {
+      "category": "coding",
+      "question": "Implement an undo/redo system that supports multi-user collaboration. Each user should have their own undo stack.",
+      "hints": [
+        "Command pattern with inverse operations",
+        "Handle conflicts between undo and other users' edits",
+        "Consider grouping operations"
+      ],
+      "idealAnswer": "Use the command pattern: each action creates a Command with execute() and undo() methods. Per-user undo stack (array of Command objects). On undo: pop from user's stack, apply inverse operation, push to redo stack. Challenge with collaboration: when undoing, the operation must be transformed against operations that happened after it (similar to OT). Use operational transformation or design undo as a new forward operation (e.g., 'undo of delete' = 'insert with same properties'). Group related operations (e.g., dragging = many move operations) into a single undoable unit using begin/end transaction markers."
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a technically challenging project where you had to learn a new domain quickly. How did you approach it?",
+      "hints": [
+        "Show learning agility",
+        "Demonstrate going deep quickly",
+        "Discuss how you validated your understanding"
+      ],
+      "idealAnswer": "Describe a project requiring domain expertise you didn't have (e.g., graphics programming, audio processing, ML). Show your learning approach: reading papers/docs, building small prototypes to test understanding, finding domain experts to review your work, and iterating based on feedback. Demonstrate that you went beyond surface-level understanding to contribute meaningfully. Show how the learning investment paid off in the project outcome."
+    },
+    {
+      "category": "technical",
+      "question": "How would you optimize a Figma-like application for documents with 50,000+ layers and 10+ concurrent collaborators?",
+      "hints": [
+        "Lazy loading and virtualization of the layer panel",
+        "Level-of-detail rendering",
+        "Network optimization for collaboration"
+      ],
+      "idealAnswer": "Rendering: level-of-detail — at low zoom, render simplified versions of distant objects (rasterize groups to textures, simplify paths). Virtualize the layer panel list. Canvas: only render visible portion with spatial culling. Lazy load off-screen page content. Memory: unload textures for non-visible pages, use compressed texture formats. Collaboration: debounce property updates, batch cursor position broadcasts, use delta sync instead of full state, implement presence awareness with cursor smoothing (interpolation between updates). Data: normalize the document model, use structural sharing for undo history, implement incremental save (only changed subtrees). Measure: track frame time budget (16ms for 60fps), memory usage, and network bandwidth per collaborator."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 5,
+    "stages": [
+      "Recruiter Screen",
+      "Technical Phone Screen (coding, 60 min)",
+      "Onsite (4 rounds: 2 coding/technical, 1 system design, 1 culture/collaboration)",
+      "Portfolio/Project Deep-Dive",
+      "Offer"
+    ],
+    "timeline": "3-6 weeks",
+    "tips": [
+      "Figma interviews are deeply technical — expect questions about rendering, data structures, and performance",
+      "Practice implementing visual/geometric algorithms (intersection, transformation, spatial indexing)",
+      "Show understanding of real-time collaboration challenges (CRDTs, OT, conflict resolution)",
+      "Demonstrate product sense — Figma engineers are expected to care about the user experience",
+      "Browser performance optimization knowledge is critical — know your rendering pipeline",
+      "Figma values craft — show attention to detail and polish in your solutions"
+    ]
+  },
+  "salaryRange": {
+    "currency": "USD",
+    "base": [180000, 250000],
+    "totalComp": [320000, 500000],
+    "source": "levels.fyi",
+    "year": 2026
+  },
+  "tags": [
+    "typescript",
+    "webgl",
+    "canvas",
+    "crdt",
+    "real-time",
+    "performance",
+    "design-tools"
+  ],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}

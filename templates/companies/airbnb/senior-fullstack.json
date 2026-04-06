@@ -1,0 +1,111 @@
+{
+  "id": "airbnb-senior-fullstack",
+  "company": "Airbnb",
+  "companyLogo": "https://logo.clearbit.com/airbnb.com",
+  "role": "Full Stack Engineer",
+  "level": "Senior (L5)",
+  "type": "technical",
+  "difficulty": "senior",
+  "language": "English",
+  "jobDescription": "As a Senior Full Stack Engineer at Airbnb, you will build features that connect millions of hosts and guests worldwide. You will work across the stack with React, TypeScript, Ruby on Rails, Java, and GraphQL to deliver seamless booking, search, and hosting experiences. Responsibilities include building end-to-end product features, optimizing search and booking flows, implementing server-driven UI for rapid experimentation, contributing to Airbnb's design system, and driving technical projects across teams. Requirements: 5+ years full stack experience, strong React and TypeScript skills, backend experience with Ruby or Java, GraphQL API design, experience with experimentation and A/B testing, and responsive design for mobile web. Preferred: Experience with server-driven UI frameworks, search systems, payments integration, and internationalization.",
+  "systemPromptOverride": "You are an Airbnb interviewer. Airbnb values belonging, craftmanship, and being a 'cereal entrepreneur' (scrappy problem-solving). Technical interviews assess full-stack proficiency and the ability to build delightful user experiences. Cross-functional collaboration is key — Airbnb engineers work closely with designers and PMs. For behavioral questions, probe for Airbnb's core values: Champion the Mission, Be a Host, Embrace the Adventure, Be a Cereal Entrepreneur. The coding bar focuses on practical, clean code.",
+  "questionBank": [
+    {
+      "category": "technical",
+      "question": "Design Airbnb's search system. How would you handle search with availability, pricing, location, and personalization?",
+      "hints": [
+        "Consider the search ranking pipeline",
+        "Think about real-time availability checking",
+        "Discuss caching strategies for search results"
+      ],
+      "idealAnswer": "Multi-stage search pipeline: (1) Query parsing and intent detection. (2) Retrieval: Elasticsearch for text matching and geo-filtering (bounding box from map viewport). (3) Availability filtering: check calendar service for date range availability (pre-computed bitwise availability masks for efficiency). (4) Pricing: compute total price with cleaning fees, service fees, and dynamic pricing adjustments. (5) Ranking: ML model scores listings by predicted booking probability using features (listing quality, host response rate, personalization signals, price competitiveness). (6) Results assembly: fetch listing details, photos, reviews. Cache aggressively at each stage. Handle map-based search with spatial indexing. Implement search session tracking for personalization across pagination."
+    },
+    {
+      "category": "coding",
+      "question": "Implement a calendar availability picker component that supports multi-day selection, blocked dates, minimum stay requirements, and price display per night.",
+      "hints": [
+        "Matrix representation for the calendar grid",
+        "State management for selection range",
+        "Handle edge cases: month boundaries, minimum stay"
+      ],
+      "idealAnswer": "Render a month grid from a date matrix. State: selectedStart, selectedEnd, hoverDate. On click: if no start, set start. If start and no end, validate range (no blocked dates within, meets minimum stay) and set end. If both set, reset to new start. On hover with start set: highlight preview range, show validation warnings. Fetch prices and blocked dates per month (lazy load future months). Memoize expensive calculations. Accessibility: keyboard navigation with arrow keys, screen reader announcements for date selection. Handle timezone-aware date calculations for listings in different zones."
+    },
+    {
+      "category": "system-design",
+      "question": "Design Airbnb's messaging system between hosts and guests with support for automated messages and translation.",
+      "hints": [
+        "Real-time delivery with offline support",
+        "Integration with booking flow",
+        "Automated message triggers"
+      ],
+      "idealAnswer": "Message service: store messages in a partitioned database (by conversation ID). Real-time delivery via WebSocket connections with fan-out from a pub/sub system. Offline queue: when recipient is offline, store messages and deliver on reconnect + push notification. Automated messages: event-driven triggers (booking confirmed -> send check-in instructions, 24h before -> send directions). Translation: integrate translation API, store original and translated text, show toggle for original. Thread model: one conversation per booking/inquiry. Handle: message read receipts, file/image attachments (upload to S3 with CDN), smart replies (ML-suggested responses), and moderation (content policy filtering for fraud/scam detection)."
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you championed the user experience in a technical decision, even when it added complexity.",
+      "hints": [
+        "Show 'Be a Host' value",
+        "Demonstrate user empathy",
+        "Quantify the impact on user metrics"
+      ],
+      "idealAnswer": "Describe a specific feature or design decision where you advocated for the user. Show how you gathered user insights (research, data, support tickets), proposed a solution that was technically harder but better for users, built alignment with stakeholders, and implemented it. Quantify the outcome with user metrics (conversion rate, NPS, support ticket reduction). Demonstrate Airbnb's value of treating every interaction as an opportunity to make someone feel they belong."
+    },
+    {
+      "category": "coding",
+      "question": "Implement a server-driven UI renderer that takes a JSON schema and renders React components dynamically, supporting nested layouts, data binding, and event handling.",
+      "hints": [
+        "Component registry mapping type strings to React components",
+        "Recursive rendering for nested structures",
+        "Handle data context and event callbacks"
+      ],
+      "idealAnswer": "Create a component registry mapping type strings to React components. Recursive render function: given a schema node, look up the component, resolve data bindings from a context object (support dot-notation paths), map child schemas recursively, and pass event handlers via a callback registry. Handle: conditional rendering (show/hide based on data), list rendering (repeat template for array data), and styling (accept style objects or class names). Support lazy loading for heavy components. Validate schema structure at render time with helpful error messages."
+    },
+    {
+      "category": "technical",
+      "question": "How would you implement internationalization (i18n) for a large React application supporting 60+ languages with dynamic content?",
+      "hints": [
+        "Translation key management",
+        "Pluralization and date/number formatting",
+        "Bundle size optimization for translations"
+      ],
+      "idealAnswer": "Use ICU message format for translations supporting plurals, gender, and variable interpolation. Architecture: extract translation keys at build time, store translations in a per-locale JSON file, load only the active locale's bundle (code-split by locale). Use React context to provide the translation function. Handle: pluralization rules per locale (CLDR data), date/time formatting with Intl.DateTimeFormat, number/currency with Intl.NumberFormat, RTL layout support (CSS logical properties), and dynamic content translation (API responses). Build tooling: automated extraction of translation keys, detection of missing translations, and pseudo-localization for testing. CDN-cache locale bundles with content hash."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 5,
+    "stages": [
+      "Recruiter Screen",
+      "Technical Phone Screen (coding, 60 min)",
+      "Onsite (4 rounds: 2 coding, 1 system design/architecture, 1 cross-functional/behavioral)",
+      "Hiring Committee Review",
+      "Offer & Team Placement"
+    ],
+    "timeline": "3-6 weeks",
+    "tips": [
+      "Airbnb coding interviews use CoderPad — practice coding in a shared editor",
+      "Full stack means full stack — expect both frontend and backend questions in the same interview",
+      "Show passion for the user experience and Airbnb's mission of belonging",
+      "Cross-functional collaboration is assessed — prepare examples of working with design and PM",
+      "Airbnb's values are central to behavioral interviews — know them well",
+      "Practice building small features end-to-end, not just algorithmic problems"
+    ]
+  },
+  "salaryRange": {
+    "currency": "USD",
+    "base": [175000, 240000],
+    "totalComp": [300000, 480000],
+    "source": "levels.fyi",
+    "year": 2026
+  },
+  "tags": [
+    "react",
+    "typescript",
+    "ruby",
+    "graphql",
+    "full-stack",
+    "search",
+    "marketplace"
+  ],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}

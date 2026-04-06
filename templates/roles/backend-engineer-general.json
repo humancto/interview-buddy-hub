@@ -1,0 +1,97 @@
+{
+  "id": "backend-engineer-general",
+  "company": null,
+  "role": "Backend Engineer",
+  "level": "Mid-Senior",
+  "type": "technical",
+  "difficulty": "senior",
+  "language": "English",
+  "jobDescription": "Generic backend engineering interview preparation covering APIs, databases, distributed systems, security, and performance. Suitable for backend roles at any company using any language.",
+  "systemPromptOverride": "You are a backend engineering interviewer. Assess depth in: API design (REST, GraphQL, gRPC), database design and optimization, distributed systems concepts, security best practices, caching strategies, and testing. The candidate can use any programming language. Evaluate problem-solving approach and ability to discuss trade-offs.",
+  "questionBank": [
+    {
+      "category": "technical",
+      "question": "Compare REST, GraphQL, and gRPC. When would you choose each for a new backend service?",
+      "hints": [
+        "Consider client needs and coupling",
+        "Think about performance characteristics",
+        "Discuss tooling and ecosystem maturity"
+      ],
+      "idealAnswer": "REST: resource-oriented, HTTP semantics, excellent caching (HTTP cache), wide tooling support. Best for: public APIs, CRUD-heavy services, when HTTP caching is valuable. GraphQL: query language letting clients request exactly what they need. Best for: mobile apps (reduce over-fetching), complex data relationships, when different clients need different data shapes. Downside: caching complexity, N+1 query problem, potential for expensive queries. gRPC: binary protocol (protobuf), HTTP/2, bidirectional streaming. Best for: internal service-to-service communication, high-throughput low-latency needs, when strong typing across services matters. Downside: not browser-friendly without a proxy, less human-readable."
+    },
+    {
+      "category": "technical",
+      "question": "Explain database indexing. When should you add an index and when might an index hurt performance?",
+      "hints": [
+        "B-tree vs hash vs GIN indexes",
+        "Write amplification cost",
+        "Covering indexes and index-only scans"
+      ],
+      "idealAnswer": "Indexes speed up reads by maintaining a sorted data structure (B-tree most common) pointing to table rows. Add indexes for: frequently filtered/sorted columns, JOIN columns, columns in WHERE clauses. Composite indexes for multi-column queries (follow leftmost prefix rule). Indexes hurt when: write-heavy workloads (every INSERT/UPDATE/DELETE must update all indexes), low-cardinality columns (boolean — index doesn't help much), small tables (sequential scan is faster). Covering indexes include all queried columns, enabling index-only scans. Partial indexes for subset of rows. Monitor with EXPLAIN ANALYZE to verify index usage."
+    },
+    {
+      "category": "coding",
+      "question": "Design and implement a simple in-memory job queue with priorities, retries with exponential backoff, and dead letter queue.",
+      "hints": [
+        "Priority queue data structure",
+        "Track retry count and next retry time",
+        "Define failure handling policy"
+      ],
+      "idealAnswer": "Priority queue (min-heap by priority then enqueue time). Job structure: id, payload, priority, retryCount, maxRetries, nextRetryAt, status. Worker loop: dequeue highest priority job that's ready (nextRetryAt <= now). On success: remove from queue. On failure: increment retryCount, if < maxRetries set nextRetryAt = now + baseDelay * 2^retryCount (exponential backoff with jitter), re-enqueue. If >= maxRetries: move to dead letter queue for manual inspection. Thread safety: use a mutex or CAS operations. Expose: enqueue, stats (queue size, DLQ size, processing count), and retry DLQ endpoint."
+    },
+    {
+      "category": "technical",
+      "question": "How do you handle database migrations in a production environment with zero downtime?",
+      "hints": [
+        "Expand-contract pattern",
+        "Backward-compatible changes only",
+        "Consider large table migrations"
+      ],
+      "idealAnswer": "Golden rule: every migration must be backward-compatible with the current application version. Expand-contract pattern: (1) Add new column/table (expand), deploy app that writes to both old and new, backfill. (2) Deploy app that reads from new. (3) Remove old column (contract) after verification. Never: rename columns, drop columns, or change types directly. For large tables: online schema change tools (gh-ost, pt-online-schema-change) that create a shadow table and swap. Always: test migrations against production-size data, have rollback plan, monitor query performance after migration."
+    },
+    {
+      "category": "technical",
+      "question": "Explain the ACID properties of database transactions and discuss when you might intentionally relax them.",
+      "hints": [
+        "Define each property clearly",
+        "Discuss isolation levels",
+        "When eventual consistency is acceptable"
+      ],
+      "idealAnswer": "Atomicity: all or nothing. Consistency: transactions leave DB in a valid state. Isolation: concurrent transactions don't interfere. Durability: committed data survives crashes. Relaxing isolation (levels): Read Uncommitted (dirty reads, rarely used), Read Committed (default in PostgreSQL, prevents dirty reads), Repeatable Read (prevents non-repeatable reads), Serializable (full isolation, highest overhead). Relax for: read-heavy analytics (Read Committed is fine), eventual consistency in distributed systems (e.g., shopping cart across regions doesn't need strict consistency), CQRS read models (eventual consistency from event stream). Keep strict for: financial transactions, inventory management, user authentication."
+    },
+    {
+      "category": "coding",
+      "question": "Implement a simple API rate limiter middleware that supports per-user limits and returns appropriate rate limit headers.",
+      "hints": [
+        "Sliding window or token bucket",
+        "Store state per user key",
+        "Return X-RateLimit-* headers"
+      ],
+      "idealAnswer": "Token bucket per user: store {tokens, lastRefill} in a Map. On request: calculate elapsed time, add tokens (rate * elapsed, cap at max), decrement 1. If tokens < 0, return 429 Too Many Requests. Set headers: X-RateLimit-Limit (max), X-RateLimit-Remaining (current tokens), X-RateLimit-Reset (time until full refill). Middleware interface: takes request, extracts user key (API key, IP, or user ID), checks/updates bucket, passes to next handler or returns 429. Consider: configurable limits per route/tier, graceful handling of missing user key, and cleanup of stale entries."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 1,
+    "stages": ["Technical Backend Interview (45-60 min)"],
+    "timeline": "N/A",
+    "tips": [
+      "Know your chosen language deeply — concurrency model, memory management, ecosystem",
+      "Database knowledge is crucial — be fluent in SQL, indexing, and query optimization",
+      "Understand distributed systems basics: CAP theorem, consensus, eventual consistency",
+      "API design matters — know RESTful conventions, error handling, and versioning",
+      "Security should be second nature — authentication, authorization, injection prevention",
+      "Practice designing schemas for real-world domains"
+    ]
+  },
+  "salaryRange": null,
+  "tags": [
+    "backend",
+    "api-design",
+    "databases",
+    "distributed-systems",
+    "security",
+    "all-companies"
+  ],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}

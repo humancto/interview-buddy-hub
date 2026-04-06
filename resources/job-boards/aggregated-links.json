@@ -1,0 +1,288 @@
+{
+  "id": "aggregated-job-boards",
+  "title": "Comprehensive Job Board Directory",
+  "description": "Curated list of job boards, career platforms, and hiring resources for tech professionals.",
+  "updatedAt": "2026-04-06",
+  "boards": [
+    {
+      "name": "LinkedIn Jobs",
+      "url": "https://linkedin.com/jobs",
+      "category": "general",
+      "description": "Largest professional network with job listings, referrals, and recruiter outreach",
+      "free": true,
+      "tags": ["all-levels", "all-roles", "networking"]
+    },
+    {
+      "name": "Indeed",
+      "url": "https://indeed.com",
+      "category": "general",
+      "description": "Largest job aggregator with salary data and company reviews",
+      "free": true,
+      "tags": ["all-levels", "all-roles", "high-volume"]
+    },
+    {
+      "name": "Glassdoor",
+      "url": "https://glassdoor.com",
+      "category": "general",
+      "description": "Job listings with company reviews, salary data, and interview questions",
+      "free": true,
+      "tags": ["all-levels", "reviews", "salary-data"]
+    },
+    {
+      "name": "Wellfound (formerly AngelList Talent)",
+      "url": "https://wellfound.com",
+      "category": "startups",
+      "description": "Startup-focused job board with equity information and direct founder connections",
+      "free": true,
+      "tags": ["startups", "equity", "early-stage"]
+    },
+    {
+      "name": "Hacker News Who's Hiring",
+      "url": "https://news.ycombinator.com/item?id=who-is-hiring",
+      "category": "tech",
+      "description": "Monthly hiring thread on Hacker News — high-quality tech companies, updated the 1st of each month",
+      "free": true,
+      "tags": ["tech", "startups", "monthly"]
+    },
+    {
+      "name": "YC Work at a Startup",
+      "url": "https://workatastartup.com",
+      "category": "startups",
+      "description": "Job board for Y Combinator portfolio companies with single application for multiple companies",
+      "free": true,
+      "tags": ["startups", "yc", "batch-apply"]
+    },
+    {
+      "name": "Levels.fyi",
+      "url": "https://levels.fyi/jobs",
+      "category": "tech",
+      "description": "Job listings with verified compensation data and level mapping across companies",
+      "free": true,
+      "tags": ["tech", "salary-transparency", "big-tech"]
+    },
+    {
+      "name": "Blind",
+      "url": "https://teamblind.com/jobs",
+      "category": "tech",
+      "description": "Anonymous professional network with job listings and insider compensation data",
+      "free": true,
+      "tags": ["tech", "anonymous", "compensation"]
+    },
+    {
+      "name": "Hired",
+      "url": "https://hired.com",
+      "category": "tech",
+      "description": "Reverse job board — companies apply to you with salary upfront",
+      "free": true,
+      "tags": ["tech", "reverse-apply", "salary-first"]
+    },
+    {
+      "name": "Otta",
+      "url": "https://otta.com",
+      "category": "tech",
+      "description": "Curated tech job board with company culture insights and personalized matches",
+      "free": true,
+      "tags": ["tech", "curated", "culture-focus"]
+    },
+    {
+      "name": "BuiltIn",
+      "url": "https://builtin.com",
+      "category": "tech",
+      "description": "Tech job board with local market focus (NYC, SF, Chicago, LA, etc.) and company profiles",
+      "free": true,
+      "tags": ["tech", "local-markets", "company-profiles"]
+    },
+    {
+      "name": "RemoteOK",
+      "url": "https://remoteok.com",
+      "category": "remote",
+      "description": "Remote-first job board for tech roles with salary filters",
+      "free": true,
+      "tags": ["remote", "tech", "global"]
+    },
+    {
+      "name": "We Work Remotely",
+      "url": "https://weworkremotely.com",
+      "category": "remote",
+      "description": "One of the largest remote work communities with curated remote-only listings",
+      "free": true,
+      "tags": ["remote", "all-roles", "curated"]
+    },
+    {
+      "name": "Remote.co",
+      "url": "https://remote.co",
+      "category": "remote",
+      "description": "Remote job listings with company remote work reviews and resources",
+      "free": true,
+      "tags": ["remote", "resources", "reviews"]
+    },
+    {
+      "name": "FlexJobs",
+      "url": "https://flexjobs.com",
+      "category": "remote",
+      "description": "Vetted remote and flexible job listings — no scams",
+      "free": false,
+      "tags": ["remote", "flexible", "vetted"]
+    },
+    {
+      "name": "Arc.dev",
+      "url": "https://arc.dev",
+      "category": "tech",
+      "description": "Remote-first developer job board with vetting process",
+      "free": true,
+      "tags": ["remote", "developers", "vetted"]
+    },
+    {
+      "name": "Toptal",
+      "url": "https://toptal.com",
+      "category": "freelance",
+      "description": "Freelance platform for top 3% of tech talent — requires rigorous screening",
+      "free": true,
+      "tags": ["freelance", "top-tier", "screening"]
+    },
+    {
+      "name": "Gun.io",
+      "url": "https://gun.io",
+      "category": "freelance",
+      "description": "Vetted freelance developer marketplace with project-based and full-time opportunities",
+      "free": true,
+      "tags": ["freelance", "vetted", "developers"]
+    },
+    {
+      "name": "Dice",
+      "url": "https://dice.com",
+      "category": "tech",
+      "description": "Tech-focused job board with salary estimator and career advice",
+      "free": true,
+      "tags": ["tech", "established", "salary-tools"]
+    },
+    {
+      "name": "ZipRecruiter",
+      "url": "https://ziprecruiter.com",
+      "category": "general",
+      "description": "AI-powered job matching with one-click apply and salary insights",
+      "free": true,
+      "tags": ["all-levels", "ai-matching", "easy-apply"]
+    },
+    {
+      "name": "SimplyHired",
+      "url": "https://simplyhired.com",
+      "category": "general",
+      "description": "Job aggregator with salary estimator and local job market data",
+      "free": true,
+      "tags": ["all-levels", "aggregator", "salary-data"]
+    },
+    {
+      "name": "Monster",
+      "url": "https://monster.com",
+      "category": "general",
+      "description": "Long-established job board with resume tools and career advice",
+      "free": true,
+      "tags": ["all-levels", "established", "resume-tools"]
+    },
+    {
+      "name": "CareerBuilder",
+      "url": "https://careerbuilder.com",
+      "category": "general",
+      "description": "Job board with AI-powered matching and skills assessment tools",
+      "free": true,
+      "tags": ["all-levels", "ai-matching", "skills"]
+    },
+    {
+      "name": "Underdog.io",
+      "url": "https://underdog.io",
+      "category": "startups",
+      "description": "Curated startup job marketplace — apply once, get matched to startups",
+      "free": true,
+      "tags": ["startups", "curated", "batch-apply"]
+    },
+    {
+      "name": "Greenhouse Job Board",
+      "url": "https://boards.greenhouse.io",
+      "category": "ats",
+      "description": "Many companies use Greenhouse ATS — search their public boards directly",
+      "free": true,
+      "tags": ["ats", "direct-apply", "companies"]
+    },
+    {
+      "name": "Lever Job Boards",
+      "url": "https://jobs.lever.co",
+      "category": "ats",
+      "description": "Lever ATS powers many startup job boards — search directly",
+      "free": true,
+      "tags": ["ats", "direct-apply", "startups"]
+    },
+    {
+      "name": "Key Values",
+      "url": "https://keyvalues.com",
+      "category": "culture",
+      "description": "Find engineering teams that share your values — filter by culture attributes",
+      "free": true,
+      "tags": ["culture-first", "engineering", "values"]
+    },
+    {
+      "name": "Cord",
+      "url": "https://cord.co",
+      "category": "tech",
+      "description": "Message-first job platform — chat directly with hiring managers",
+      "free": true,
+      "tags": ["tech", "direct-messaging", "uk-focus"]
+    },
+    {
+      "name": "Pallet",
+      "url": "https://pallet.com",
+      "category": "community",
+      "description": "Community-curated job boards from tech influencers and newsletters",
+      "free": true,
+      "tags": ["community", "curated", "newsletters"]
+    },
+    {
+      "name": "Triplebyte (now part of Karat)",
+      "url": "https://karat.com",
+      "category": "tech",
+      "description": "Skills-based hiring platform — take an assessment, get matched to companies",
+      "free": true,
+      "tags": ["skills-based", "assessment", "matching"]
+    },
+    {
+      "name": "Tech Ladies",
+      "url": "https://techladies.co",
+      "category": "diversity",
+      "description": "Job board and community for women and non-binary people in tech",
+      "free": true,
+      "tags": ["diversity", "women-in-tech", "community"]
+    },
+    {
+      "name": "Diversify Tech",
+      "url": "https://diversifytech.com",
+      "category": "diversity",
+      "description": "Job board, scholarships, and events for underrepresented people in tech",
+      "free": true,
+      "tags": ["diversity", "scholarships", "community"]
+    },
+    {
+      "name": "People of Color in Tech",
+      "url": "https://pocit.com",
+      "category": "diversity",
+      "description": "Job board and community for people of color in the tech industry",
+      "free": true,
+      "tags": ["diversity", "poc", "community"]
+    },
+    {
+      "name": "Relocate.me",
+      "url": "https://relocate.me",
+      "category": "relocation",
+      "description": "Tech jobs that offer relocation packages, primarily European companies",
+      "free": true,
+      "tags": ["relocation", "europe", "visa-sponsorship"]
+    },
+    {
+      "name": "AngelList Venture",
+      "url": "https://angel.co",
+      "category": "startups",
+      "description": "Startup ecosystem platform with job listings, investments, and company data",
+      "free": true,
+      "tags": ["startups", "venture", "equity"]
+    }
+  ]
+}

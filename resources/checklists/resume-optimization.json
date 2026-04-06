@@ -1,0 +1,132 @@
+{
+  "id": "resume-optimization",
+  "title": "Resume Optimization for Tech Roles",
+  "description": "ATS-friendly resume tips, formatting guidelines, and content strategies for software engineering and tech roles.",
+  "updatedAt": "2026-04-06",
+  "formatting": [
+    {
+      "rule": "Keep to 1 page (2 pages only if 10+ years of highly relevant experience)",
+      "priority": "high"
+    },
+    {
+      "rule": "Use a clean, single-column layout — ATS systems struggle with multi-column formats",
+      "priority": "high"
+    },
+    {
+      "rule": "Use standard section headers: Experience, Education, Skills, Projects",
+      "priority": "high"
+    },
+    {
+      "rule": "Use a standard font (Calibri, Arial, Helvetica) at 10-11pt",
+      "priority": "medium"
+    },
+    {
+      "rule": "Save as PDF unless the application specifically requests .docx",
+      "priority": "medium"
+    },
+    {
+      "rule": "No photos, graphics, or icons — they confuse ATS parsers",
+      "priority": "high"
+    },
+    {
+      "rule": "Use consistent date formatting (e.g., 'Jan 2023 - Present')",
+      "priority": "medium"
+    },
+    {
+      "rule": "Include your name, email, phone, LinkedIn, and GitHub at the top",
+      "priority": "high"
+    }
+  ],
+  "contentStrategy": [
+    {
+      "section": "Experience",
+      "tips": [
+        "Lead each bullet with a strong action verb (Designed, Implemented, Optimized, Led, Reduced)",
+        "Use the XYZ formula: Accomplished [X] as measured by [Y] by doing [Z]",
+        "Quantify everything: 'Reduced API latency by 40%' not 'Improved API performance'",
+        "Focus on impact, not just tasks — what was the business outcome?",
+        "Tailor bullets to the job description — mirror their language and requirements",
+        "Include 3-5 bullets per role, focusing on most impactful work",
+        "Mention specific technologies used in context: 'Built a real-time pipeline using Kafka and Flink'",
+        "Show progression: increasing scope, leadership, and complexity over time"
+      ]
+    },
+    {
+      "section": "Skills",
+      "tips": [
+        "List languages, frameworks, databases, tools, and cloud platforms",
+        "Order by proficiency — strongest first",
+        "Match keywords from the job description exactly (React vs React.js matters for ATS)",
+        "Don't list soft skills here — demonstrate them in your experience bullets",
+        "Include both specific tools (PostgreSQL, Redis, Kafka) and categories (distributed systems)",
+        "Remove outdated technologies unless specifically relevant to the role"
+      ]
+    },
+    {
+      "section": "Projects (for earlier career or career changers)",
+      "tips": [
+        "Include 2-3 significant personal or open-source projects",
+        "Link to live demos and GitHub repos",
+        "Describe the project's purpose, your role, technologies used, and impact/scale",
+        "Open-source contributions to well-known projects are highly valued"
+      ]
+    },
+    {
+      "section": "Education",
+      "tips": [
+        "Include degree, university, and graduation year",
+        "GPA only if > 3.5 and you're within 3 years of graduation",
+        "Relevant coursework only if you lack professional experience in that area",
+        "Include relevant certifications (AWS, GCP, Kubernetes) — they help with ATS"
+      ]
+    }
+  ],
+  "atsOptimization": [
+    "Use exact keywords from the job description — ATS matches on keywords",
+    "Spell out acronyms at least once: 'Amazon Web Services (AWS)'",
+    "Avoid tables, text boxes, headers/footers — ATS may not parse them",
+    "Use standard bullet points (not custom symbols)",
+    "Include the job title you're applying for somewhere in your resume",
+    "Don't use 'References available upon request' — it wastes space",
+    "Many companies use Greenhouse, Lever, or Workday — test your resume with a free ATS scanner"
+  ],
+  "strongActionVerbs": [
+    "Architected",
+    "Built",
+    "Created",
+    "Designed",
+    "Developed",
+    "Engineered",
+    "Implemented",
+    "Integrated",
+    "Launched",
+    "Led",
+    "Managed",
+    "Mentored",
+    "Migrated",
+    "Optimized",
+    "Orchestrated",
+    "Pioneered",
+    "Reduced",
+    "Refactored",
+    "Scaled",
+    "Shipped",
+    "Spearheaded",
+    "Streamlined",
+    "Transformed"
+  ],
+  "exampleBullets": [
+    {
+      "weak": "Worked on the backend team to improve performance",
+      "strong": "Reduced API response latency by 60% (p99 from 800ms to 320ms) by implementing Redis caching and query optimization, improving conversion rates by 12%"
+    },
+    {
+      "weak": "Built a new feature for the mobile app",
+      "strong": "Designed and shipped the in-app messaging feature used by 2M+ monthly active users, leading a team of 3 engineers from RFC to launch in 8 weeks"
+    },
+    {
+      "weak": "Responsible for maintaining the CI/CD pipeline",
+      "strong": "Migrated CI/CD from Jenkins to GitHub Actions, reducing build times from 45 min to 12 min and enabling 3x more daily deployments"
+    }
+  ]
+}

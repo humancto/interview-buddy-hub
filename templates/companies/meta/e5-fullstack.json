@@ -1,0 +1,122 @@
+{
+  "id": "meta-e5-fullstack",
+  "company": "Meta",
+  "companyLogo": "https://logo.clearbit.com/meta.com",
+  "role": "Full Stack Engineer",
+  "level": "E5 (Senior)",
+  "type": "technical",
+  "difficulty": "senior",
+  "language": "English",
+  "jobDescription": "As a Senior Full Stack Engineer (E5) at Meta, you will build products that connect billions of people across Facebook, Instagram, WhatsApp, and Messenger. You will work across the stack from React/React Native frontends to Hack/Python backends and GraphQL APIs. Responsibilities include designing and implementing end-to-end features, optimizing performance for global-scale products, leading technical projects across multiple engineers, contributing to internal frameworks and tooling, and participating in on-call rotations. Requirements: 5+ years of full stack experience, strong proficiency in React and at least one backend language (Python, Hack/PHP, Java, C++), experience with GraphQL, relational databases at scale, and mobile-first development. Preferred: Experience with React Native, real-time systems, A/B testing frameworks, and privacy-aware architecture.",
+  "systemPromptOverride": "You are a Meta interviewer. Meta interviews focus heavily on coding speed and correctness. For coding rounds, expect optimal solutions within 30-35 minutes with clean code. Meta values 'Move Fast' — ask about shipping velocity and iteration. For system design, push on scale (billions of users). Behavioral questions should probe for Meta's core values: Move Fast, Be Bold, Focus on Long-Term Impact, Build Awesome Things, and Be Open.",
+  "questionBank": [
+    {
+      "category": "coding",
+      "question": "Implement a function that finds all valid combinations of k numbers that sum up to n, using numbers 1-9 with no duplicates.",
+      "hints": [
+        "Backtracking approach",
+        "Prune early when sum exceeds target",
+        "Track used numbers with a bitmask or set"
+      ],
+      "idealAnswer": "Use backtracking with a start index to avoid duplicates. At each step, try adding numbers from start to 9. Prune when remaining sum is negative or when we exceed k numbers. Base case: k === 0 and n === 0 means valid combination. Time complexity O(9! / (9-k)!), but practically much less due to pruning."
+    },
+    {
+      "category": "coding",
+      "question": "Given a binary tree, return the vertical order traversal. Nodes at the same position should be sorted by value.",
+      "hints": [
+        "BFS with column tracking",
+        "Use a map from column to list of (row, value) pairs",
+        "Sort within each column by row then value"
+      ],
+      "idealAnswer": "BFS traversal tracking (node, row, col). Use a TreeMap/sorted map keyed by column. For each column, store (row, value) pairs. Sort each column's entries by row first, then value. Return values grouped by column from left to right. Time O(n log n) for sorting, Space O(n)."
+    },
+    {
+      "category": "technical",
+      "question": "How would you design Meta's News Feed to handle billions of posts with personalized ranking?",
+      "hints": [
+        "Fan-out on write vs fan-out on read",
+        "Consider the mix approach for celebrities",
+        "Discuss ranking model features"
+      ],
+      "idealAnswer": "Hybrid approach: fan-out on write for regular users (push posts to friends' feed caches), fan-out on read for high-follower accounts (celebrities, pages). Ranking pipeline: candidate retrieval from social graph + interest signals, then ML ranking model scoring engagement probability. Feature store with real-time and batch features. Cache ranked feeds with TTL. Handle feed refreshes and new post injection. Discuss privacy filtering, content policy enforcement, and A/B testing the ranking model."
+    },
+    {
+      "category": "technical",
+      "question": "Explain React's Fiber reconciliation algorithm. How does it improve over the old stack reconciler?",
+      "hints": [
+        "Incremental rendering and time-slicing",
+        "Priority-based updates",
+        "Interruptible work loops"
+      ],
+      "idealAnswer": "Fiber replaces the synchronous, recursive stack reconciler with an incremental one. Each element becomes a fiber node in a linked-list tree. Work is split into units that can be paused and resumed. Priority levels (Immediate, UserBlocking, Normal, Low, Idle) determine scheduling order. The double-buffering technique (current vs work-in-progress tree) enables commit-phase batching. Effects are collected during render and flushed during commit. This enables concurrent features like Suspense, transitions, and selective hydration."
+    },
+    {
+      "category": "coding",
+      "question": "Implement a rate limiter that supports multiple time windows (e.g., 10 requests per second AND 100 per minute).",
+      "hints": [
+        "Sliding window approach",
+        "Consider using sorted sets or circular buffers",
+        "Handle concurrent access"
+      ],
+      "idealAnswer": "Use a sliding window log approach: store timestamps of requests in a sorted data structure per client. For each incoming request, remove expired entries for each window and check if adding this request would exceed any window's limit. For production, use Redis sorted sets with ZRANGEBYSCORE for efficient window queries. Consider token bucket as an alternative for smoother rate limiting. Handle distributed rate limiting with Redis or a coordination service."
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you had to ship something quickly under pressure. How did you decide what to cut?",
+      "hints": [
+        "Show Meta's 'Move Fast' value",
+        "Demonstrate prioritization framework",
+        "Discuss managing technical debt after"
+      ],
+      "idealAnswer": "Describe a specific time-pressured situation. Show how you identified the MVP scope by separating must-haves from nice-to-haves. Demonstrate data-driven prioritization (impact vs effort). Explain how you communicated trade-offs to stakeholders. Show that you followed up to address technical debt and missing features post-launch."
+    },
+    {
+      "category": "system-design",
+      "question": "Design Instagram Stories — the full system from upload to viewing with real-time view counts.",
+      "hints": [
+        "24-hour TTL changes the storage strategy",
+        "Consider CDN caching for popular stories",
+        "Real-time view counts need special handling"
+      ],
+      "idealAnswer": "Upload pipeline: client compresses media, uploads to object storage via CDN, transcoding service generates multiple resolutions. Storage: hot storage for active stories (< 24h), auto-archive to cold storage. Viewing: preload next stories in tray, serve from CDN edge. View counts: use write-behind pattern with in-memory counters (Redis) flushed periodically to persistent storage. Viewer list stored in sorted set by timestamp. Fan-out notifications to close friends. Discuss story ranking, seen state tracking, and privacy controls."
+    },
+    {
+      "category": "coding",
+      "question": "Write a function that serializes and deserializes a binary tree to/from a string. The tree may contain null nodes.",
+      "hints": [
+        "Preorder traversal with null markers",
+        "Consider level-order (BFS) approach",
+        "Handle delimiter and escape characters"
+      ],
+      "idealAnswer": "Serialize: BFS or preorder DFS, outputting values with a delimiter (comma) and null marker ('X'). Deserialize: split string and reconstruct using a queue (BFS) or recursion (DFS). For DFS: serialize as 'val,left,right' with 'X' for null. Deserialize by consuming tokens left to right, recursively building left then right subtrees. Time and space both O(n)."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 4,
+    "stages": [
+      "Recruiter Screen + Initial Coding Screen (35 min)",
+      "Two Coding Interviews (2 x 35 min)",
+      "System Design Interview (45 min)",
+      "Behavioral Interview (35 min: 'Meta Values')"
+    ],
+    "timeline": "3-6 weeks",
+    "tips": [
+      "Meta coding interviews are fast-paced — practice solving medium/hard LeetCode in 25 minutes",
+      "Always optimize your solution — brute force is usually not enough",
+      "For system design, quantify everything: QPS, storage, bandwidth",
+      "Behavioral interviews are scored on Meta's values — prepare specific examples for each value",
+      "The initial coding screen is a filter — treat it as seriously as onsite rounds",
+      "Meta often extends offers quickly after successful interviews"
+    ]
+  },
+  "salaryRange": {
+    "currency": "USD",
+    "base": [185000, 260000],
+    "totalComp": [350000, 550000],
+    "source": "levels.fyi",
+    "year": 2026
+  },
+  "tags": ["react", "graphql", "full-stack", "hack", "python", "react-native"],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}

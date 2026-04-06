@@ -1,0 +1,263 @@
+{
+  "id": "system-design-top-20",
+  "title": "Top 20 System Design Problems",
+  "description": "The most frequently asked system design interview questions with structured approach guides. Each problem includes scale requirements, key components, and discussion points.",
+  "updatedAt": "2026-04-06",
+  "problems": [
+    {
+      "id": 1,
+      "title": "Design a URL Shortener (bit.ly)",
+      "difficulty": "easy",
+      "keyTopics": ["Hashing", "Database sharding", "Caching", "Analytics"],
+      "approach": "Start with API design (POST /shorten, GET /:code). Hash or counter-based ID generation. Key-value store for O(1) lookups. Cache hot URLs. Analytics via async event pipeline.",
+      "scaleTarget": "100M URLs/month, 10B redirects/month"
+    },
+    {
+      "id": 2,
+      "title": "Design Twitter/X Feed",
+      "difficulty": "hard",
+      "keyTopics": [
+        "Fan-out",
+        "Timeline generation",
+        "Ranking",
+        "Real-time updates"
+      ],
+      "approach": "Fan-out on write for regular users, fan-out on read for celebrities. ML-based ranking of candidates. Cache pre-computed timelines. WebSocket for real-time updates.",
+      "scaleTarget": "500M users, 50K tweets/sec"
+    },
+    {
+      "id": 3,
+      "title": "Design a Chat System (WhatsApp/Slack)",
+      "difficulty": "hard",
+      "keyTopics": [
+        "WebSockets",
+        "Message ordering",
+        "Presence",
+        "Group messaging"
+      ],
+      "approach": "WebSocket gateway fleet for persistent connections. Message service with per-conversation ordering. Presence via heartbeat + pub/sub. Fan-out for group messages. Offline delivery via push + catch-up sync.",
+      "scaleTarget": "1B users, 100B messages/day"
+    },
+    {
+      "id": 4,
+      "title": "Design YouTube/Netflix Video Streaming",
+      "difficulty": "hard",
+      "keyTopics": [
+        "Video transcoding",
+        "CDN",
+        "Adaptive bitrate",
+        "Recommendation"
+      ],
+      "approach": "Upload: transcode to multiple resolutions/codecs asynchronously. Serve via CDN with adaptive bitrate streaming (DASH/HLS). Buffer-based ABR algorithm. Recommendation engine for homepage/next video.",
+      "scaleTarget": "1B daily views, 500 hours uploaded/min"
+    },
+    {
+      "id": 5,
+      "title": "Design Google Search",
+      "difficulty": "hard",
+      "keyTopics": [
+        "Web crawling",
+        "Inverted index",
+        "PageRank",
+        "Query processing"
+      ],
+      "approach": "Crawler builds web graph. Inverted index maps terms to document lists. Ranking combines relevance (BM25/TF-IDF), link analysis (PageRank), freshness, and user signals. Serve from distributed index shards.",
+      "scaleTarget": "Billions of pages indexed, 100K queries/sec"
+    },
+    {
+      "id": 6,
+      "title": "Design an E-commerce Platform (Amazon)",
+      "difficulty": "hard",
+      "keyTopics": [
+        "Product catalog",
+        "Shopping cart",
+        "Order processing",
+        "Inventory management"
+      ],
+      "approach": "Microservices: catalog, cart, order, payment, inventory, shipping. Event-driven order processing with saga pattern. Inventory with optimistic locking. Search via Elasticsearch. Recommendation engine.",
+      "scaleTarget": "500M products, 100K orders/min during peak"
+    },
+    {
+      "id": 7,
+      "title": "Design a Ride-Sharing System (Uber)",
+      "difficulty": "hard",
+      "keyTopics": [
+        "Geospatial indexing",
+        "Real-time matching",
+        "Dynamic pricing",
+        "ETA prediction"
+      ],
+      "approach": "H3/S2 geospatial indexing for driver locations. Real-time matching with optimization. Stream processing for dynamic pricing. ML-based ETA with live traffic overlay.",
+      "scaleTarget": "20M rides/day, millions of concurrent drivers"
+    },
+    {
+      "id": 8,
+      "title": "Design a Rate Limiter",
+      "difficulty": "easy",
+      "keyTopics": [
+        "Token bucket",
+        "Sliding window",
+        "Distributed state",
+        "Redis"
+      ],
+      "approach": "Token bucket or sliding window algorithm. Store per-client state in Redis with atomic operations (Lua scripts). Return rate limit headers. Handle distributed deployments with centralized or local + sync approach.",
+      "scaleTarget": "1M requests/sec across multiple API gateways"
+    },
+    {
+      "id": 9,
+      "title": "Design a Notification System",
+      "difficulty": "medium",
+      "keyTopics": [
+        "Multi-channel delivery",
+        "Template engine",
+        "Priority queues",
+        "User preferences"
+      ],
+      "approach": "API receives events, preference service filters, template engine renders, channel-specific workers deliver (push, email, SMS). Priority queues for urgency levels. Track delivery and engagement.",
+      "scaleTarget": "1B notifications/day across 3+ channels"
+    },
+    {
+      "id": 10,
+      "title": "Design a Distributed Cache (Redis)",
+      "difficulty": "medium",
+      "keyTopics": [
+        "Consistent hashing",
+        "Replication",
+        "Eviction policies",
+        "Cache coherence"
+      ],
+      "approach": "Consistent hashing for key distribution across nodes. Primary-replica replication for availability. LRU/LFU eviction. Handle cache invalidation with TTL and explicit invalidation. Support data structures beyond key-value.",
+      "scaleTarget": "10M operations/sec, 1TB data, sub-millisecond latency"
+    },
+    {
+      "id": 11,
+      "title": "Design a Web Crawler",
+      "difficulty": "medium",
+      "keyTopics": [
+        "URL frontier",
+        "Politeness",
+        "Deduplication",
+        "Distributed coordination"
+      ],
+      "approach": "Seed URLs -> priority frontier -> distributed fetchers with per-domain rate limiting -> parser extracts links -> dedup with bloom filter -> index content. Handle robots.txt, redirects, and dynamic pages.",
+      "scaleTarget": "1B pages/month"
+    },
+    {
+      "id": 12,
+      "title": "Design Dropbox/Google Drive",
+      "difficulty": "hard",
+      "keyTopics": [
+        "File sync",
+        "Chunking",
+        "Conflict resolution",
+        "Metadata service"
+      ],
+      "approach": "Client watches filesystem, chunks files (4MB blocks), deduplicates with content hashing, uploads changed chunks. Metadata service tracks file tree and versions. Sync protocol resolves conflicts (last-writer-wins or create copy). Block storage for chunks.",
+      "scaleTarget": "500M users, 1B files synced/day"
+    },
+    {
+      "id": 13,
+      "title": "Design a Key-Value Store (DynamoDB)",
+      "difficulty": "hard",
+      "keyTopics": [
+        "Partitioning",
+        "Replication",
+        "Consistency levels",
+        "Failure handling"
+      ],
+      "approach": "Consistent hashing for partition assignment. Paxos/Raft per partition for replication. Tunable consistency (strong via leader reads, eventual via any-replica reads). Handle partitioning, node failures, and data rebalancing.",
+      "scaleTarget": "Millions of operations/sec, petabytes of data"
+    },
+    {
+      "id": 14,
+      "title": "Design a Metrics/Monitoring System (Datadog)",
+      "difficulty": "medium",
+      "keyTopics": [
+        "Time-series data",
+        "Aggregation",
+        "Alerting",
+        "Dashboards"
+      ],
+      "approach": "Agents collect metrics, send to ingestion service via UDP/HTTP. Store in time-series database with downsampling for older data. Pre-compute aggregations. Alerting engine evaluates rules against recent data. Dashboard queries with rollup functions.",
+      "scaleTarget": "10M metrics/sec, 1 year retention"
+    },
+    {
+      "id": 15,
+      "title": "Design a Payment System (Stripe)",
+      "difficulty": "hard",
+      "keyTopics": [
+        "Idempotency",
+        "Transaction processing",
+        "Reconciliation",
+        "Fraud detection"
+      ],
+      "approach": "Idempotent API with idempotency keys. Event-sourced transaction log. Saga pattern for multi-step flows (auth, capture, settle). Async reconciliation with bank statements. ML-based fraud scoring. PCI-DSS compliance.",
+      "scaleTarget": "10K transactions/sec, 99.999% availability"
+    },
+    {
+      "id": 16,
+      "title": "Design a Social Graph (Facebook)",
+      "difficulty": "hard",
+      "keyTopics": [
+        "Graph database",
+        "Friend recommendations",
+        "Privacy",
+        "Graph traversal"
+      ],
+      "approach": "Adjacency list storage partitioned by user ID. Cache hot social graphs in memory. Friend-of-friend queries with BFS depth limit. Recommendation: collaborative filtering on graph structure. Privacy: per-edge visibility rules evaluated at query time.",
+      "scaleTarget": "3B users, 500B edges, 100K graph queries/sec"
+    },
+    {
+      "id": 17,
+      "title": "Design a Message Queue (Kafka)",
+      "difficulty": "medium",
+      "keyTopics": [
+        "Partitioning",
+        "Consumer groups",
+        "Ordering",
+        "Durability"
+      ],
+      "approach": "Topics with partitions (ordered, append-only logs). Producer partitions by key hash. Consumer groups with partition assignment. Replication for durability. Offset-based consumption for replay capability.",
+      "scaleTarget": "1M messages/sec, 7-day retention"
+    },
+    {
+      "id": 18,
+      "title": "Design an Autocomplete/Typeahead System",
+      "difficulty": "medium",
+      "keyTopics": [
+        "Trie data structure",
+        "Ranking",
+        "Caching",
+        "Personalization"
+      ],
+      "approach": "Trie storing top-K completions at each node. Precompute suggestions offline from query logs. Serve from distributed cache with prefix-based lookup. Personalization layer adds user history. Handle: typo tolerance (edit distance), trending queries, and harmful query filtering.",
+      "scaleTarget": "100K queries/sec, sub-50ms latency"
+    },
+    {
+      "id": 19,
+      "title": "Design a Content Delivery Network (CDN)",
+      "difficulty": "hard",
+      "keyTopics": [
+        "Edge caching",
+        "DNS routing",
+        "Cache invalidation",
+        "Origin shielding"
+      ],
+      "approach": "DNS-based routing to nearest edge PoP. Edge servers cache content with LRU eviction. Cache hierarchy: edge -> regional -> origin shield -> origin. Purge API for cache invalidation (propagated via pub/sub). Handle: cache warming, stale-while-revalidate, and DDoS mitigation at edge.",
+      "scaleTarget": "100+ PoPs globally, 100 Tbps capacity"
+    },
+    {
+      "id": 20,
+      "title": "Design a Collaborative Document Editor (Google Docs)",
+      "difficulty": "hard",
+      "keyTopics": [
+        "Operational Transformation / CRDTs",
+        "Real-time sync",
+        "Conflict resolution",
+        "Cursor presence"
+      ],
+      "approach": "OT with central server: clients send operations with revision number, server transforms concurrent ops. Persist operation log + periodic snapshots. WebSocket for real-time sync. Cursor positions as metadata operations. Offline support with operation queuing.",
+      "scaleTarget": "100M documents, 50 concurrent editors per doc"
+    }
+  ]
+}

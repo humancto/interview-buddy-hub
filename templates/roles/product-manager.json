@@ -1,0 +1,96 @@
+{
+  "id": "product-manager",
+  "company": null,
+  "role": "Product Manager",
+  "level": "Mid-Senior",
+  "type": "behavioral",
+  "difficulty": "senior",
+  "language": "English",
+  "jobDescription": "Generic product management interview preparation covering product sense, analytical thinking, technical knowledge, leadership, and strategy. Covers frameworks used at top tech companies.",
+  "systemPromptOverride": "You are a PM interviewer. Evaluate the candidate on: product sense (identifying user needs, prioritizing features), analytical thinking (metrics, A/B testing, data-driven decisions), technical acumen (ability to work with engineers), leadership (influence without authority, stakeholder management), and strategic thinking (market analysis, competitive landscape). Use follow-up questions to probe depth. Look for structured thinking frameworks applied to ambiguous problems.",
+  "questionBank": [
+    {
+      "category": "product-sense",
+      "question": "How would you improve Instagram Reels? Walk me through your approach.",
+      "hints": [
+        "Start with user segments and their needs",
+        "Define success metrics",
+        "Prioritize with a framework (RICE, impact vs effort)"
+      ],
+      "idealAnswer": "Define the goal: increase creator output and viewer engagement. User segments: creators (casual, semi-pro, professional), viewers (passive scrollers, active engagers). Pain points by segment: creators — editing tools lag behind TikTok, discovery algorithm unclear, monetization limited; viewers — content quality inconsistent, too much recycled content, limited content diversity. Prioritized improvements: (1) Enhanced editing tools with templates and effects (high reach, medium effort), (2) Better creator analytics dashboard (medium reach, low effort), (3) Content diversity algorithm tuning (high reach, high effort). Success metrics: daily active creators, average watch time per session, like-to-view ratio, creator retention at 30 days."
+    },
+    {
+      "category": "analytical",
+      "question": "Daily active users for our messaging feature dropped 15% last week. How would you investigate?",
+      "hints": [
+        "Start broad, then narrow",
+        "Consider technical vs product causes",
+        "Check for external factors"
+      ],
+      "idealAnswer": "Structured investigation: (1) Verify the data — is this real or a measurement issue (tracking bug, definition change)? (2) Segment the drop — is it all users or specific segments (geography, platform, user tenure, feature variant)? (3) Timeline correlation — did anything change that week (deploy, experiment, competitor launch, holiday, outage)? (4) Funnel analysis — where are users dropping off (open app but not messaging, sending fewer messages, not opening notifications)? (5) Qualitative signals — support tickets, app store reviews, social media complaints. (6) Technical check — error rates, latency increases, push notification delivery rates. Likely causes to investigate first: a deployment breaking something, an experiment with negative impact, or a platform change affecting notifications."
+    },
+    {
+      "category": "product-sense",
+      "question": "Design a new feature for Spotify for commuters. What would you build?",
+      "hints": [
+        "Define the commuter user persona",
+        "Consider context of use (driving, transit, walking)",
+        "Think about differentiation from competitors"
+      ],
+      "idealAnswer": "Persona: daily commuters (20-40 min each way), mix of driving and transit. Context: hands-busy, time-constrained, routine activity. Insight: commutes are the same time every day but moods and needs vary. Feature: 'Commute Mode' — auto-activates based on time and location. For drivers: voice-first interface, reduces distractions, curated playlists matching commute duration. For transit: podcast episodes matching ride length, offline download pre-loaded. Smart recommendations: learn that Monday mornings need energizing music, Friday evenings need wind-down. Metrics: commute-time listening hours, feature adoption rate, skip rate during commute sessions, NPS of commuters vs non-commuters."
+    },
+    {
+      "category": "execution",
+      "question": "You have a team of 5 engineers and need to launch a feature in 6 weeks. Halfway through, you realize you're behind. What do you do?",
+      "hints": [
+        "Diagnose why you're behind",
+        "Scope reduction vs timeline extension",
+        "Stakeholder communication"
+      ],
+      "idealAnswer": "Immediate actions: (1) Diagnose — what specifically is behind and why (scope creep, unexpected complexity, resource issues, blockers). (2) Assess options: cut scope to MVP (identify what's truly essential for launch), extend timeline (communicate trade-off to stakeholders), add resources (rarely helps mid-project — Brooks's Law). (3) Recommend scope reduction — define MLP (Minimum Lovable Product) by ranking features by user impact and cutting lowest. (4) Communicate — be transparent with stakeholders about the situation, options, and your recommendation with data. (5) Re-plan remaining 3 weeks with daily standups and explicit milestones. (6) Post-launch: retrospective on estimation and planning process."
+    },
+    {
+      "category": "technical",
+      "question": "How would you define the success metrics for a new search feature? What would you measure and what trade-offs exist?",
+      "hints": [
+        "North star vs guardrail metrics",
+        "Leading vs lagging indicators",
+        "Counter metrics to prevent gaming"
+      ],
+      "idealAnswer": "North star: search success rate (% of searches leading to a meaningful action within 5 minutes). Primary metrics: click-through rate on search results, zero-results rate, time to first click, search refinement rate (lower is better — users found what they needed on first try). Guardrail metrics: page load time (don't sacrifice speed for relevance), false positive rate for content policy. Counter metrics: ensure improving search doesn't decrease browsing engagement (people discovering things serendipitously). A/B testing: use interleaving for ranking changes (show results from both algorithms interleaved to the same user). Segment metrics by query type: navigational, informational, transactional."
+    },
+    {
+      "category": "strategy",
+      "question": "Should Notion build an email product? Walk me through how you'd evaluate this opportunity.",
+      "hints": [
+        "Market analysis and competitive landscape",
+        "Strategic fit with core product",
+        "Build vs buy vs partner"
+      ],
+      "idealAnswer": "Framework: (1) Market opportunity — email is a massive market but extremely competitive (Gmail, Outlook, Superhuman). TAM is large but winning share is very difficult. (2) Strategic fit — Notion's strength is flexible, connected workspace. Email as a surface to capture and organize information fits, but email as a communication tool is a different product category. (3) User demand — analyze feature requests, survey power users, check if users already email-to-Notion. (4) Competitive moat — Notion's advantage would be integration with existing workspace, not email itself. (5) Recommendation: don't build a full email client. Instead, build deep email integrations (email-to-page capture, send Notion pages via email, email notifications with inline actions). This serves the user need without competing in a saturated market. Focus resources on strengthening the core workspace product."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 1,
+    "stages": ["Product Manager Interview (45-60 min)"],
+    "timeline": "N/A",
+    "tips": [
+      "Use structured frameworks but don't be robotic — show genuine product intuition",
+      "Always start with the user — who are they and what's their pain point",
+      "Metrics should include north star, primary, guardrail, and counter metrics",
+      "Show technical understanding — you need to work with engineers daily",
+      "Practice estimation: market sizing, capacity, and cost-benefit analysis",
+      "Have opinions about products you use — interviewers want to see passion and thoughtfulness"
+    ]
+  },
+  "salaryRange": null,
+  "tags": [
+    "product-management",
+    "product-sense",
+    "analytics",
+    "strategy",
+    "all-companies"
+  ],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}

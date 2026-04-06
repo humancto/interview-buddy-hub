@@ -1,0 +1,119 @@
+{
+  "id": "google-l5-system-design",
+  "company": "Google",
+  "companyLogo": "https://logo.clearbit.com/google.com",
+  "role": "Software Engineer",
+  "level": "L5 (Senior)",
+  "type": "system-design",
+  "difficulty": "senior",
+  "language": "English",
+  "jobDescription": "As a Senior Software Engineer (L5) at Google, you will lead the design and implementation of large-scale distributed systems serving billions of users. You will own the technical direction for your team's systems, mentor L3-L4 engineers, and collaborate across teams on cross-cutting infrastructure. Responsibilities include designing scalable architectures, leading code and design reviews, driving technical decisions with data, and improving system reliability and performance. Requirements: 7+ years of software engineering experience, expertise in distributed systems, strong understanding of networking, storage, and compute trade-offs. Experience with large-scale data processing (MapReduce, Dataflow), storage systems (Bigtable, Spanner), and service mesh architectures. Preferred: Publications or patents in distributed systems, experience with Kubernetes/Borg, capacity planning, and SRE practices.",
+  "systemPromptOverride": "You are a Google L5 system design interviewer. Push the candidate to think at Google scale (billions of users, petabytes of data). Expect them to drive the conversation. Probe on: capacity estimation, data modeling, API design, scalability bottlenecks, consistency vs availability trade-offs, and failure modes. A strong candidate will discuss monitoring, alerting, and graceful degradation unprompted.",
+  "questionBank": [
+    {
+      "category": "system-design",
+      "question": "Design Google Maps navigation system. Focus on real-time routing for millions of concurrent users.",
+      "hints": [
+        "Consider graph partitioning for road networks",
+        "Think about real-time traffic data ingestion",
+        "Discuss hierarchical routing (local vs highway)"
+      ],
+      "idealAnswer": "Partition the road network graph geographically using quad-trees. Use contraction hierarchies or A* with landmarks for efficient routing. Ingest real-time traffic from Android phones via a streaming pipeline (Pub/Sub + Dataflow). Cache popular routes. Use edge computing for low-latency responses. Handle rerouting with incremental graph updates. Discuss CDN for map tiles, offline support, and ETA prediction with ML models."
+    },
+    {
+      "category": "system-design",
+      "question": "Design YouTube's video recommendation system at scale.",
+      "hints": [
+        "Two-stage: candidate generation and ranking",
+        "Consider real-time vs batch features",
+        "Discuss cold start and diversity"
+      ],
+      "idealAnswer": "Two-stage architecture: candidate generation (retrieve ~1000 candidates from billions using collaborative filtering, content-based signals, and user embeddings stored in approximate nearest neighbor index) then ranking (deep neural network scoring candidates using hundreds of features). Feature store with real-time (last watched, session context) and batch features (watch history embeddings). Handle cold start with content features and exploration. A/B test with engagement and satisfaction metrics. Discuss freshness, diversity injection, and feedback loops."
+    },
+    {
+      "category": "system-design",
+      "question": "Design a global distributed key-value store similar to Google Cloud Spanner with strong consistency.",
+      "hints": [
+        "TrueTime and synchronized clocks",
+        "Paxos or Raft for consensus",
+        "Consider cross-region replication"
+      ],
+      "idealAnswer": "Use Paxos groups for each data shard. Achieve external consistency via TrueTime (GPS + atomic clocks) for globally ordered timestamps. Partition data using consistent hashing across zones. Implement two-phase commit for cross-shard transactions. Discuss read-only transactions using snapshot reads at a consistent timestamp. Handle zone failures with automatic leader election. Address data locality with directory-based placement."
+    },
+    {
+      "category": "system-design",
+      "question": "Design Gmail's search functionality that searches across billions of mailboxes with sub-second latency.",
+      "hints": [
+        "Inverted index per user vs global index",
+        "Consider index freshness for new emails",
+        "Discuss ranking and relevance"
+      ],
+      "idealAnswer": "Per-user inverted indexes stored in distributed storage (Bigtable-like). Real-time indexing pipeline processes new emails within seconds. Index structure includes subject, body, sender, labels, attachments metadata. Support query operators (from:, has:attachment, before:). Rank by relevance (TF-IDF + recency + interaction signals). Implement prefix matching for autocomplete. Handle index compaction and garbage collection for deleted emails. Discuss query parsing, spell correction, and snippet generation."
+    },
+    {
+      "category": "system-design",
+      "question": "Design a real-time collaborative document editing system like Google Docs.",
+      "hints": [
+        "Operational Transformation vs CRDTs",
+        "Consider cursor presence and comments",
+        "Discuss offline support and conflict resolution"
+      ],
+      "idealAnswer": "Use Operational Transformation (OT) with a central server as the source of truth. Each document has a revision history. Clients send operations (insert, delete) with base revision number. Server transforms concurrent operations to maintain consistency. WebSocket connections for real-time sync. Persist snapshots periodically with operation log for recovery. Handle cursors and selections as metadata operations. Support offline mode with operation queuing and reconciliation on reconnect. Discuss access control, commenting system, and suggestion mode."
+    },
+    {
+      "category": "behavioral",
+      "question": "Describe a time you identified a significant technical risk in a project and how you addressed it.",
+      "hints": [
+        "Show proactive risk identification",
+        "Demonstrate cross-team influence",
+        "Quantify the impact of your intervention"
+      ],
+      "idealAnswer": "Describe identifying a risk early (scalability, reliability, security). Show how you built consensus around the risk, proposed mitigation strategies, and drove the solution. Quantify the potential impact avoided. Demonstrate leadership without authority and ability to influence technical direction across teams."
+    },
+    {
+      "category": "system-design",
+      "question": "Design a system to detect and prevent abuse/spam in Google Search queries in real-time.",
+      "hints": [
+        "Consider rate limiting at multiple layers",
+        "Think about ML-based anomaly detection",
+        "Discuss false positive handling"
+      ],
+      "idealAnswer": "Multi-layer defense: IP-based rate limiting at the edge (Cloud Armor), user-level rate limiting with token buckets, ML-based anomaly detection for sophisticated attacks. Feature extraction pipeline processes query patterns in real-time. Train models on labeled abuse data. Implement a rules engine for known patterns with quick update capability. Use bloom filters for known-bad fingerprints. Handle CAPTCHA challenges for suspicious traffic. Discuss the balance between blocking abuse and not disrupting legitimate users, appeals process, and monitoring dashboards."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 5,
+    "stages": [
+      "Recruiter Screen",
+      "Technical Phone Screen (45 min coding)",
+      "Onsite Virtual Loop (4-5 rounds: 2 coding + 1 system design + 1 behavioral/leadership + 1 Googleyness)",
+      "Hiring Committee Review",
+      "Senior Leadership Review & Team Matching"
+    ],
+    "timeline": "5-10 weeks",
+    "tips": [
+      "L5 system design interviews expect you to independently drive the discussion",
+      "Always start with requirements clarification and capacity estimation",
+      "Draw clear architecture diagrams — use boxes, arrows, and label data flows",
+      "Discuss trade-offs explicitly: consistency vs availability, latency vs throughput",
+      "Address monitoring, alerting, and operational concerns without being prompted",
+      "Show leadership signals: mentoring examples, cross-team impact, technical vision"
+    ]
+  },
+  "salaryRange": {
+    "currency": "USD",
+    "base": [185000, 260000],
+    "totalComp": [350000, 550000],
+    "source": "levels.fyi",
+    "year": 2026
+  },
+  "tags": [
+    "distributed-systems",
+    "system-design",
+    "scalability",
+    "architecture",
+    "google-infra"
+  ],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}

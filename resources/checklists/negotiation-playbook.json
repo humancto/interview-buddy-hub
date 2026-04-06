@@ -1,0 +1,136 @@
+{
+  "id": "negotiation-playbook",
+  "title": "Salary Negotiation Playbook",
+  "description": "Comprehensive guide to negotiating your tech compensation package, including strategies, scripts, and common scenarios.",
+  "updatedAt": "2026-04-06",
+  "principles": [
+    "Never give a number first — let them anchor",
+    "Always negotiate — companies expect it and build in room",
+    "Negotiate the total package, not just base salary",
+    "Use competing offers as leverage (but never lie about them)",
+    "Be enthusiastic about the role while negotiating — it's not adversarial",
+    "Get everything in writing before accepting",
+    "The recruiter is not your adversary — they want to close you"
+  ],
+  "components": [
+    {
+      "name": "Base Salary",
+      "negotiable": true,
+      "notes": "Most companies have bands per level. Push to top of band or argue for the next level."
+    },
+    {
+      "name": "Signing Bonus",
+      "negotiable": true,
+      "notes": "Often the most flexible component. Ask for higher bonus if base is at band cap."
+    },
+    {
+      "name": "Annual Bonus Target",
+      "negotiable": false,
+      "notes": "Usually fixed by level. Focus on other components."
+    },
+    {
+      "name": "Equity/RSU Grant",
+      "negotiable": true,
+      "notes": "Significant at senior levels. Ask about vesting schedule, refresh grants, and strike price."
+    },
+    {
+      "name": "Start Date",
+      "negotiable": true,
+      "notes": "Can negotiate for time off between jobs. Some companies backdate RSU grants to earlier start."
+    },
+    {
+      "name": "Level",
+      "negotiable": true,
+      "notes": "The single highest-leverage negotiation. Moving up a level can be worth $50-200K+ in TC."
+    },
+    {
+      "name": "Remote Work / Location",
+      "negotiable": true,
+      "notes": "Some companies adjust pay by location. Negotiate remote flexibility if important."
+    },
+    {
+      "name": "PTO / Sabbatical",
+      "negotiable": true,
+      "notes": "Smaller companies may offer additional PTO. Larger companies have fixed policies."
+    },
+    {
+      "name": "Relocation Package",
+      "negotiable": true,
+      "notes": "If relocating, negotiate for full coverage including temporary housing and moving costs."
+    }
+  ],
+  "scripts": [
+    {
+      "scenario": "When asked for salary expectations early in the process",
+      "script": "I'm really excited about this opportunity and I'd prefer to learn more about the role and team before discussing compensation. I'm confident we can find a number that works for both of us. Could you share the range budgeted for this position?",
+      "notes": "Deflect politely. If pressed, say 'I'm looking for a competitive package in line with market rates for this level.'"
+    },
+    {
+      "scenario": "When you receive the initial offer",
+      "script": "Thank you so much for the offer! I'm very excited about joining [Company]. I'd like to take a day or two to review the full package. Could you send me the details in writing?",
+      "notes": "Never accept on the spot. Always ask for written details and time to review."
+    },
+    {
+      "scenario": "Negotiating a higher base salary",
+      "script": "I'm very enthusiastic about this role and the team. After reviewing the offer and considering my experience in [specific area], market data from levels.fyi, and my competing opportunities, I was hoping we could discuss adjusting the base to [target]. I believe this better reflects the value I'll bring, especially given my expertise in [specific skill relevant to the role].",
+      "notes": "Cite specific reasons: experience, market data, competing offers, relevant skills."
+    },
+    {
+      "scenario": "Leveraging a competing offer",
+      "script": "I want to be transparent — I have another offer from [Company] at [TC number]. I genuinely prefer [their company] because of [specific reasons]. Is there flexibility to make the package more competitive? I want to make the right long-term decision.",
+      "notes": "Only mention real offers. Show genuine preference for their company. Let them decide how to match."
+    },
+    {
+      "scenario": "When they say the offer is firm",
+      "script": "I understand the base salary may be at the top of the band. Would there be flexibility on the signing bonus or equity grant? Even a one-time signing bonus of [amount] would help bridge the gap and make this an easy yes.",
+      "notes": "If one component is fixed, pivot to others. Signing bonus is often the most flexible."
+    },
+    {
+      "scenario": "Asking for a level bump",
+      "script": "Based on my [X years] of experience and the scope of work I'd be taking on, I believe [next level] is a better fit. In my current role, I've been operating at that level by [specific examples]. Could we discuss whether [next level] is appropriate?",
+      "notes": "This is the highest-leverage negotiation. Have concrete examples of operating at the higher level."
+    },
+    {
+      "scenario": "Accepting the offer",
+      "script": "Thank you for working with me on this. I'm thrilled to accept the offer at [confirmed terms]. I'm really looking forward to joining the team on [start date]. Could you send the updated offer letter for my signature?",
+      "notes": "Confirm all negotiated terms verbally and get them in the written offer letter before signing."
+    }
+  ],
+  "researchSources": [
+    {
+      "name": "Levels.fyi",
+      "url": "https://levels.fyi",
+      "description": "Crowdsourced compensation data with level mapping across companies"
+    },
+    {
+      "name": "Glassdoor",
+      "url": "https://glassdoor.com",
+      "description": "Salary data and company reviews"
+    },
+    {
+      "name": "Blind",
+      "url": "https://teamblind.com",
+      "description": "Anonymous professional network with real compensation discussions"
+    },
+    {
+      "name": "Comprehensive.io",
+      "url": "https://comprehensive.io",
+      "description": "Compensation data specifically for tech roles"
+    },
+    {
+      "name": "H1B Salary Database",
+      "url": "https://h1bdata.info",
+      "description": "Public H1B salary data filed with the Department of Labor"
+    }
+  ],
+  "commonMistakes": [
+    "Accepting the first offer without negotiating",
+    "Giving a number before receiving their offer",
+    "Negotiating aggressively or making ultimatums",
+    "Lying about competing offers",
+    "Focusing only on base salary and ignoring equity, bonus, and level",
+    "Not researching market rates before negotiating",
+    "Accepting verbally without getting written confirmation",
+    "Burning bridges — you may work with these people someday"
+  ]
+}

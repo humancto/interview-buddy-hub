@@ -1,0 +1,111 @@
+{
+  "id": "uber-l5-system-design",
+  "company": "Uber",
+  "companyLogo": "https://logo.clearbit.com/uber.com",
+  "role": "Software Engineer",
+  "level": "L5 (Senior)",
+  "type": "system-design",
+  "difficulty": "senior",
+  "language": "English",
+  "jobDescription": "As a Senior Software Engineer (L5a/L5b) at Uber, you will design and build the systems powering ride-sharing, delivery, and freight logistics for millions of daily trips across 70+ countries. You will work with Go, Java, or Python to build low-latency, high-throughput distributed systems. Responsibilities include designing systems for real-time geospatial processing, ETA prediction, dynamic pricing, and marketplace matching. You will lead technical projects across teams, mentor engineers, and drive system reliability. Requirements: 5-8 years software engineering experience, expertise in distributed systems, experience with geospatial systems or real-time data processing, proficiency in Go or Java, strong understanding of microservices architecture, stream processing (Kafka, Flink), and storage systems. Preferred: Experience with ML-powered systems, geospatial indexing (H3, S2), and multi-region deployment.",
+  "systemPromptOverride": "You are an Uber interviewer. Uber's systems operate at massive scale with real-time constraints — location updates from millions of devices, sub-second matching, dynamic pricing calculations. Push candidates to think about geospatial challenges, real-time stream processing, and marketplace dynamics. Uber values pragmatic engineering: get the right trade-off between consistency, availability, and latency. Ask about failure modes in distributed systems and how they would handle partial outages gracefully.",
+  "questionBank": [
+    {
+      "category": "system-design",
+      "question": "Design Uber's ride matching system. How would you match riders with drivers in real-time with optimal ETA?",
+      "hints": [
+        "Geospatial indexing for nearby drivers",
+        "Consider the matching optimization problem",
+        "Discuss supply-demand balancing"
+      ],
+      "idealAnswer": "Geospatial index: use H3 (hexagonal hierarchical index) to partition the map. Maintain a real-time index of available drivers by H3 cell. When a ride request arrives: (1) Find nearby available drivers by expanding H3 rings around pickup point. (2) Calculate ETA for each candidate using routing engine with live traffic. (3) Run matching optimization: consider driver ETA, driver rating, trip profitability, fairness (time since last trip). (4) Use a batch matching approach (collect requests over 2-second windows) for globally optimal matching vs greedy per-request matching. Handle: driver location staleness (require freshness < 10s), concurrent ride requests (optimistic locking on driver state), and surge areas (adjust matching radius dynamically)."
+    },
+    {
+      "category": "system-design",
+      "question": "Design Uber's dynamic pricing (surge) system that adjusts prices in real-time based on supply and demand.",
+      "hints": [
+        "Define geographic pricing zones",
+        "Consider the feedback loop between price and demand",
+        "Discuss fairness and regulatory constraints"
+      ],
+      "idealAnswer": "Divide the city into pricing zones (H3 cells at appropriate resolution). For each zone, compute supply-demand ratio in real-time: supply = available drivers in zone and adjacent zones, demand = ride requests in recent window (5 min). Pricing function: base_price * surge_multiplier where multiplier is a smooth function of supply/demand ratio. Use stream processing (Flink) on driver location and ride request events. Apply smoothing: temporal (exponential moving average to avoid rapid oscillations) and spatial (blend with neighbor zones to avoid sharp boundaries). Constraints: regulatory price caps, maximum surge limits, customer communication (show surge before request), and gradual ramp-up/cool-down. A/B test pricing models with holdout groups."
+    },
+    {
+      "category": "technical",
+      "question": "How would you design a real-time ETA prediction service that accounts for live traffic, road closures, and historical patterns?",
+      "hints": [
+        "Graph-based routing with live weights",
+        "ML model for ETA adjustment",
+        "Consider the data pipeline for traffic updates"
+      ],
+      "idealAnswer": "Multi-layer approach: (1) Base routing — road network graph with segment-level speeds from historical data (time-of-day, day-of-week profiles). Use contraction hierarchies for fast graph queries. (2) Real-time overlay — GPS traces from Uber drivers processed through a streaming pipeline to update segment speeds in real-time. Use map-matching algorithm to assign GPS points to road segments. (3) ML adjustment — a gradient-boosted model that post-adjusts graph-based ETA using features: origin/destination embeddings, current traffic conditions, weather, events, time features. (4) Segment computation — precompute ETAs for common H3 cell pairs, recompute on traffic changes. Cache aggressively with TTL proportional to ETA magnitude."
+    },
+    {
+      "category": "coding",
+      "question": "Implement a geospatial index that efficiently finds all points within a given radius of a query point. Support insert, delete, and range query.",
+      "hints": [
+        "Consider quadtree or geohash approach",
+        "Handle points near cell boundaries",
+        "Optimize for frequent queries with infrequent updates"
+      ],
+      "idealAnswer": "Use a quadtree: recursively partition 2D space into four quadrants. Each leaf node holds points up to a capacity, then splits. Insert: traverse to appropriate leaf, insert or split. Delete: remove from leaf, optionally merge sparse siblings. Range query: given center and radius, recursively visit quadrants that intersect the query circle (check if quadrant bounds intersect circle). For each candidate point in qualifying leaves, compute exact distance. Alternative: geohash with prefix-based lookup and neighbor cell expansion. Time: O(log n) insert/delete, O(k + log n) for range query returning k results."
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you had to make a system work reliably under extreme scale or traffic spikes.",
+      "hints": [
+        "Discuss load testing and capacity planning",
+        "Show proactive resilience engineering",
+        "Quantify the scale"
+      ],
+      "idealAnswer": "Describe a specific high-scale challenge (e.g., New Year's Eve traffic spike, product launch, special event). Show how you prepared: load testing with realistic traffic patterns, identifying bottlenecks (database, network, compute), implementing circuit breakers and graceful degradation, capacity planning with headroom. During the event: monitoring dashboards, runbooks, on-call coordination. After: post-mortem with improvements. Quantify: requests per second, latency percentiles, availability achieved."
+    },
+    {
+      "category": "system-design",
+      "question": "Design Uber Eats' order tracking system that shows real-time order status and driver location to the customer.",
+      "hints": [
+        "Event-driven architecture for status updates",
+        "WebSocket vs server-sent events for real-time push",
+        "Consider the different stages of an order"
+      ],
+      "idealAnswer": "Order state machine: placed -> confirmed -> preparing -> ready -> picked_up -> en_route -> delivered. Each transition published as an event to Kafka. Real-time tracking service: drivers send location updates every 4 seconds via UDP/TCP to a location service. Customer tracking: WebSocket connection from customer app to a push gateway. Gateway subscribes to relevant order events and driver location stream (filtered by order's assigned driver). Backend: order service manages state transitions, location service maintains driver positions in Redis with geo commands, push gateway handles fan-out. Handle: connection drops (reconnect with catch-up), battery optimization (reduce location frequency when stationary), and ETA updates (recalculate on each location update)."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 5,
+    "stages": [
+      "Recruiter Screen",
+      "Technical Phone Screen (coding, 45 min)",
+      "Onsite (4 rounds: 2 coding, 1 system design, 1 behavioral)",
+      "Hiring Committee Review",
+      "Offer"
+    ],
+    "timeline": "3-6 weeks",
+    "tips": [
+      "Uber interviews emphasize system design heavily — practice real-time and geospatial systems",
+      "Coding rounds are LeetCode-style but with emphasis on production quality",
+      "Show familiarity with stream processing and event-driven architectures",
+      "Uber values pragmatism — discuss practical trade-offs, not theoretical perfection",
+      "Behavioral questions assess leadership, collaboration, and handling ambiguity",
+      "Research Uber's engineering blog for system design patterns they've published"
+    ]
+  },
+  "salaryRange": {
+    "currency": "USD",
+    "base": [175000, 240000],
+    "totalComp": [300000, 500000],
+    "source": "levels.fyi",
+    "year": 2026
+  },
+  "tags": [
+    "go",
+    "java",
+    "distributed-systems",
+    "geospatial",
+    "real-time",
+    "kafka",
+    "system-design"
+  ],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}

@@ -1,0 +1,98 @@
+{
+  "id": "frontend-engineer-general",
+  "company": null,
+  "role": "Frontend Engineer",
+  "level": "Mid-Senior",
+  "type": "technical",
+  "difficulty": "senior",
+  "language": "English",
+  "jobDescription": "Generic frontend engineering interview preparation covering core web technologies, modern frameworks, performance optimization, and accessibility. Suitable for frontend roles at any company.",
+  "systemPromptOverride": "You are a frontend engineering interviewer. Assess the candidate's depth in: JavaScript/TypeScript fundamentals, React or framework-specific knowledge, browser APIs and rendering pipeline, CSS layout and responsive design, web performance optimization, accessibility, and testing strategies. Balance theoretical knowledge with practical coding ability.",
+  "questionBank": [
+    {
+      "category": "technical",
+      "question": "Explain JavaScript closures and provide a practical example of where they're useful and where they can cause problems.",
+      "hints": [
+        "Lexical scoping and variable capture",
+        "Common gotcha: closures in loops",
+        "Use cases: data privacy, partial application"
+      ],
+      "idealAnswer": "A closure is a function that retains access to its outer scope's variables even after the outer function returns. Use cases: module pattern for encapsulation, partial application/currying, event handlers with state. Gotcha: closures in for loops capture the variable reference, not the value — classic fix is using let (block scope) or IIFE. Memory consideration: closures retain references to outer scope, potentially preventing garbage collection of large objects."
+    },
+    {
+      "category": "technical",
+      "question": "How does CSS Grid differ from Flexbox? When would you choose one over the other?",
+      "hints": [
+        "1D vs 2D layout",
+        "Content-first vs layout-first approaches",
+        "Specific use cases for each"
+      ],
+      "idealAnswer": "Flexbox: one-dimensional layout (row OR column). Content-driven sizing. Best for: navigation bars, card rows, centering elements, distributing space among items. Grid: two-dimensional layout (rows AND columns simultaneously). Layout-driven. Best for: page layouts, dashboards, complex grid patterns, overlapping elements. Use Grid for overall page structure, Flexbox for component-level layout within grid cells. They complement each other and can be nested."
+    },
+    {
+      "category": "coding",
+      "question": "Implement a custom React hook useDebounce that debounces a value and also returns a cancel function.",
+      "hints": [
+        "Use useRef for the timeout",
+        "Use useEffect for cleanup",
+        "Consider the dependency array carefully"
+      ],
+      "idealAnswer": "Use useState for the debounced value, useRef for the timeout ID. useEffect watches the input value: clear existing timeout, set new timeout that updates debounced value after delay. Cleanup function clears timeout on unmount or value change. Expose cancel function that clears the timeout and optionally resets to current value. Consider: leading vs trailing debounce, maxWait option, and callback-style variant for functions."
+    },
+    {
+      "category": "technical",
+      "question": "What is the difference between SSR, SSG, ISR, and CSR? When would you use each?",
+      "hints": [
+        "Consider SEO, performance, and data freshness",
+        "Think about caching strategies",
+        "Discuss hybrid approaches"
+      ],
+      "idealAnswer": "CSR (Client-Side Rendering): browser renders everything. Fast navigation after initial load. Use for: dashboards, authenticated apps. Downside: poor SEO, slow initial load. SSR (Server-Side Rendering): server renders HTML per request. Good SEO, fast FCP. Use for: dynamic content, personalized pages. Downside: server load, TTFB. SSG (Static Site Generation): HTML generated at build time. Fastest delivery via CDN. Use for: blogs, docs, marketing pages. Downside: rebuild for content changes. ISR (Incremental Static Regeneration): SSG with background revalidation. Use for: e-commerce product pages, content that changes periodically. Best practice: hybrid approach — SSG for static content, SSR for dynamic, CSR for interactive components."
+    },
+    {
+      "category": "coding",
+      "question": "Build an accessible dropdown/select component from scratch. Handle keyboard navigation, screen reader support, and ARIA attributes.",
+      "hints": [
+        "Role=listbox and option",
+        "Arrow key navigation with focus management",
+        "Announce selections to screen readers"
+      ],
+      "idealAnswer": "Use role='combobox' on trigger, role='listbox' on dropdown, role='option' on items. Keyboard: Enter/Space to toggle, ArrowDown/Up to navigate options, Escape to close, type-ahead for filtering. ARIA: aria-expanded, aria-activedescendant for virtual focus, aria-selected on chosen option, aria-label for the component. Focus management: keep focus on the trigger, use aria-activedescendant to indicate highlighted option. Click outside to close (useClickOutside pattern). Handle: multi-select variant, grouped options, disabled options, and mobile touch interactions."
+    },
+    {
+      "category": "technical",
+      "question": "How would you set up a comprehensive testing strategy for a React application?",
+      "hints": [
+        "Testing pyramid: unit, integration, e2e",
+        "What to test at each level",
+        "Discuss testing tools and trade-offs"
+      ],
+      "idealAnswer": "Testing pyramid: Unit (Jest + React Testing Library) — test individual functions, hooks, and component rendering in isolation. Prefer testing behavior over implementation. Integration — test feature flows with multiple components interacting, mock API calls with MSW. E2E (Playwright or Cypress) — test critical user journeys (login, checkout, key workflows). Limit to most important paths due to maintenance cost. Visual regression (Chromatic/Percy) — catch unintended UI changes. Accessibility (axe-core) — automated a11y checks. Performance (Lighthouse CI) — prevent performance regressions. Coverage target: 80%+ meaningful coverage, not vanity metrics."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 1,
+    "stages": ["Technical Frontend Interview (45-60 min)"],
+    "timeline": "N/A",
+    "tips": [
+      "Know JavaScript deeply — closures, prototypes, event loop, promises, and generators",
+      "React hooks should be second nature — understand the rules and common patterns",
+      "Performance optimization: know your Core Web Vitals and how to improve them",
+      "Accessibility is increasingly tested — understand WCAG guidelines and ARIA",
+      "Practice building components without a UI library to show fundamentals",
+      "Be able to discuss trade-offs between different rendering strategies (SSR, CSR, SSG)"
+    ]
+  },
+  "salaryRange": null,
+  "tags": [
+    "frontend",
+    "react",
+    "javascript",
+    "typescript",
+    "css",
+    "accessibility",
+    "all-companies"
+  ],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}

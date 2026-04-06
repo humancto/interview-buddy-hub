@@ -1,0 +1,141 @@
+name: Build Template Index
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'templates/**/*.json'
+      - 'resources/**/*.json'
+  workflow_dispatch:
+
+jobs:
+  build-index:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Build index
+        run: |
+          node -e "
+          const fs = require('fs');
+          const path = require('path');
+
+          function findJsonFiles(dir, pattern) {
+            const results = [];
+            if (!fs.existsSync(dir)) return results;
+            const items = fs.readdirSync(dir, { withFileTypes: true });
+            for (const item of items) {
+              const fullPath = path.join(dir, item.name);
+              if (item.isDirectory()) {
+                results.push(...findJsonFiles(fullPath, pattern));
+              } else if (item.name.endsWith('.json') && item.name !== 'index.json') {
+                results.push(fullPath);
+              }
+            }
+            return results;
+          }
+
+          // Find all company templates
+          const companyFiles = findJsonFiles('templates/companies', '*.json');
+          const roleFiles = findJsonFiles('templates/roles', '*.json');
+
+          const templates = [];
+          const companies = new Set();
+          const roles = new Set();
+          let totalQuestions = 0;
+
+          for (const file of [...companyFiles, ...roleFiles]) {
+            try {
+              const content = JSON.parse(fs.readFileSync(file, 'utf-8'));
+              const relativePath = path.relative('templates', file);
+
+              templates.push({
+                id: content.id,
+                company: content.company,
+                role: content.role,
+                level: content.level,
+                type: content.type,
+                difficulty: content.difficulty,
+                tags: content.tags || [],
+                popularity: content.popularity || 0,
+                contributor: content.contributor || 'community',
+                path: relativePath
+              });
+
+              if (content.company) companies.add(content.company);
+              if (content.role) roles.add(content.role);
+              if (content.questionBank) totalQuestions += content.questionBank.length;
+            } catch (e) {
+              console.error('Error processing ' + file + ': ' + e.message);
+            }
+          }
+
+          // Read existing index to preserve manually added companies/roles
+          let existingIndex = {};
+          try {
+            existingIndex = JSON.parse(fs.readFileSync('templates/index.json', 'utf-8'));
+          } catch (e) {}
+
+          // Merge companies and roles
+          const allCompanies = [...new Set([
+            ...companies,
+            ...(existingIndex.companies || [])
+          ])].sort();
+
+          const allRoles = [...new Set([
+            ...roles,
+            ...(existingIndex.roles || [])
+          ])].sort();
+
+          const index = {
+            version: (existingIndex.version || 0) + 1,
+            updatedAt: new Date().toISOString().split('T')[0],
+            templates: templates.sort((a, b) => a.id.localeCompare(b.id)),
+            companies: allCompanies,
+            roles: allRoles,
+            categories: ['behavioral', 'technical', 'system-design', 'coding'],
+            stats: {
+              totalTemplates: templates.length,
+              totalCompanies: allCompanies.length,
+              totalRoles: allRoles.length,
+              totalQuestions: totalQuestions,
+              lastUpdated: new Date().toISOString().split('T')[0]
+            }
+          };
+
+          fs.writeFileSync('templates/index.json', JSON.stringify(index, null, 2));
+          console.log('Index built successfully:');
+          console.log('  Templates: ' + templates.length);
+          console.log('  Companies: ' + allCompanies.length);
+          console.log('  Roles: ' + allRoles.length);
+          console.log('  Questions: ' + totalQuestions);
+          "
+
+      - name: Validate JSON files
+        run: |
+          find templates resources -name '*.json' -exec sh -c '
+            for file do
+              node -e "JSON.parse(require(\"fs\").readFileSync(\"$file\", \"utf-8\"))" 2>/dev/null || {
+                echo "Invalid JSON: $file"
+                exit 1
+              }
+            done
+          ' sh {} +
+          echo "All JSON files are valid."
+
+      - name: Commit updated index
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add templates/index.json
+          git diff --staged --quiet || git commit -m "chore: rebuild template index [automated]"
+          git push

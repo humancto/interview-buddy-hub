@@ -1,0 +1,122 @@
+{
+  "id": "anthropic-ml-engineer",
+  "company": "Anthropic",
+  "companyLogo": "https://logo.clearbit.com/anthropic.com",
+  "role": "ML Engineer",
+  "level": "Senior",
+  "type": "technical",
+  "difficulty": "expert",
+  "language": "English",
+  "jobDescription": "As a Senior ML Engineer at Anthropic, you will develop and optimize the infrastructure and algorithms behind Claude and future AI systems. You will work on training pipeline optimization, model evaluation, fine-tuning methods, and safety-focused ML techniques. You will collaborate with researchers to translate novel ideas into scalable implementations. Responsibilities include building and optimizing distributed training pipelines, implementing RLHF and constitutional AI methods, developing evaluation and red-teaming frameworks, creating efficient inference serving systems, and contributing to interpretability research tooling. Requirements: 5+ years ML engineering experience, expert Python and PyTorch/JAX skills, experience with large-scale distributed training, strong understanding of transformer architectures, familiarity with alignment techniques (RLHF, RLAIF, constitutional AI). Preferred: Experience with JAX/TPU programming, interpretability research, adversarial robustness, and experience at frontier AI labs.",
+  "systemPromptOverride": "You are an Anthropic interviewer. Anthropic deeply values safety-conscious engineering and careful, principled thinking. Assess candidates on: technical depth in ML systems, thoughtfulness about safety implications, ability to reason about failure modes, and collaborative problem-solving style. Anthropic's culture emphasizes intellectual honesty, epistemic humility, and doing careful work. Push candidates to think about second-order effects and failure modes. Ask about alignment and safety as first-class engineering concerns, not afterthoughts.",
+  "questionBank": [
+    {
+      "category": "technical",
+      "question": "Explain Constitutional AI (CAI) and how it differs from standard RLHF. What are the advantages and limitations?",
+      "hints": [
+        "Self-critique and revision process",
+        "Compare human feedback scaling",
+        "Discuss the constitution design process"
+      ],
+      "idealAnswer": "CAI uses a set of principles (a 'constitution') to guide model behavior instead of relying solely on human preference labels. Two phases: (1) Supervised — the model generates responses, critiques them against the constitution, and revises them. The revised responses become training data. (2) RL — instead of human comparisons, the model itself evaluates which response better follows the constitution (RLAIF). Advantages: scales better than RLHF (no human labeling bottleneck), more transparent (principles are explicit), easier to audit and update. Limitations: constitution design requires careful thought, model self-evaluation has biases, may not capture nuanced human preferences that are hard to articulate as rules."
+    },
+    {
+      "category": "technical",
+      "question": "How would you design an efficient inference serving system for a large language model with variable-length requests?",
+      "hints": [
+        "Continuous batching vs static batching",
+        "KV cache memory management",
+        "Speculative decoding for latency"
+      ],
+      "idealAnswer": "Use continuous batching (iteration-level scheduling) to maximize GPU utilization — new requests join the batch at any iteration, completed requests leave immediately. Implement paged attention (vLLM-style) for efficient KV cache memory management — allocate cache in pages, use page tables for virtual-to-physical mapping, enabling memory sharing and reducing waste. Use speculative decoding with a smaller draft model to generate candidate tokens verified in parallel by the target model for lower latency. Implement prefix caching for common system prompts. Handle priority queues for different SLA tiers. Quantize weights (INT8/INT4 with GPTQ or AWQ) for memory savings and throughput."
+    },
+    {
+      "category": "coding",
+      "question": "Implement a simple reward model training loop in PyTorch. Given a dataset of preference pairs (chosen, rejected), train a model to predict human preferences.",
+      "hints": [
+        "Bradley-Terry model for pairwise comparisons",
+        "The loss is based on log-sigmoid of reward difference",
+        "Consider regularization"
+      ],
+      "idealAnswer": "Load a pre-trained language model, add a scalar reward head. For each preference pair, compute rewards r_chosen and r_rejected. Loss = -log(sigmoid(r_chosen - r_rejected)), averaged over the batch. Add L2 regularization on reward magnitudes to prevent reward hacking. Training: use a lower learning rate than pre-training, cosine schedule, gradient clipping. Evaluation: accuracy on held-out preference pairs, calibration of reward scores. Handle ties in preferences (optional: margin-based loss). Monitor reward distribution statistics for collapse detection."
+    },
+    {
+      "category": "technical",
+      "question": "What is mechanistic interpretability? Describe an approach to understanding what a specific attention head in a transformer has learned.",
+      "hints": [
+        "Activation patching and causal tracing",
+        "Probing classifiers",
+        "Circuit analysis"
+      ],
+      "idealAnswer": "Mechanistic interpretability aims to reverse-engineer the algorithms learned by neural networks. For a specific attention head: (1) Analyze attention patterns on curated inputs to form hypotheses (e.g., 'induction heads' that copy patterns). (2) Activation patching — replace the head's output on one input with its output on another, measure downstream effect on model behavior to establish causal importance. (3) Probing — train linear classifiers on the head's outputs to identify what information it encodes. (4) Circuit analysis — trace the computational graph from input through this head to output, identifying upstream (what writes to K,Q) and downstream (what reads the output) components. Tools: TransformerLens, pyviz for attention visualization."
+    },
+    {
+      "category": "system-design",
+      "question": "Design an automated red-teaming system for evaluating LLM safety before deployment.",
+      "hints": [
+        "Diverse attack categories",
+        "Automated adversarial input generation",
+        "Scalable evaluation pipeline"
+      ],
+      "idealAnswer": "Multi-layered system: (1) Attack generation — use another LLM to generate adversarial prompts across categories (jailbreaks, harmful content, PII extraction, bias elicitation), supplement with human red-teamers for creative attacks. (2) Target model evaluation — run generated attacks against the model, collect responses. (3) Automated evaluation — classifier models judge response safety on multiple dimensions (harmfulness, refusal appropriateness, information leakage). (4) Aggregation and reporting — dashboard showing safety scores by category, regression tracking across model versions, automatic blocking if safety drops below thresholds. (5) Feedback loop — failed attacks inform model training. Handle adversarial robustness: test jailbreak transferability, multi-turn attacks, and encoding-based bypasses."
+    },
+    {
+      "category": "behavioral",
+      "question": "Describe a time when you identified that a system you were building could be misused. How did you address it?",
+      "hints": [
+        "Show proactive safety thinking",
+        "Discuss mitigation strategies",
+        "Balance capability with safety"
+      ],
+      "idealAnswer": "Describe a specific situation where you identified a potential misuse vector (e.g., a powerful tool that could be weaponized, a data pipeline that could leak PII, an API that could be used for spam). Show that you proactively raised the concern rather than waiting to be asked. Describe the mitigation you implemented (access controls, rate limiting, content filtering, design changes). Demonstrate that you considered the full threat model and that safety was a first-class concern, not a checkbox."
+    },
+    {
+      "category": "coding",
+      "question": "Implement an efficient batched beam search for autoregressive language model generation with support for length penalties and repetition penalties.",
+      "hints": [
+        "Maintain top-k beams per batch element",
+        "Handle variable-length sequences in a batch",
+        "Consider memory-efficient implementation"
+      ],
+      "idealAnswer": "Maintain beam_width hypotheses per batch element as (token_ids, log_prob, finished). At each step: (1) Forward pass with all active beams batched together. (2) Add length penalty (divide log_prob by length^alpha). (3) Apply repetition penalty (reduce logits for tokens already in the sequence). (4) Select top beam_width*2 candidates per batch element. (5) Prune back to beam_width, moving finished sequences to a completed set. (6) Reshape tensors and KV cache for the new beam configuration. Handle early stopping when all top beams are finished. Return sequences sorted by length-normalized log probability."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 5,
+    "stages": [
+      "Recruiter Screen + Values Alignment Discussion",
+      "Technical Phone Screen (ML coding)",
+      "ML Systems Design Interview",
+      "Onsite (3-4 rounds: ML depth, systems coding, research discussion, culture/values)",
+      "Team Conversations"
+    ],
+    "timeline": "4-8 weeks",
+    "tips": [
+      "Anthropic cares deeply about safety and alignment — have genuine, thoughtful opinions on these topics",
+      "Be prepared to discuss trade-offs between capability and safety with nuance",
+      "Demonstrate depth in ML fundamentals — not just how to use frameworks, but why things work",
+      "Show experience with large-scale systems and the practical challenges of training LLMs",
+      "Intellectual honesty is valued — saying 'I don't know' is better than bluffing",
+      "Read Anthropic's research papers (constitutional AI, interpretability, scaling laws) before interviewing"
+    ]
+  },
+  "salaryRange": {
+    "currency": "USD",
+    "base": [250000, 375000],
+    "totalComp": [500000, 900000],
+    "source": "levels.fyi",
+    "year": 2026
+  },
+  "tags": [
+    "python",
+    "pytorch",
+    "jax",
+    "transformers",
+    "rlhf",
+    "alignment",
+    "interpretability",
+    "llm"
+  ],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}

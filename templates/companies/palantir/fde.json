@@ -1,0 +1,110 @@
+{
+  "id": "palantir-fde",
+  "company": "Palantir",
+  "companyLogo": "https://logo.clearbit.com/palantir.com",
+  "role": "Forward Deployed Engineer",
+  "level": "Senior",
+  "type": "technical",
+  "difficulty": "senior",
+  "language": "English",
+  "jobDescription": "As a Forward Deployed Engineer (FDE) at Palantir, you will work directly with customers (government agencies, financial institutions, healthcare organizations) to deploy Palantir's platforms (Foundry, Gotham, Apollo) and build custom solutions for their most complex data problems. You will bridge the gap between Palantir's product and real-world operational challenges. Responsibilities include understanding customer workflows and translating them into technical solutions, building data pipelines and integrations, creating custom applications on Palantir platforms, leading technical workstreams at customer sites, and providing feedback to product teams. Requirements: 3-7 years software engineering experience, strong problem-solving skills, ability to work independently in ambiguous environments, experience with data engineering (SQL, Python, Spark), willingness to travel (30-50%), and excellent communication skills. Preferred: Experience with data modeling, workflow automation, geospatial analysis, and working with sensitive/classified data. Active security clearance is a plus.",
+  "systemPromptOverride": "You are a Palantir interviewer. Palantir FDE interviews uniquely test for both technical ability and client-facing skills. Assess: ability to decompose complex real-world problems, comfort with ambiguity, strong communication skills, and technical versatility. FDEs must think on their feet, work independently, and translate messy customer requirements into clean technical solutions. Expect coding questions with a practical bent (data processing, not LeetCode puzzles), system design focused on data architecture, and behavioral questions about working with non-technical stakeholders.",
+  "questionBank": [
+    {
+      "category": "technical",
+      "question": "A government agency has 50 different data sources (databases, CSVs, APIs, PDFs) about infrastructure projects. How would you design a unified data model and integration pipeline?",
+      "hints": [
+        "Ontology design (entities and relationships)",
+        "Data quality and deduplication challenges",
+        "Incremental vs batch processing"
+      ],
+      "idealAnswer": "Start with understanding the domain: identify key entities (projects, contractors, agencies, locations, budgets, timelines). Design an ontology with typed objects and relationships. Pipeline architecture: (1) Ingestion layer — connectors for each source type (JDBC, file watcher, API poller, PDF extraction via OCR/NLP). (2) Transformation layer — normalize schemas, standardize formats (dates, addresses, IDs), apply data quality rules. (3) Entity resolution — deduplicate entities across sources using fuzzy matching (name similarity, address normalization, ID crosswalk tables). (4) Linking — establish relationships using foreign keys and inference. (5) Output — unified ontology accessible via API and UI. Handle: schema evolution, late-arriving data, conflicting values (source priority rules), PII handling, and audit trail of data provenance."
+    },
+    {
+      "category": "coding",
+      "question": "Given a large dataset of financial transactions, write a function that detects potentially fraudulent transaction chains (A sends to B, B sends to C within 24 hours, total amount > threshold).",
+      "hints": [
+        "Graph traversal with time constraints",
+        "Consider memory efficiency for large datasets",
+        "Handle cycles in the transaction graph"
+      ],
+      "idealAnswer": "Build a directed graph where nodes are accounts and edges are transactions with amounts and timestamps. For each transaction edge, do a time-constrained BFS/DFS forward: follow subsequent transactions from the recipient within 24 hours. Track cumulative amount through the chain. Flag chains where cumulative amount exceeds threshold. Handle: cycles (visited set per chain), fan-out limits (cap chain width to avoid exponential blowup), and time window sliding (transactions must be in sequence). For large datasets: process in time-ordered batches, use a sliding window over the transaction stream, and prune chains that exceed the time window."
+    },
+    {
+      "category": "technical",
+      "question": "How would you build a real-time operational dashboard for a supply chain, showing inventory levels, shipment tracking, and demand forecasting?",
+      "hints": [
+        "Data freshness requirements vary by metric",
+        "Consider multiple visualization types",
+        "Handle data from different time zones and update frequencies"
+      ],
+      "idealAnswer": "Tiered data architecture: (1) Real-time layer (seconds) — shipment GPS positions, warehouse scan events via streaming pipeline (Kafka/Flink). (2) Near-real-time (minutes) — inventory levels aggregated from warehouse management systems. (3) Batch (daily) — demand forecasts from ML models, historical analysis. Dashboard design: map view for shipment tracking (WebSocket updates for live positions), time-series charts for inventory levels with alerts for low stock, forecast charts comparing predicted vs actual demand. Interactive: drill-down from region to warehouse to SKU level. Alerts: configurable thresholds for stockouts, delayed shipments, demand anomalies. Handle: data source failures (show staleness indicators), time zone normalization, and role-based access control for different organizational levels."
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you had to explain a complex technical concept to a non-technical stakeholder. How did you ensure understanding and alignment?",
+      "hints": [
+        "Use analogies and visual aids",
+        "Check understanding iteratively",
+        "Focus on impact, not implementation"
+      ],
+      "idealAnswer": "Describe a specific situation with a non-technical audience (executive, customer, partner). Show how you adapted your communication: used analogies to familiar concepts, created visual diagrams, focused on business impact rather than technical details, and checked for understanding by asking targeted questions. Demonstrate patience and the ability to adjust your explanation based on feedback. Show the outcome: alignment on a decision, approval for a project, or successful adoption of a tool."
+    },
+    {
+      "category": "coding",
+      "question": "Implement a function that takes a SQL-like query string (SELECT, WHERE, ORDER BY) and executes it against an in-memory array of objects.",
+      "hints": [
+        "Parse the query into components",
+        "Support basic operators (=, >, <, LIKE)",
+        "Handle ORDER BY with multiple columns"
+      ],
+      "idealAnswer": "Parse: split query into SELECT fields, table (ignored for in-memory), WHERE conditions, and ORDER BY clauses using regex or a simple recursive descent parser. Execute: (1) Filter — evaluate WHERE conditions against each row, supporting =, !=, >, <, >=, <=, LIKE (convert to regex), AND, OR. (2) Sort — apply ORDER BY with comparator chain for multiple columns, supporting ASC/DESC. (3) Project — select only requested fields (or * for all). Handle: quoted strings, NULL values (IS NULL, IS NOT NULL), nested parentheses in WHERE, and numeric vs string comparison. Return array of result objects."
+    },
+    {
+      "category": "system-design",
+      "question": "Design a system for tracking and responding to natural disaster events, integrating satellite imagery, social media signals, weather data, and ground reports.",
+      "hints": [
+        "Multi-source data fusion",
+        "Geospatial analysis and visualization",
+        "Alert prioritization and routing"
+      ],
+      "idealAnswer": "Data ingestion: satellite imagery (periodic API pulls, event-triggered tasking), weather services (NOAA APIs, real-time streams), social media (Twitter/X streaming API filtered by disaster keywords and geolocation), ground reports (mobile app submissions, 911 dispatch feeds). Processing: NLP on social media for event detection and severity classification, geospatial clustering to identify affected areas, satellite image analysis (change detection for damage assessment). Fusion: merge signals into a unified event model with confidence scores. Visualization: map-based dashboard with layered overlays (affected areas, resource positions, evacuation routes). Alerting: priority-based routing to response teams based on event type, severity, and location. Handle: data reliability (cross-reference multiple sources), real-time updates, and connectivity challenges in disaster zones."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 5,
+    "stages": [
+      "Recruiter Screen + Karat Coding Screen",
+      "Technical Phone Screen (practical coding)",
+      "Onsite (3-4 rounds: coding, system design, decomposition exercise, behavioral)",
+      "Customer Scenario Simulation",
+      "Offer"
+    ],
+    "timeline": "3-6 weeks",
+    "tips": [
+      "FDE interviews test practical problem-solving more than algorithmic puzzles",
+      "Be prepared for open-ended decomposition problems — break them down systematically",
+      "Communication skills are assessed as heavily as technical skills",
+      "Show comfort with ambiguity — FDEs often work without clear requirements",
+      "Palantir values mission-driven engineers — research their work in defense, healthcare, and anti-fraud",
+      "Practice explaining technical concepts to non-technical audiences"
+    ]
+  },
+  "salaryRange": {
+    "currency": "USD",
+    "base": [140000, 200000],
+    "totalComp": [200000, 350000],
+    "source": "levels.fyi",
+    "year": 2026
+  },
+  "tags": [
+    "python",
+    "sql",
+    "data-engineering",
+    "palantir-foundry",
+    "problem-decomposition",
+    "client-facing"
+  ],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}

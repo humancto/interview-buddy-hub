@@ -1,0 +1,283 @@
+{
+  "id": "coding-patterns",
+  "title": "Top Algorithm Patterns for Coding Interviews",
+  "description": "Pattern recognition guide for coding interviews. Learn to identify which pattern applies to a problem, not memorize solutions. Each pattern includes identifying signals, common problems, and the core technique.",
+  "updatedAt": "2026-04-06",
+  "patterns": [
+    {
+      "id": 1,
+      "name": "Two Pointers",
+      "difficulty": "easy",
+      "signals": [
+        "Sorted array/linked list",
+        "Finding pairs with a target sum",
+        "Removing duplicates in-place",
+        "Partitioning"
+      ],
+      "technique": "Use two pointers moving toward each other (or in the same direction) to reduce O(n^2) to O(n). Start/end pointers for sorted arrays, slow/fast for linked lists.",
+      "examples": [
+        "Two Sum (sorted)",
+        "Container With Most Water",
+        "Remove Duplicates from Sorted Array",
+        "Trapping Rain Water"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Sliding Window",
+      "difficulty": "medium",
+      "signals": [
+        "Contiguous subarray/substring",
+        "Fixed or variable window size",
+        "Maximum/minimum of subarrays",
+        "String pattern matching"
+      ],
+      "technique": "Maintain a window [left, right] over the array. Expand right to include elements, shrink left when constraint is violated. Track window state with a hash map or counter.",
+      "examples": [
+        "Maximum Sum Subarray of Size K",
+        "Longest Substring Without Repeating Characters",
+        "Minimum Window Substring",
+        "Fruit Into Baskets"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Binary Search",
+      "difficulty": "medium",
+      "signals": [
+        "Sorted array",
+        "Finding boundary/threshold",
+        "Minimize/maximize answer",
+        "Monotonic function"
+      ],
+      "technique": "Search on the answer space, not just the input. If you can define a condition that's false then true (or vice versa), binary search applies. Use left + (right - left) / 2 to avoid overflow.",
+      "examples": [
+        "Search in Rotated Sorted Array",
+        "Find Minimum in Rotated Array",
+        "Koko Eating Bananas",
+        "Median of Two Sorted Arrays"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "BFS / Level-Order Traversal",
+      "difficulty": "medium",
+      "signals": [
+        "Shortest path in unweighted graph",
+        "Level-by-level processing",
+        "Finding nearest/minimum steps",
+        "Spreading from multiple sources"
+      ],
+      "technique": "Queue-based traversal processing nodes level by level. Track visited nodes. For multi-source BFS, initialize queue with all sources. Level tracking with queue size snapshot.",
+      "examples": [
+        "Binary Tree Level Order Traversal",
+        "Word Ladder",
+        "Rotting Oranges",
+        "Shortest Path in Grid"
+      ]
+    },
+    {
+      "id": 5,
+      "name": "DFS / Backtracking",
+      "difficulty": "medium",
+      "signals": [
+        "Generate all combinations/permutations",
+        "Explore all paths",
+        "Decision tree problems",
+        "Constraint satisfaction"
+      ],
+      "technique": "Recursively explore choices, backtrack when constraint is violated. Use a visited set for graph DFS. Prune early to improve performance. Pass state by reference and undo after recursion.",
+      "examples": [
+        "Combination Sum",
+        "N-Queens",
+        "Word Search",
+        "Generate Parentheses",
+        "Sudoku Solver"
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Dynamic Programming",
+      "difficulty": "hard",
+      "signals": [
+        "Optimal substructure (optimal solution uses optimal sub-solutions)",
+        "Overlapping subproblems",
+        "'How many ways'",
+        "'Minimum/maximum cost'"
+      ],
+      "technique": "Define state clearly, write recurrence relation, identify base cases. Decide top-down (memoization) or bottom-up (tabulation). Optimize space if only previous row/state needed.",
+      "examples": [
+        "Longest Common Subsequence",
+        "Coin Change",
+        "Edit Distance",
+        "0/1 Knapsack",
+        "Longest Increasing Subsequence"
+      ]
+    },
+    {
+      "id": 7,
+      "name": "Greedy",
+      "difficulty": "medium",
+      "signals": [
+        "Local optimal leads to global optimal",
+        "Scheduling/interval problems",
+        "Huffman-like choices",
+        "Can prove greedy choice property"
+      ],
+      "technique": "Sort by a key metric, then make the locally optimal choice at each step. Prove correctness by exchange argument or showing optimal substructure. Often combined with sorting.",
+      "examples": [
+        "Activity Selection",
+        "Jump Game",
+        "Task Scheduler",
+        "Merge Intervals",
+        "Gas Station"
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Monotonic Stack",
+      "difficulty": "medium",
+      "signals": [
+        "Next greater/smaller element",
+        "Histogram problems",
+        "Stock span",
+        "Temperature problems"
+      ],
+      "technique": "Maintain a stack where elements are in monotonically increasing (or decreasing) order. When a new element violates the monotonic property, pop and process. The popped element's answer involves the new element.",
+      "examples": [
+        "Next Greater Element",
+        "Largest Rectangle in Histogram",
+        "Daily Temperatures",
+        "Stock Span Problem"
+      ]
+    },
+    {
+      "id": 9,
+      "name": "Union-Find (Disjoint Set)",
+      "difficulty": "medium",
+      "signals": [
+        "Grouping/clustering",
+        "Connected components",
+        "Detect cycles in undirected graph",
+        "Dynamic connectivity"
+      ],
+      "technique": "Track parent of each element. Find: follow parent pointers to root (with path compression). Union: merge two sets by connecting roots (with rank/size). Nearly O(1) amortized operations.",
+      "examples": [
+        "Number of Islands (alternative to DFS)",
+        "Accounts Merge",
+        "Redundant Connection",
+        "Longest Consecutive Sequence"
+      ]
+    },
+    {
+      "id": 10,
+      "name": "Topological Sort",
+      "difficulty": "medium",
+      "signals": [
+        "Dependency ordering",
+        "Course prerequisites",
+        "Build systems",
+        "Task scheduling with dependencies"
+      ],
+      "technique": "Kahn's algorithm: compute in-degree for each node, start with in-degree 0 nodes in queue, process and decrement neighbors' in-degree. Alternatively: DFS with post-order recording. Cycle detection: if processed count < total nodes.",
+      "examples": [
+        "Course Schedule",
+        "Alien Dictionary",
+        "Build Order",
+        "Parallel Courses"
+      ]
+    },
+    {
+      "id": 11,
+      "name": "Trie (Prefix Tree)",
+      "difficulty": "medium",
+      "signals": [
+        "Prefix matching",
+        "Autocomplete",
+        "Word dictionary operations",
+        "XOR problems"
+      ],
+      "technique": "Tree where each node represents a character. Insert by traversing/creating nodes for each character. Search by traversal. Store isEndOfWord flag at terminal nodes. Space: O(alphabet_size * average_word_length * num_words).",
+      "examples": [
+        "Implement Trie",
+        "Word Search II",
+        "Design Search Autocomplete",
+        "Maximum XOR of Two Numbers"
+      ]
+    },
+    {
+      "id": 12,
+      "name": "Heap / Priority Queue",
+      "difficulty": "medium",
+      "signals": [
+        "K-th largest/smallest",
+        "Merge K sorted lists",
+        "Median of stream",
+        "Top K frequent elements"
+      ],
+      "technique": "Use min-heap for K largest (evict smallest), max-heap for K smallest (evict largest). Two heaps for running median. Priority queue for merge operations. Time: O(log K) per operation.",
+      "examples": [
+        "Kth Largest Element",
+        "Merge K Sorted Lists",
+        "Find Median from Data Stream",
+        "Top K Frequent Elements"
+      ]
+    },
+    {
+      "id": 13,
+      "name": "Graph: Dijkstra / Shortest Path",
+      "difficulty": "hard",
+      "signals": [
+        "Weighted graph shortest path",
+        "Minimum cost path",
+        "Network delay time",
+        "Non-negative weights"
+      ],
+      "technique": "Priority queue with (distance, node). Process closest unvisited node, relax edges to neighbors. For negative weights, use Bellman-Ford. For all-pairs, use Floyd-Warshall. Time: O((V+E) log V) with binary heap.",
+      "examples": [
+        "Network Delay Time",
+        "Cheapest Flights Within K Stops",
+        "Path With Minimum Effort",
+        "Swim in Rising Water"
+      ]
+    },
+    {
+      "id": 14,
+      "name": "Bit Manipulation",
+      "difficulty": "medium",
+      "signals": [
+        "XOR for finding unique elements",
+        "Power of 2 checks",
+        "Subsets via bitmask",
+        "Counting bits"
+      ],
+      "technique": "XOR: a^a=0, a^0=a (find single number). AND with (n-1): clear lowest set bit (power of 2 check, count bits). Bitmask: represent subsets as integers, iterate with i & (1<<j).",
+      "examples": [
+        "Single Number",
+        "Number of 1 Bits",
+        "Subsets",
+        "Reverse Bits",
+        "Missing Number"
+      ]
+    },
+    {
+      "id": 15,
+      "name": "Interval Merging / Sweep Line",
+      "difficulty": "medium",
+      "signals": [
+        "Overlapping intervals",
+        "Meeting rooms",
+        "Calendar conflicts",
+        "Range coverage"
+      ],
+      "technique": "Sort intervals by start time. Merge overlapping intervals by comparing current end with next start. For point-in-time queries, use sweep line: convert intervals to +1 (start) and -1 (end) events, sort, and scan.",
+      "examples": [
+        "Merge Intervals",
+        "Insert Interval",
+        "Meeting Rooms II",
+        "Non-overlapping Intervals",
+        "My Calendar"
+      ]
+    }
+  ]
+}

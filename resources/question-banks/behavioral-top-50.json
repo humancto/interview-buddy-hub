@@ -1,0 +1,658 @@
+{
+  "id": "behavioral-top-50",
+  "title": "Top 50 Behavioral Interview Questions",
+  "description": "The most commonly asked behavioral questions at top tech companies, organized by competency with STAR framework guidance.",
+  "updatedAt": "2026-04-06",
+  "questions": [
+    {
+      "id": 1,
+      "category": "Leadership",
+      "question": "Tell me about a time you led a team through a difficult challenge.",
+      "framework": "STAR",
+      "keySignals": [
+        "Setting direction",
+        "Motivating others",
+        "Making tough decisions",
+        "Taking accountability"
+      ],
+      "commonAt": ["Amazon", "Google", "Meta", "Microsoft"]
+    },
+    {
+      "id": 2,
+      "category": "Leadership",
+      "question": "Describe a situation where you had to influence people without having direct authority.",
+      "framework": "STAR",
+      "keySignals": [
+        "Building consensus",
+        "Understanding motivations",
+        "Data-driven persuasion",
+        "Relationship building"
+      ],
+      "commonAt": ["Google", "Stripe", "Airbnb"]
+    },
+    {
+      "id": 3,
+      "category": "Leadership",
+      "question": "Tell me about a time you mentored someone and helped them grow.",
+      "framework": "STAR",
+      "keySignals": [
+        "Investing in others",
+        "Identifying growth areas",
+        "Providing constructive feedback",
+        "Patience"
+      ],
+      "commonAt": ["Google", "Microsoft", "Apple"]
+    },
+    {
+      "id": 4,
+      "category": "Conflict Resolution",
+      "question": "Describe a time you disagreed with a coworker. How did you resolve it?",
+      "framework": "STAR",
+      "keySignals": [
+        "Active listening",
+        "Seeking to understand",
+        "Finding common ground",
+        "Professional resolution"
+      ],
+      "commonAt": ["Amazon", "Meta", "Netflix"]
+    },
+    {
+      "id": 5,
+      "category": "Conflict Resolution",
+      "question": "Tell me about a time you received negative feedback. How did you handle it?",
+      "framework": "STAR",
+      "keySignals": [
+        "Self-awareness",
+        "Growth mindset",
+        "Emotional regulation",
+        "Actionable change"
+      ],
+      "commonAt": ["Microsoft", "Google", "Amazon"]
+    },
+    {
+      "id": 6,
+      "category": "Conflict Resolution",
+      "question": "Describe a situation where you had to push back on a stakeholder's request.",
+      "framework": "STAR",
+      "keySignals": [
+        "Backbone",
+        "Data-driven reasoning",
+        "Respectful disagreement",
+        "Alternative solutions"
+      ],
+      "commonAt": ["Amazon", "Stripe", "Coinbase"]
+    },
+    {
+      "id": 7,
+      "category": "Problem Solving",
+      "question": "Tell me about the most complex technical problem you've solved.",
+      "framework": "STAR",
+      "keySignals": [
+        "Systematic approach",
+        "Breaking down complexity",
+        "Creative thinking",
+        "Perseverance"
+      ],
+      "commonAt": ["Google", "Meta", "Apple", "Stripe"]
+    },
+    {
+      "id": 8,
+      "category": "Problem Solving",
+      "question": "Describe a time you had to make a decision with incomplete information.",
+      "framework": "STAR",
+      "keySignals": [
+        "Risk assessment",
+        "Bias for action",
+        "Mitigating downside",
+        "Speed of decision"
+      ],
+      "commonAt": ["Amazon", "Uber", "DoorDash"]
+    },
+    {
+      "id": 9,
+      "category": "Problem Solving",
+      "question": "Tell me about a time you identified a problem before anyone else noticed.",
+      "framework": "STAR",
+      "keySignals": [
+        "Proactive thinking",
+        "Pattern recognition",
+        "Ownership",
+        "Impact awareness"
+      ],
+      "commonAt": ["Amazon", "Netflix", "Palantir"]
+    },
+    {
+      "id": 10,
+      "category": "Problem Solving",
+      "question": "Describe a time you had to debug a complex production issue under time pressure.",
+      "framework": "STAR",
+      "keySignals": [
+        "Systematic debugging",
+        "Staying calm under pressure",
+        "Communication during crisis",
+        "Root cause analysis"
+      ],
+      "commonAt": ["Google", "Meta", "Stripe", "Coinbase"]
+    },
+    {
+      "id": 11,
+      "category": "Ownership",
+      "question": "Tell me about a project you owned end-to-end. What was the outcome?",
+      "framework": "STAR",
+      "keySignals": [
+        "Full ownership",
+        "Driving to completion",
+        "Handling obstacles",
+        "Measuring impact"
+      ],
+      "commonAt": ["Amazon", "Airbnb", "Uber"]
+    },
+    {
+      "id": 12,
+      "category": "Ownership",
+      "question": "Describe a time you took initiative on something outside your job description.",
+      "framework": "STAR",
+      "keySignals": [
+        "Proactive behavior",
+        "Seeing the bigger picture",
+        "Self-starting",
+        "Impact beyond role"
+      ],
+      "commonAt": ["Amazon", "Netflix", "Stripe"]
+    },
+    {
+      "id": 13,
+      "category": "Ownership",
+      "question": "Tell me about a time you had to deliver bad news to your team or manager.",
+      "framework": "STAR",
+      "keySignals": [
+        "Transparency",
+        "Accountability",
+        "Proposed solutions",
+        "Emotional intelligence"
+      ],
+      "commonAt": ["Amazon", "Google", "Microsoft"]
+    },
+    {
+      "id": 14,
+      "category": "Collaboration",
+      "question": "Describe a time you worked with a cross-functional team. What was your role?",
+      "framework": "STAR",
+      "keySignals": [
+        "Cross-team communication",
+        "Understanding different perspectives",
+        "Bridging gaps",
+        "Shared success"
+      ],
+      "commonAt": ["Airbnb", "Figma", "Notion", "Spotify"]
+    },
+    {
+      "id": 15,
+      "category": "Collaboration",
+      "question": "Tell me about a successful collaboration with a designer or PM.",
+      "framework": "STAR",
+      "keySignals": [
+        "Empathy for other roles",
+        "Shared decision-making",
+        "Communication clarity",
+        "Joint problem-solving"
+      ],
+      "commonAt": ["Airbnb", "Figma", "Spotify"]
+    },
+    {
+      "id": 16,
+      "category": "Collaboration",
+      "question": "Describe a time you helped a teammate who was struggling.",
+      "framework": "STAR",
+      "keySignals": [
+        "Empathy",
+        "Generosity with time",
+        "Teaching ability",
+        "Team-first mentality"
+      ],
+      "commonAt": ["Google", "Microsoft", "Anthropic"]
+    },
+    {
+      "id": 17,
+      "category": "Failure & Learning",
+      "question": "Tell me about your biggest professional failure. What did you learn?",
+      "framework": "STAR",
+      "keySignals": [
+        "Honesty",
+        "Self-reflection",
+        "Growth from failure",
+        "Concrete changes made"
+      ],
+      "commonAt": ["Every company"]
+    },
+    {
+      "id": 18,
+      "category": "Failure & Learning",
+      "question": "Describe a project that didn't go as planned. What would you do differently?",
+      "framework": "STAR",
+      "keySignals": [
+        "Honest assessment",
+        "Root cause identification",
+        "Learning extraction",
+        "Applied improvements"
+      ],
+      "commonAt": ["Every company"]
+    },
+    {
+      "id": 19,
+      "category": "Failure & Learning",
+      "question": "Tell me about a time you made a mistake that affected customers or users.",
+      "framework": "STAR",
+      "keySignals": [
+        "Accountability",
+        "Quick response",
+        "Customer empathy",
+        "Prevention measures"
+      ],
+      "commonAt": ["Amazon", "Stripe", "Coinbase"]
+    },
+    {
+      "id": 20,
+      "category": "Failure & Learning",
+      "question": "Describe a time you had to abandon an approach that wasn't working and pivot.",
+      "framework": "STAR",
+      "keySignals": [
+        "Intellectual honesty",
+        "Adaptability",
+        "Sunk cost awareness",
+        "New direction success"
+      ],
+      "commonAt": ["Meta", "Uber", "DoorDash"]
+    },
+    {
+      "id": 21,
+      "category": "Communication",
+      "question": "Tell me about a time you had to explain a complex technical concept to a non-technical audience.",
+      "framework": "STAR",
+      "keySignals": [
+        "Audience adaptation",
+        "Use of analogies",
+        "Checking understanding",
+        "Clear structure"
+      ],
+      "commonAt": ["Palantir", "Salesforce", "Microsoft"]
+    },
+    {
+      "id": 22,
+      "category": "Communication",
+      "question": "Describe a time you had to give difficult feedback to a peer.",
+      "framework": "STAR",
+      "keySignals": [
+        "Courage",
+        "Empathy",
+        "Specific examples",
+        "Constructive framing"
+      ],
+      "commonAt": ["Netflix", "Google", "Meta"]
+    },
+    {
+      "id": 23,
+      "category": "Communication",
+      "question": "Tell me about a technical document or proposal you wrote that drove a significant decision.",
+      "framework": "STAR",
+      "keySignals": [
+        "Written communication",
+        "Persuasive structure",
+        "Data-driven arguments",
+        "Stakeholder awareness"
+      ],
+      "commonAt": ["Amazon", "Google", "Stripe"]
+    },
+    {
+      "id": 24,
+      "category": "Prioritization",
+      "question": "How do you decide what to work on when everything seems urgent?",
+      "framework": "STAR",
+      "keySignals": [
+        "Framework usage",
+        "Impact assessment",
+        "Stakeholder alignment",
+        "Saying no gracefully"
+      ],
+      "commonAt": ["Every company"]
+    },
+    {
+      "id": 25,
+      "category": "Prioritization",
+      "question": "Tell me about a time you had to balance speed of delivery with quality.",
+      "framework": "STAR",
+      "keySignals": [
+        "Trade-off analysis",
+        "Risk awareness",
+        "Pragmatic decisions",
+        "Technical debt management"
+      ],
+      "commonAt": ["Meta", "Uber", "DoorDash"]
+    },
+    {
+      "id": 26,
+      "category": "Prioritization",
+      "question": "Describe a time you cut scope to meet a deadline. How did you decide what to cut?",
+      "framework": "STAR",
+      "keySignals": [
+        "MVP thinking",
+        "User impact focus",
+        "Stakeholder communication",
+        "Follow-through on deferred items"
+      ],
+      "commonAt": ["Meta", "Amazon", "Stripe"]
+    },
+    {
+      "id": 27,
+      "category": "Innovation",
+      "question": "Tell me about a time you introduced a new technology or process to your team.",
+      "framework": "STAR",
+      "keySignals": [
+        "Innovation mindset",
+        "Change management",
+        "Building buy-in",
+        "Measuring adoption"
+      ],
+      "commonAt": ["Google", "Netflix", "Figma"]
+    },
+    {
+      "id": 28,
+      "category": "Innovation",
+      "question": "Describe a creative solution you came up with for a difficult problem.",
+      "framework": "STAR",
+      "keySignals": [
+        "Creative thinking",
+        "Unconventional approaches",
+        "Testing hypotheses",
+        "Effective outcomes"
+      ],
+      "commonAt": ["Apple", "Figma", "Anthropic"]
+    },
+    {
+      "id": 29,
+      "category": "Adaptability",
+      "question": "Tell me about a time you had to learn a new technology quickly for a project.",
+      "framework": "STAR",
+      "keySignals": [
+        "Learning agility",
+        "Resource finding",
+        "Practical application",
+        "Knowledge sharing"
+      ],
+      "commonAt": ["Every company"]
+    },
+    {
+      "id": 30,
+      "category": "Adaptability",
+      "question": "Describe a time when project requirements changed significantly. How did you adapt?",
+      "framework": "STAR",
+      "keySignals": [
+        "Flexibility",
+        "Positive attitude",
+        "Rapid replanning",
+        "Stakeholder management"
+      ],
+      "commonAt": ["Every company"]
+    },
+    {
+      "id": 31,
+      "category": "Customer Focus",
+      "question": "Tell me about a time you went above and beyond for a customer or user.",
+      "framework": "STAR",
+      "keySignals": [
+        "Customer empathy",
+        "Extra effort",
+        "User impact",
+        "Long-term thinking"
+      ],
+      "commonAt": ["Amazon", "Airbnb", "Salesforce"]
+    },
+    {
+      "id": 32,
+      "category": "Customer Focus",
+      "question": "Describe a time you used customer feedback to improve a product.",
+      "framework": "STAR",
+      "keySignals": [
+        "Active listening",
+        "Data synthesis",
+        "Action from feedback",
+        "Measuring improvement"
+      ],
+      "commonAt": ["Amazon", "Airbnb", "Figma"]
+    },
+    {
+      "id": 33,
+      "category": "Technical Decision Making",
+      "question": "Tell me about a significant technical trade-off you made and how you evaluated options.",
+      "framework": "STAR",
+      "keySignals": [
+        "Structured evaluation",
+        "Considering alternatives",
+        "Long-term thinking",
+        "Documenting decisions"
+      ],
+      "commonAt": ["Google", "Stripe", "Netflix"]
+    },
+    {
+      "id": 34,
+      "category": "Technical Decision Making",
+      "question": "Describe a time you chose to take on technical debt. How did you manage it afterward?",
+      "framework": "STAR",
+      "keySignals": [
+        "Pragmatic decision",
+        "Risk awareness",
+        "Payback plan",
+        "Follow-through"
+      ],
+      "commonAt": ["Meta", "Uber", "DoorDash"]
+    },
+    {
+      "id": 35,
+      "category": "Technical Decision Making",
+      "question": "Tell me about a time you advocated for a technology or architectural change.",
+      "framework": "STAR",
+      "keySignals": [
+        "Technical vision",
+        "Building consensus",
+        "Data-driven advocacy",
+        "Managing transition"
+      ],
+      "commonAt": ["Google", "Netflix", "Stripe"]
+    },
+    {
+      "id": 36,
+      "category": "Ambiguity",
+      "question": "Describe a project where the requirements were unclear. How did you proceed?",
+      "framework": "STAR",
+      "keySignals": [
+        "Comfort with ambiguity",
+        "Clarifying questions",
+        "Iterative approach",
+        "Stakeholder alignment"
+      ],
+      "commonAt": ["Amazon", "Palantir", "Netflix"]
+    },
+    {
+      "id": 37,
+      "category": "Ambiguity",
+      "question": "Tell me about a time you started something from scratch with no playbook.",
+      "framework": "STAR",
+      "keySignals": [
+        "Self-direction",
+        "Research and learning",
+        "Building frameworks",
+        "Iteration"
+      ],
+      "commonAt": ["Startups", "Netflix", "Palantir"]
+    },
+    {
+      "id": 38,
+      "category": "Ethics & Values",
+      "question": "Tell me about a time you had to make an ethical decision at work.",
+      "framework": "STAR",
+      "keySignals": [
+        "Moral courage",
+        "Principled reasoning",
+        "Standing up for what's right",
+        "Navigating gray areas"
+      ],
+      "commonAt": ["Anthropic", "Google", "Microsoft"]
+    },
+    {
+      "id": 39,
+      "category": "Ethics & Values",
+      "question": "Describe a time you identified a potential safety or security concern. What did you do?",
+      "framework": "STAR",
+      "keySignals": [
+        "Proactive safety thinking",
+        "Escalation judgment",
+        "User protection focus",
+        "Systemic improvement"
+      ],
+      "commonAt": ["Anthropic", "Coinbase", "Stripe"]
+    },
+    {
+      "id": 40,
+      "category": "Scale & Impact",
+      "question": "Tell me about the highest-impact project you've worked on. How do you measure impact?",
+      "framework": "STAR",
+      "keySignals": [
+        "Impact quantification",
+        "Scope awareness",
+        "Contribution clarity",
+        "Business understanding"
+      ],
+      "commonAt": ["Every company"]
+    },
+    {
+      "id": 41,
+      "category": "Scale & Impact",
+      "question": "Describe a time you improved a process that benefited the entire team or organization.",
+      "framework": "STAR",
+      "keySignals": [
+        "Systems thinking",
+        "Process improvement",
+        "Measuring before/after",
+        "Adoption driving"
+      ],
+      "commonAt": ["Amazon", "Google", "Microsoft"]
+    },
+    {
+      "id": 42,
+      "category": "Time Management",
+      "question": "How do you manage your time when working on multiple projects simultaneously?",
+      "framework": "STAR",
+      "keySignals": [
+        "Structured approach",
+        "Context switching management",
+        "Communication",
+        "Delivering consistently"
+      ],
+      "commonAt": ["Every company"]
+    },
+    {
+      "id": 43,
+      "category": "Resilience",
+      "question": "Tell me about a time you persevered through a very challenging period at work.",
+      "framework": "STAR",
+      "keySignals": [
+        "Grit",
+        "Maintaining quality under stress",
+        "Self-care awareness",
+        "Positive outcome"
+      ],
+      "commonAt": ["Every company"]
+    },
+    {
+      "id": 44,
+      "category": "Resilience",
+      "question": "Describe a time you had to recover from a setback. How did you bounce back?",
+      "framework": "STAR",
+      "keySignals": [
+        "Emotional resilience",
+        "Action-oriented recovery",
+        "Learning from adversity",
+        "Coming back stronger"
+      ],
+      "commonAt": ["Every company"]
+    },
+    {
+      "id": 45,
+      "category": "Vision",
+      "question": "Tell me about a time you saw an opportunity others missed and acted on it.",
+      "framework": "STAR",
+      "keySignals": [
+        "Strategic vision",
+        "Initiative",
+        "Conviction",
+        "Execution on vision"
+      ],
+      "commonAt": ["Amazon", "Netflix", "Anthropic"]
+    },
+    {
+      "id": 46,
+      "category": "Diversity & Inclusion",
+      "question": "Describe a time you advocated for diversity or inclusion in your workplace.",
+      "framework": "STAR",
+      "keySignals": [
+        "Awareness",
+        "Action not just words",
+        "Inclusive behavior",
+        "Systemic change"
+      ],
+      "commonAt": ["Google", "Microsoft", "Airbnb"]
+    },
+    {
+      "id": 47,
+      "category": "Stakeholder Management",
+      "question": "Tell me about a time you managed competing stakeholder priorities.",
+      "framework": "STAR",
+      "keySignals": [
+        "Understanding each perspective",
+        "Finding win-wins",
+        "Transparent communication",
+        "Decisive action"
+      ],
+      "commonAt": ["Amazon", "Salesforce", "Palantir"]
+    },
+    {
+      "id": 48,
+      "category": "Continuous Improvement",
+      "question": "What's the most valuable thing you've learned in the past year? How did you apply it?",
+      "framework": "STAR",
+      "keySignals": [
+        "Continuous learning",
+        "Self-directed growth",
+        "Practical application",
+        "Sharing knowledge"
+      ],
+      "commonAt": ["Every company"]
+    },
+    {
+      "id": 49,
+      "category": "Culture Fit",
+      "question": "Why are you interested in this company? What about our mission resonates with you?",
+      "framework": "Narrative",
+      "keySignals": [
+        "Genuine interest",
+        "Research depth",
+        "Values alignment",
+        "Personal connection to mission"
+      ],
+      "commonAt": ["Every company"]
+    },
+    {
+      "id": 50,
+      "category": "Self-Awareness",
+      "question": "What are your strengths and areas for development as an engineer?",
+      "framework": "Narrative",
+      "keySignals": [
+        "Honest self-assessment",
+        "Specific examples",
+        "Active development plan",
+        "Not cliche answers"
+      ],
+      "commonAt": ["Every company"]
+    }
+  ]
+}

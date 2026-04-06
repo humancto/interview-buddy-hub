@@ -1,0 +1,130 @@
+{
+  "id": "amazon-sde2-backend",
+  "company": "Amazon",
+  "companyLogo": "https://logo.clearbit.com/amazon.com",
+  "role": "Backend Engineer",
+  "level": "SDE2 (Mid-Senior)",
+  "type": "technical",
+  "difficulty": "senior",
+  "language": "English",
+  "jobDescription": "As an SDE2 at Amazon, you will design and build scalable backend services that power Amazon's retail, AWS, or subsidiary products. You will own services end-to-end, from design through deployment and operational excellence. Responsibilities include designing RESTful APIs and microservices, writing production-quality code in Java, Python, or Go, building CI/CD pipelines, managing service health with operational dashboards, and contributing to team technical direction. Requirements: 3-7 years backend development experience, strong CS fundamentals (data structures, algorithms, distributed systems), experience with AWS services (DynamoDB, SQS, Lambda, ECS), proficiency in at least one backend language, understanding of microservices architecture and event-driven design. Preferred: Experience with high-throughput systems (>100K TPS), familiarity with Amazon's leadership principles, operational excellence mindset.",
+  "systemPromptOverride": "You are an Amazon interviewer. Amazon interviews are deeply rooted in the 16 Leadership Principles (LP). Every behavioral question must map to one or more LPs. For technical questions, probe on operational excellence: monitoring, alarming, rollback strategies, and blast radius. Amazon values 'Bias for Action' and 'Ownership' — look for candidates who take initiative and think beyond their immediate scope. For coding, expect production-quality code with error handling.",
+  "questionBank": [
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you disagreed with your manager or team about a technical decision. What did you do? (Leadership Principle: Have Backbone; Disagree and Commit)",
+      "hints": [
+        "Show respectful disagreement with data",
+        "Demonstrate commitment after the decision",
+        "Focus on the 'Disagree and Commit' principle"
+      ],
+      "idealAnswer": "Describe a specific disagreement where you had conviction based on data or experience. Show how you articulated your position clearly and respectfully, listened to others' perspectives, and ultimately either convinced the team or committed fully to the decision once made. Emphasize that you didn't hold a grudge or undermine the decision afterward."
+    },
+    {
+      "category": "behavioral",
+      "question": "Describe a time when you took on something significant outside your area of responsibility. (Leadership Principle: Ownership)",
+      "hints": [
+        "Show thinking beyond team boundaries",
+        "Demonstrate long-term thinking",
+        "Quantify the impact"
+      ],
+      "idealAnswer": "Describe identifying a problem or opportunity that wasn't in your scope but was important for the org. Show how you took initiative, got buy-in, and drove it to completion. Demonstrate the 'Ownership' principle — thinking like an owner, not blaming others, and acting on behalf of the entire company."
+    },
+    {
+      "category": "technical",
+      "question": "Design an order processing system for Amazon that handles peak traffic during Prime Day (>100K orders per minute).",
+      "hints": [
+        "Event-driven architecture with SQS/SNS",
+        "Consider idempotency for payment processing",
+        "Discuss graceful degradation strategies"
+      ],
+      "idealAnswer": "Event-driven microservices: Order Service validates and publishes to SQS, Payment Service processes payments idempotently (using idempotency keys), Inventory Service reserves stock with optimistic locking, Fulfillment Service assigns to warehouse. Use SQS FIFO for ordered processing, DLQ for failures. DynamoDB for order state with conditional writes. Step Functions for orchestration with compensation (saga pattern) for failures. Auto-scaling based on queue depth. Circuit breakers between services. Feature flags for non-critical features during peak load."
+    },
+    {
+      "category": "coding",
+      "question": "Implement an LRU Cache with O(1) get and put operations. The cache should support a maximum capacity.",
+      "hints": [
+        "Combine HashMap with doubly linked list",
+        "Consider thread safety",
+        "Handle edge cases: capacity 0, duplicate keys"
+      ],
+      "idealAnswer": "Use a HashMap for O(1) lookup mapping key to linked list node. Doubly linked list maintains access order — most recently used at head, least recently used at tail. Get: move accessed node to head, return value. Put: if key exists, update value and move to head. If new key and at capacity, evict tail node and remove from map. Add new node at head. Time O(1) for both operations, Space O(capacity)."
+    },
+    {
+      "category": "technical",
+      "question": "How would you design a service to handle distributed transactions across multiple microservices without two-phase commit?",
+      "hints": [
+        "Saga pattern: choreography vs orchestration",
+        "Compensating transactions",
+        "Eventual consistency"
+      ],
+      "idealAnswer": "Use the Saga pattern. Two approaches: Choreography (services publish events and react to others' events — decentralized) or Orchestration (a central coordinator manages the saga steps). Each service has a local transaction and a compensating transaction for rollback. Use an event store or outbox pattern for reliable event publishing. Implement idempotency in all services. Choose orchestration for complex flows with many steps and choreography for simpler flows. Discuss trade-offs: eventual consistency, visibility into saga state, and debugging."
+    },
+    {
+      "category": "coding",
+      "question": "Given a stream of log events, design and implement a real-time anomaly detector that identifies when error rates exceed 2 standard deviations from the rolling mean.",
+      "hints": [
+        "Sliding window statistics",
+        "Welford's online algorithm for variance",
+        "Consider time-bucketed windows"
+      ],
+      "idealAnswer": "Use a circular buffer of time-bucketed counts (e.g., 1-minute buckets over 1 hour). Maintain running sum and sum-of-squares for O(1) mean and standard deviation calculation using Welford's algorithm. When a new event arrives, update the current bucket. Compare current error rate against mean + 2*stddev of historical buckets. Handle cold start with minimum sample requirement. Consider exponential moving average as alternative for more weight on recent data."
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you had to make a decision with incomplete data. (Leadership Principle: Bias for Action)",
+      "hints": [
+        "Show calculated risk-taking",
+        "Demonstrate speed of decision-making",
+        "Explain how you mitigated downside"
+      ],
+      "idealAnswer": "Describe a situation where waiting for perfect information would have caused missed opportunity or harm. Show how you gathered available data quickly, identified the reversibility of the decision, made a call, and put monitoring/rollback in place. Demonstrate that many decisions are reversible (two-way doors) and bias toward action over analysis paralysis."
+    },
+    {
+      "category": "technical",
+      "question": "Explain how DynamoDB achieves single-digit millisecond performance at any scale. Discuss the architecture.",
+      "hints": [
+        "Consistent hashing for partitioning",
+        "Request routers and partition metadata",
+        "Storage nodes and replication"
+      ],
+      "idealAnswer": "DynamoDB uses consistent hashing to distribute data across storage partitions. Request routers maintain partition metadata and direct requests to the correct partition leader. Each partition is replicated across 3 AZs using Paxos for strong consistency on writes. Reads can be eventually consistent (any replica) or strongly consistent (leader). Auto-scaling adjusts partition count based on throughput and storage. Adaptive capacity handles hot partitions by borrowing unused capacity. DAX provides microsecond caching layer."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 5,
+    "stages": [
+      "Online Assessment (2 coding + LP survey)",
+      "Phone Screen (1 coding + 1 behavioral)",
+      "Onsite Loop (4 rounds: 2 technical + 1 system design + 1 'Bar Raiser')",
+      "Debrief with Bar Raiser",
+      "Offer/Team Placement"
+    ],
+    "timeline": "2-6 weeks",
+    "tips": [
+      "Every interview round includes behavioral questions — prepare 15+ STAR stories mapped to Leadership Principles",
+      "The Bar Raiser is not on the hiring team and has veto power — they evaluate long-term potential",
+      "Use specific data and metrics in every answer — Amazon is data-driven",
+      "For system design, mention AWS services by name (DynamoDB, SQS, Lambda, etc.)",
+      "Operational excellence is critical — discuss monitoring, alarming, and runbooks",
+      "Write clean, compilable code — Amazon expects production-quality code in interviews"
+    ]
+  },
+  "salaryRange": {
+    "currency": "USD",
+    "base": [140000, 185000],
+    "totalComp": [230000, 400000],
+    "source": "levels.fyi",
+    "year": 2026
+  },
+  "tags": [
+    "java",
+    "aws",
+    "microservices",
+    "dynamodb",
+    "distributed-systems",
+    "leadership-principles"
+  ],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}

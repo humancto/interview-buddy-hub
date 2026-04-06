@@ -1,0 +1,117 @@
+{
+  "id": "behavioral-star-method",
+  "company": null,
+  "role": "Any",
+  "level": "All Levels",
+  "type": "behavioral",
+  "difficulty": "all",
+  "language": "English",
+  "jobDescription": "This template covers behavioral interview preparation using the STAR (Situation, Task, Action, Result) framework. Applicable to all roles and companies. Behavioral interviews assess soft skills, leadership, collaboration, conflict resolution, and cultural fit.",
+  "systemPromptOverride": "You are a behavioral interviewer. Use the STAR framework to evaluate responses. For each answer, listen for: (1) Specific Situation with context, (2) Clear Task or challenge, (3) Concrete Actions the candidate personally took, (4) Quantifiable Results and learnings. Push back if answers are vague, lack specifics, or use 'we' instead of 'I'. Ask follow-up questions to probe depth. Evaluate for self-awareness, growth mindset, and emotional intelligence.",
+  "questionBank": [
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you failed at something. What happened and what did you learn?",
+      "hints": [
+        "Choose a genuine failure, not a humble brag",
+        "Focus on what you learned and changed",
+        "Show self-awareness and growth"
+      ],
+      "idealAnswer": "STAR framework: Describe a real failure with honest context (not 'I worked too hard'). Explain what went wrong and your role in it. Detail the specific lessons learned and concrete behavioral changes you made. Show that the failure made you better — give an example of successfully applying those lessons later."
+    },
+    {
+      "category": "behavioral",
+      "question": "Describe a situation where you had to work with a difficult colleague. How did you handle it?",
+      "hints": [
+        "Don't badmouth the person",
+        "Focus on your actions and approach",
+        "Show empathy and conflict resolution skills"
+      ],
+      "idealAnswer": "Describe the working relationship challenge without being judgmental. Show how you sought to understand their perspective, found common ground, and adapted your communication style. Detail specific actions: direct conversation, finding shared goals, involving a mediator if needed. Result: improved working relationship or at minimum, productive professional output despite differences."
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you led a project or initiative. What was your approach to leadership?",
+      "hints": [
+        "Show both strategic and tactical leadership",
+        "Discuss how you motivated the team",
+        "Quantify the outcome"
+      ],
+      "idealAnswer": "Describe the project scope and why leadership was needed. Show your approach: setting vision, breaking down the work, delegating based on strengths, removing blockers, communicating progress, and making tough decisions. Demonstrate servant leadership: enabling others, giving credit, taking blame. Quantify results: timeline, quality, team satisfaction."
+    },
+    {
+      "category": "behavioral",
+      "question": "Give me an example of when you had to prioritize between multiple competing deadlines. How did you decide?",
+      "hints": [
+        "Show a prioritization framework",
+        "Discuss stakeholder communication",
+        "Demonstrate time management"
+      ],
+      "idealAnswer": "Describe the competing priorities with their stakes and deadlines. Show your prioritization approach: impact vs effort matrix, stakeholder alignment, identifying dependencies and critical paths. Explain how you communicated decisions and timelines to stakeholders. Show the outcome and whether your prioritization was correct. Reflect on what you'd do differently."
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you received feedback you initially disagreed with. What happened?",
+      "hints": [
+        "Show emotional maturity",
+        "Demonstrate active listening",
+        "Describe how you processed the feedback"
+      ],
+      "idealAnswer": "Describe the feedback and your initial reaction honestly. Show that you paused before reacting, asked clarifying questions to understand the perspective, and reflected on it with an open mind. Detail whether you ultimately agreed (and what you changed) or disagreed (and how you communicated that respectfully). Show growth from the experience."
+    },
+    {
+      "category": "behavioral",
+      "question": "Describe a time you had to influence people without formal authority.",
+      "hints": [
+        "Show persuasion through data and relationship-building",
+        "Demonstrate understanding of others' motivations",
+        "Focus on the approach, not just the outcome"
+      ],
+      "idealAnswer": "Describe the situation where you needed buy-in but had no direct authority. Show how you understood each stakeholder's priorities and concerns, built your case with data, created allies, demonstrated the value through prototypes or pilots, and addressed objections. Result: achieved alignment and the desired outcome through influence rather than mandate."
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you went above and beyond what was expected. What motivated you?",
+      "hints": [
+        "Show intrinsic motivation",
+        "Demonstrate ownership mentality",
+        "Quantify the extra impact"
+      ],
+      "idealAnswer": "Describe the baseline expectation and what you did beyond it. Explain your motivation (quality standards, user impact, team success, learning opportunity). Show the additional impact your effort created. Demonstrate that you do this because of personal standards, not for recognition."
+    },
+    {
+      "category": "behavioral",
+      "question": "Give me an example of a time you had to adapt quickly to a significant change at work.",
+      "hints": [
+        "Show resilience and flexibility",
+        "Discuss your emotional response honestly",
+        "Focus on constructive adaptation"
+      ],
+      "idealAnswer": "Describe the change (reorg, pivot, new technology, team change). Acknowledge your initial reaction honestly. Show how you quickly shifted to a constructive mindset: understanding the reasons for the change, identifying opportunities, re-planning your work, and helping others adapt. Demonstrate resilience and the ability to thrive in ambiguity."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 1,
+    "stages": ["Behavioral Interview (45-60 min)"],
+    "timeline": "N/A",
+    "tips": [
+      "Prepare 10-15 STAR stories covering different competencies",
+      "Each story should be specific with names, timelines, and metrics",
+      "Practice telling each story in 2-3 minutes — be concise",
+      "Always end with the Result AND what you learned",
+      "Avoid 'we' — interviewers want to know YOUR contribution",
+      "Have stories ready for: failure, conflict, leadership, prioritization, and influence",
+      "Tailor stories to the company's values (e.g., Amazon LPs, Meta values)"
+    ]
+  },
+  "salaryRange": null,
+  "tags": [
+    "behavioral",
+    "star-method",
+    "soft-skills",
+    "leadership",
+    "all-companies"
+  ],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}

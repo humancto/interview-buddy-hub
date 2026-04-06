@@ -1,0 +1,111 @@
+{
+  "id": "coinbase-senior-backend",
+  "company": "Coinbase",
+  "companyLogo": "https://logo.clearbit.com/coinbase.com",
+  "role": "Backend Engineer",
+  "level": "Senior (IC3)",
+  "type": "technical",
+  "difficulty": "senior",
+  "language": "English",
+  "jobDescription": "As a Senior Backend Engineer at Coinbase, you will build the financial infrastructure for the cryptoeconomy. You will work with Go, Ruby, and TypeScript to develop secure, reliable systems for cryptocurrency trading, custody, and blockchain integration. Responsibilities include designing high-reliability trading systems, building blockchain integration services (node management, transaction processing), implementing security-critical wallet and custody systems, ensuring regulatory compliance (KYC/AML), and optimizing system performance for high-volatility trading periods. Requirements: 5+ years backend experience, strong Go or Ruby skills, experience with financial systems or cryptocurrency, deep understanding of security engineering, distributed systems, and database design (PostgreSQL, DynamoDB). Preferred: Blockchain protocol knowledge (EVM, Bitcoin), cryptography fundamentals, experience with compliance systems, and high-frequency trading systems.",
+  "systemPromptOverride": "You are a Coinbase interviewer. Coinbase operates in a highly regulated, security-critical domain. Interviews emphasize: security-first thinking, reliability for financial systems, and understanding of blockchain technology. Every candidate should demonstrate awareness of the unique challenges of cryptocurrency systems: irreversible transactions, key management, MEV protection, and regulatory compliance. Probe on: how they handle security-critical code, their approach to testing financial logic, and their understanding of consensus mechanisms.",
+  "questionBank": [
+    {
+      "category": "system-design",
+      "question": "Design Coinbase's cryptocurrency trading engine that handles order matching, execution, and settlement for 200+ trading pairs.",
+      "hints": [
+        "Order book data structure",
+        "Matching algorithm (price-time priority)",
+        "Consider settlement finality for crypto"
+      ],
+      "idealAnswer": "Order book per trading pair: sorted buy orders (max-heap by price) and sell orders (min-heap by price). Matching engine: FIFO within each price level (price-time priority). When a new order arrives: match against the opposite side, generate fills. Use an event-sourced architecture: all order actions are events in an append-only log for auditability. Settle trades: for fiat, update internal ledgers; for crypto, batch on-chain settlements periodically. Handle: market orders (immediate execution at best available), limit orders (add to book if no match), stop orders (trigger when price crosses threshold). Risk checks: pre-trade (sufficient balance), position limits, circuit breakers for extreme volatility. Horizontal scaling: partition by trading pair."
+    },
+    {
+      "category": "technical",
+      "question": "How would you design a secure hot/cold wallet system for cryptocurrency custody?",
+      "hints": [
+        "Multi-signature schemes",
+        "Key management and HSMs",
+        "Threshold signing (MPC)"
+      ],
+      "idealAnswer": "Three-tier architecture: (1) Hot wallet — small balances for immediate withdrawals, keys in HSMs, automated signing with rate limits and amount thresholds. (2) Warm wallet — medium balances, multi-sig (e.g., 2-of-3) with keys across geographic regions, semi-automated with human approval for large amounts. (3) Cold wallet — majority of assets, air-gapped key generation, multi-sig with geographically distributed key ceremony, manual process for moving funds. Use MPC (Multi-Party Computation) for threshold signing — no single point of compromise. Monitor: transaction patterns for anomaly detection, balance reconciliation every block, alerting on unexpected outflows. Disaster recovery: Shamir's Secret Sharing for key backup."
+    },
+    {
+      "category": "coding",
+      "question": "Implement a function that validates Ethereum transactions: check signature, nonce ordering, and sufficient balance from a set of pending and confirmed transactions.",
+      "hints": [
+        "ECDSA signature recovery",
+        "Nonce gap detection",
+        "Consider pending transaction replacement (same nonce, higher gas)"
+      ],
+      "idealAnswer": "Validate: (1) Recover signer from signature using ecrecover(hash, v, r, s), verify matches 'from' field. (2) Check nonce: must equal the account's next expected nonce (last confirmed + number of valid pending txs). Detect nonce gaps. Allow replacement: same nonce with higher gas price replaces pending tx. (3) Balance check: start with confirmed balance, subtract values of pending txs in nonce order, verify remaining >= value + gasLimit * gasPrice. (4) Additional: check gasLimit is reasonable, value is non-negative, chain ID matches. Return detailed error for each validation failure."
+    },
+    {
+      "category": "behavioral",
+      "question": "Describe a time you handled a security incident or implemented a critical security improvement.",
+      "hints": [
+        "Show security-first mindset",
+        "Demonstrate systematic response",
+        "Discuss prevention measures"
+      ],
+      "idealAnswer": "Describe a real security event: detection (how was it found — monitoring, audit, report), response (containment, assessment, communication), and recovery (fix, post-mortem). Or describe a proactive security improvement: threat model analysis, identifying a vulnerability class, implementing defense in depth. Show understanding of security principles: least privilege, defense in depth, fail-safe defaults, zero trust. Demonstrate that security is a first-class concern, not an afterthought."
+    },
+    {
+      "category": "technical",
+      "question": "Explain the EVM (Ethereum Virtual Machine) execution model. How does gas work and why does it matter for system design?",
+      "hints": [
+        "Stack-based architecture",
+        "Gas as computation metering",
+        "Implications for smart contract interaction"
+      ],
+      "idealAnswer": "The EVM is a stack-based virtual machine that executes bytecode. Each operation (opcode) has a fixed gas cost reflecting computational complexity. Gas model: transactions specify gasLimit (max gas willing to use) and gasPrice (ETH per gas unit). If execution runs out of gas, all state changes revert but gas is consumed. Post EIP-1559: baseFee (burned) + priorityFee (to validator). System design implications: gas estimation before submission (simulate execution), gas price oracle for competitive pricing, handling out-of-gas failures gracefully, batching operations for gas efficiency, and monitoring gas costs for profitability of automated operations."
+    },
+    {
+      "category": "system-design",
+      "question": "Design a real-time cryptocurrency price feed system that aggregates prices from multiple exchanges and provides reliable market data.",
+      "hints": [
+        "WebSocket connections to exchanges",
+        "Outlier detection for erroneous prices",
+        "VWAP and other aggregation methods"
+      ],
+      "idealAnswer": "Connect to 10+ exchanges via their WebSocket APIs for real-time trade and order book data. Aggregation pipeline: (1) Normalize data formats across exchanges. (2) Compute metrics per exchange: last price, VWAP (volume-weighted average price), bid/ask spread. (3) Aggregate across exchanges using volume-weighted median (resistant to outliers). (4) Outlier detection: flag prices >3 standard deviations from the aggregate, apply circuit breaker if multiple exchanges diverge (potential market event or exchange issue). (5) Publish via WebSocket to internal consumers and API clients. Handle: exchange downtime (gracefully degrade to remaining sources), stale data detection (mark price as stale if no updates in 30s), and historical storage (time-series database for charts and analysis)."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 5,
+    "stages": [
+      "Recruiter Screen",
+      "Technical Phone Screen (coding, 60 min)",
+      "Onsite (4 rounds: 2 coding, 1 system design, 1 behavioral/values)",
+      "Security-Focused Discussion",
+      "Offer"
+    ],
+    "timeline": "3-5 weeks",
+    "tips": [
+      "Security awareness is tested in every round — always consider security implications",
+      "Understand blockchain basics: consensus, transactions, wallets, smart contracts",
+      "Coinbase uses Go extensively — familiarity with Go is a strong plus",
+      "Financial system reliability is paramount — discuss exactly-once semantics and idempotency",
+      "Show understanding of regulatory requirements (KYC/AML) in system design",
+      "Coinbase is remote-first — demonstrate strong async communication skills"
+    ]
+  },
+  "salaryRange": {
+    "currency": "USD",
+    "base": [175000, 250000],
+    "totalComp": [300000, 500000],
+    "source": "levels.fyi",
+    "year": 2026
+  },
+  "tags": [
+    "go",
+    "ruby",
+    "blockchain",
+    "cryptocurrency",
+    "security",
+    "fintech",
+    "distributed-systems"
+  ],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}

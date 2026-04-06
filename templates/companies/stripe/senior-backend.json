@@ -1,0 +1,120 @@
+{
+  "id": "stripe-senior-backend",
+  "company": "Stripe",
+  "companyLogo": "https://logo.clearbit.com/stripe.com",
+  "role": "Backend Engineer",
+  "level": "Senior (L3)",
+  "type": "technical",
+  "difficulty": "senior",
+  "language": "English",
+  "jobDescription": "As a Senior Backend Engineer at Stripe, you will build and maintain the financial infrastructure that powers millions of businesses worldwide. You will work primarily in Ruby, Java, or Go to develop payment processing systems, fraud detection engines, and financial APIs handling billions of dollars. Responsibilities include designing highly reliable payment systems with exactly-once semantics, building APIs that developers love, optimizing transaction throughput and latency, ensuring PCI-DSS compliance, and contributing to Stripe's engineering culture through writing and mentorship. Requirements: 5+ years backend experience, strong systems programming skills, experience with financial systems or high-reliability infrastructure, deep understanding of database internals (PostgreSQL), distributed systems, and API design. Preferred: Experience with payment processing, Ruby on Rails at scale, event sourcing, and regulatory compliance.",
+  "systemPromptOverride": "You are a Stripe interviewer. Stripe is famous for its high hiring bar and focus on clear thinking. Interviews test for: writing clean, well-structured code, designing robust systems, and communicating clearly. Stripe values engineers who think about failure modes and edge cases obsessively. For coding, expect the candidate to write production-quality code with error handling. For system design, focus on reliability, correctness, and idempotency — money cannot be lost or duplicated. Ask about debugging methodology and how they reason about complex systems.",
+  "questionBank": [
+    {
+      "category": "coding",
+      "question": "Implement an idempotent payment processing function. Given a payment request with an idempotency key, ensure the payment is processed exactly once even with retries and concurrent requests.",
+      "hints": [
+        "Use database transactions with unique constraints",
+        "Consider the state machine for payment lifecycle",
+        "Handle concurrent requests with the same idempotency key"
+      ],
+      "idealAnswer": "Store idempotency keys in a database with a unique constraint. On request: BEGIN transaction, INSERT idempotency record (fail if exists = concurrent/retry), process payment, store result in idempotency record, COMMIT. On retry: look up idempotency key, return cached result. Handle race conditions with SELECT FOR UPDATE or advisory locks. Implement a state machine (pending -> processing -> succeeded/failed) to handle partial failures. Set TTL on idempotency keys (e.g., 24 hours). Consider using the outbox pattern for reliable event publishing."
+    },
+    {
+      "category": "system-design",
+      "question": "Design Stripe's payment processing pipeline from the moment a charge API call is made to settlement with the bank.",
+      "hints": [
+        "Consider the full lifecycle: auth, capture, settlement",
+        "Think about retry strategies and reconciliation",
+        "Discuss fraud detection integration points"
+      ],
+      "idealAnswer": "API Gateway receives charge request, validates API key and parameters. Payment Service creates payment intent, runs fraud checks (ML model + rules engine) in parallel with 3D Secure if needed. Authorization: send ISO 8583 message to card network (Visa/Mastercard) via acquirer. Store auth result. For capture: batch captures for settlement, generate clearing files. Settlement: reconcile with bank statements daily. Implement saga pattern for multi-step flows. Use event sourcing for complete audit trail. Handle declines, partial captures, refunds, and disputes. Idempotency at every step. Multi-region deployment with active-passive for data residency."
+    },
+    {
+      "category": "coding",
+      "question": "Implement a rate limiter using the token bucket algorithm that supports per-customer limits with different tiers.",
+      "hints": [
+        "Lazy token refill on each request",
+        "Store bucket state in Redis for distributed use",
+        "Handle tier changes gracefully"
+      ],
+      "idealAnswer": "Token bucket per customer: store (tokens_remaining, last_refill_timestamp) in Redis. On request: calculate tokens to add based on elapsed time and tier's refill rate, cap at tier's max burst. Decrement by 1 if tokens available, reject otherwise. Use Redis MULTI/EXEC or Lua script for atomicity. Return rate limit headers (X-RateLimit-Remaining, X-RateLimit-Reset). Handle tier upgrades by adjusting max and refill rate. Implement graceful degradation when Redis is unavailable (allow traffic with logging)."
+    },
+    {
+      "category": "technical",
+      "question": "How would you design a database migration strategy for a system that processes payments 24/7 with zero downtime?",
+      "hints": [
+        "Expand-contract pattern",
+        "Consider backward compatibility during rollout",
+        "Think about large table migrations"
+      ],
+      "idealAnswer": "Use the expand-contract (parallel change) pattern: Phase 1 (Expand) — add new column/table, dual-write to both old and new, backfill historical data in batches with throttling. Phase 2 (Migrate) — switch reads to new schema, verify consistency. Phase 3 (Contract) — remove old column/table after verification period. For large tables: use pt-online-schema-change or gh-ost for MySQL, or CREATE INDEX CONCURRENTLY for PostgreSQL. Never lock tables. Feature flags control the rollout. Monitor query performance throughout. Have rollback plan at each phase."
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a bug in production that affected customers. How did you handle it?",
+      "hints": [
+        "Show systematic debugging approach",
+        "Demonstrate customer empathy",
+        "Discuss prevention measures"
+      ],
+      "idealAnswer": "Describe a real production incident. Show systematic approach: detect (monitoring/alerts), assess impact (affected customers, financial impact), mitigate (rollback, feature flag, hotfix), communicate (status page, customer notifications), resolve (root cause analysis), and prevent (post-mortem, automated tests, improved monitoring). Emphasize customer impact awareness and urgency. Show blameless post-mortem culture and concrete prevention measures."
+    },
+    {
+      "category": "coding",
+      "question": "Implement a function that converts between any two currencies given a graph of exchange rates. Handle cycles and find the best rate.",
+      "hints": [
+        "Model as a weighted graph",
+        "BFS/DFS for path finding",
+        "Consider using -log for Bellman-Ford to find best rate"
+      ],
+      "idealAnswer": "Model currencies as nodes, exchange rates as directed edges. For finding any path: BFS/DFS from source to target, multiplying rates along the path. For best rate: convert to log space (sum instead of multiply), negate values, and use Bellman-Ford to find shortest path (which corresponds to best exchange rate). Detect negative cycles (arbitrage opportunities). Cache results with TTL for frequently queried pairs. Handle missing rates gracefully."
+    },
+    {
+      "category": "technical",
+      "question": "Explain how you would implement distributed tracing across Stripe's microservices to debug a slow payment flow.",
+      "hints": [
+        "Trace context propagation",
+        "Sampling strategies",
+        "Correlation with business metrics"
+      ],
+      "idealAnswer": "Implement OpenTelemetry-based tracing. Propagate trace context (trace ID, span ID, baggage) via HTTP headers (W3C traceparent) and message queue metadata. Instrument: HTTP clients/servers, database queries, cache operations, external API calls (card networks). Sampling: 100% for errors and slow requests (tail-based sampling), 1-10% for normal traffic. Store traces in a columnar store (ClickHouse or managed service). Correlate trace IDs with payment IDs for business context. Build dashboards showing p50/p95/p99 latency per service and per payment flow step."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 5,
+    "stages": [
+      "Recruiter Screen",
+      "Coding Phone Screen (60 min, practical problem)",
+      "Take-Home Project (optional, 3-4 hours)",
+      "Onsite (4 rounds: 2 coding, 1 system design, 1 collaboration/behavioral)",
+      "Founder/Leadership Chat"
+    ],
+    "timeline": "3-6 weeks",
+    "tips": [
+      "Stripe interviews emphasize practical coding — write code you'd actually ship",
+      "Error handling and edge cases matter enormously — don't skip them",
+      "For system design, focus on reliability and correctness over raw throughput",
+      "Stripe values clear written communication — practice explaining technical concepts concisely",
+      "The take-home project is evaluated on code quality, not just correctness",
+      "Research Stripe's API design philosophy — they care deeply about developer experience"
+    ]
+  },
+  "salaryRange": {
+    "currency": "USD",
+    "base": [190000, 260000],
+    "totalComp": [350000, 550000],
+    "source": "levels.fyi",
+    "year": 2026
+  },
+  "tags": [
+    "ruby",
+    "java",
+    "payments",
+    "fintech",
+    "api-design",
+    "distributed-systems"
+  ],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}

@@ -1,0 +1,120 @@
+{
+  "id": "google-l4-frontend",
+  "company": "Google",
+  "companyLogo": "https://logo.clearbit.com/google.com",
+  "role": "Frontend Engineer",
+  "level": "L4 (Mid)",
+  "type": "technical",
+  "difficulty": "senior",
+  "language": "English",
+  "jobDescription": "As a Frontend Engineer at Google (L4), you will build and optimize user-facing features for products used by billions. You will work with TypeScript, Angular/React, and modern web platform APIs. You will collaborate with UX designers, product managers, and backend engineers to deliver performant, accessible, and delightful user experiences. Responsibilities include implementing complex UI components, optimizing web performance metrics (LCP, FID, CLS), writing unit and integration tests, participating in design reviews, and mentoring junior engineers. You will contribute to Google's internal frontend frameworks and tooling. Requirements: 3-5 years of professional frontend experience, strong JavaScript/TypeScript skills, experience with modern frameworks (React, Angular, or Vue), deep understanding of browser rendering pipeline, accessibility standards (WCAG 2.1), and responsive design. Preferred: Experience with Web Components, service workers, build systems (Bazel, Webpack), and performance profiling.",
+  "systemPromptOverride": "You are a Google interviewer. Google values structured, methodical problem-solving. Encourage the candidate to think out loud and break problems into smaller pieces. Google interviews emphasize correctness, scalability, and code quality. Ask follow-up questions about edge cases, testing strategy, and how the solution would scale. Use Googleyness signals: intellectual humility, collaborative spirit, and bias toward action.",
+  "questionBank": [
+    {
+      "category": "technical",
+      "question": "How would you optimize a React application rendering a list of 10,000 items?",
+      "hints": [
+        "Think about virtualization libraries like react-window",
+        "Consider memoization with React.memo and useMemo",
+        "Discuss pagination vs infinite scroll trade-offs"
+      ],
+      "idealAnswer": "Use virtualized rendering (react-window or react-virtuoso) to only render visible items. Implement React.memo on list item components to prevent unnecessary re-renders. Use useMemo for expensive computations. Consider pagination for better UX and reduced memory usage. Implement proper key props for efficient reconciliation. For search/filter, debounce input and use web workers for heavy computation."
+    },
+    {
+      "category": "technical",
+      "question": "Explain the Critical Rendering Path and how you would optimize it.",
+      "hints": [
+        "Consider resource loading order",
+        "Think about render-blocking resources",
+        "Discuss metrics like FCP and LCP"
+      ],
+      "idealAnswer": "The Critical Rendering Path is the sequence of steps the browser takes to convert HTML, CSS, and JS into pixels: DOM construction, CSSOM construction, render tree, layout, and paint. Optimize by: minimizing critical resources (inline critical CSS, defer non-critical JS), reducing critical path length (minimize round trips), and reducing critical bytes (compress, minify). Use preload/preconnect hints, implement code splitting, lazy load below-fold content, and optimize images with modern formats (WebP, AVIF)."
+    },
+    {
+      "category": "technical",
+      "question": "Design a real-time collaborative text editor in the browser. What are the key technical challenges?",
+      "hints": [
+        "Consider conflict resolution strategies",
+        "Think about OT vs CRDT",
+        "Discuss WebSocket vs WebRTC"
+      ],
+      "idealAnswer": "Key challenges: concurrent editing conflicts, network latency, and offline support. Use Operational Transformation (OT) like Google Docs or CRDTs for conflict-free merging. Implement WebSocket connections for real-time sync with fallback to polling. Design cursor presence system showing other users' positions. Handle undo/redo per-user with operation history. Consider using a library like Yjs for CRDT implementation. Address memory management for long documents and implement efficient diffing."
+    },
+    {
+      "category": "technical",
+      "question": "How does the browser event loop work? Explain microtasks vs macrotasks.",
+      "hints": [
+        "Think about Promise callbacks vs setTimeout",
+        "Consider requestAnimationFrame placement",
+        "Discuss how this affects UI responsiveness"
+      ],
+      "idealAnswer": "The event loop processes tasks from the macrotask queue (setTimeout, setInterval, I/O, UI rendering) one at a time. After each macrotask, all microtasks (Promise.then, MutationObserver, queueMicrotask) are drained before the next macrotask or render. requestAnimationFrame callbacks run before the next paint. This means Promises resolve before setTimeout(0). Long-running synchronous code blocks the entire loop, freezing the UI. Use chunking, web workers, or scheduler.yield() for heavy computation."
+    },
+    {
+      "category": "technical",
+      "question": "Implement a type-safe event emitter in TypeScript that supports typed events.",
+      "hints": [
+        "Use generics and mapped types",
+        "Consider the interface for on, off, and emit",
+        "Think about memory leak prevention"
+      ],
+      "idealAnswer": "Define a type map interface where keys are event names and values are payload types. Use generics to constrain on/off/emit methods. Implement with a Map of Set<Function> for listeners. Include once() support, error handling for emit, and a removeAllListeners cleanup method. Consider WeakRef for automatic cleanup of garbage-collected subscribers."
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you had to make a significant technical trade-off. What was the context and how did you decide?",
+      "hints": [
+        "Use the STAR method",
+        "Quantify the impact",
+        "Show how you evaluated alternatives"
+      ],
+      "idealAnswer": "Describe a specific situation with clear trade-offs (e.g., shipping speed vs technical debt, performance vs maintainability). Show structured evaluation of options with pros/cons. Demonstrate data-driven decision making and stakeholder alignment. Explain the outcome and what you learned."
+    },
+    {
+      "category": "coding",
+      "question": "Given a nested object and a dot-notation path string, implement a function that safely gets and sets values. Handle arrays, missing paths, and type safety.",
+      "hints": [
+        "Split the path and traverse iteratively",
+        "Handle edge cases: null, undefined, arrays",
+        "Consider Proxy for advanced implementation"
+      ],
+      "idealAnswer": "Implement get(obj, path, defaultValue) by splitting path on dots, reducing through the object. For set, traverse to the parent, creating intermediate objects/arrays as needed. Handle numeric keys for arrays. Add TypeScript overloads for type-safe return values. Consider using optional chaining internally and handle edge cases like empty paths."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 5,
+    "stages": [
+      "Online Assessment or Recruiter Screen",
+      "Technical Phone Screen (45 min)",
+      "Onsite Virtual Loop (4-5 rounds)",
+      "Hiring Committee Review",
+      "Team Matching & Offer"
+    ],
+    "timeline": "4-8 weeks",
+    "tips": [
+      "Google values structured thinking — always clarify requirements before coding",
+      "Practice on a Google Doc or plain text editor, not an IDE",
+      "For coding rounds, aim for optimal time/space complexity and discuss trade-offs",
+      "Behavioral questions use 'Googleyness and Leadership' criteria — show collaboration and initiative",
+      "System design rounds expect you to drive the conversation — draw diagrams and estimate scale",
+      "The hiring committee reviews all feedback holistically, so consistency across rounds matters"
+    ]
+  },
+  "salaryRange": {
+    "currency": "USD",
+    "base": [130000, 185000],
+    "totalComp": [200000, 350000],
+    "source": "levels.fyi",
+    "year": 2026
+  },
+  "tags": [
+    "react",
+    "javascript",
+    "typescript",
+    "web-performance",
+    "accessibility",
+    "angular"
+  ],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}

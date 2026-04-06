@@ -1,0 +1,109 @@
+{
+  "id": "netflix-senior-frontend",
+  "company": "Netflix",
+  "companyLogo": "https://logo.clearbit.com/netflix.com",
+  "role": "Frontend Engineer",
+  "level": "Senior",
+  "type": "technical",
+  "difficulty": "senior",
+  "language": "English",
+  "jobDescription": "As a Senior UI Engineer at Netflix, you will build the next generation of the Netflix experience across web, TV, and mobile platforms. You will work with React, Node.js, and Netflix's custom frameworks to deliver seamless streaming experiences to 250+ million subscribers. Responsibilities include building performant, accessible user interfaces, optimizing application bundle size and load times, implementing A/B testing infrastructure, developing server-side rendering and edge-side logic, and contributing to Netflix's open-source projects. Requirements: 6+ years frontend experience, expert React and Node.js skills, experience with server-side rendering, performance optimization, A/B testing frameworks, and cross-platform development. Deep understanding of JavaScript engine internals, module bundling, and web security. Preferred: Experience with video players (MSE/EME), adaptive streaming (HLS/DASH), and TV platform development (Tizen, webOS, Roku).",
+  "systemPromptOverride": "You are a Netflix interviewer. Netflix's culture memo emphasizes freedom and responsibility, high performance, and candid feedback. Netflix pays top of market and expects exceptional performance. Technical interviews should probe for deep frontend expertise — not just framework knowledge but understanding of browser internals, performance, and architecture. Netflix values context over control — assess the candidate's ability to make independent decisions with good judgment. Ask about trade-offs and how they handle ambiguity.",
+  "questionBank": [
+    {
+      "category": "technical",
+      "question": "How would you optimize Netflix's homepage to load and become interactive in under 2 seconds on a slow 3G connection?",
+      "hints": [
+        "Consider critical rendering path optimization",
+        "Think about progressive enhancement",
+        "Discuss server-side rendering strategies"
+      ],
+      "idealAnswer": "Implement a multi-phase loading strategy: (1) Server-side render critical above-fold content with inline critical CSS. (2) Preload hero image at appropriate resolution using srcset and sizes. (3) Lazy load below-fold rows with Intersection Observer. (4) Code-split by route and defer non-critical JS. (5) Use service worker for caching static assets and API responses. (6) Implement skeleton screens during loading. (7) Optimize images with AVIF/WebP, serve at device-appropriate sizes via CDN. (8) Use HTTP/3 and early hints for faster resource discovery. (9) Prefetch likely navigation targets. Measure with Core Web Vitals (LCP < 2.5s, FID < 100ms, CLS < 0.1)."
+    },
+    {
+      "category": "technical",
+      "question": "Explain how Netflix implements A/B testing on the frontend. How would you design an A/B testing SDK?",
+      "hints": [
+        "Client-side vs server-side allocation",
+        "Avoiding flash of wrong experiment",
+        "Statistical significance"
+      ],
+      "idealAnswer": "Server-side allocation preferred to avoid FOUC (flash of original content). On request, the allocation service assigns the user to experiment groups based on member ID hash (deterministic). The SDK should: fetch allocations early (edge-side or SSR), expose a getExperiment(name) API returning the variant, support default values for failed fetches, track exposure events for analysis, handle allocation caching, and support mutual exclusion layers for overlapping experiments. Use a centralized experiment platform for configuration and analysis. Track guardrail metrics (quality of service, engagement) alongside experiment metrics."
+    },
+    {
+      "category": "coding",
+      "question": "Implement a custom virtual scrolling component that efficiently renders a grid of video thumbnails with variable row heights and dynamic content loading.",
+      "hints": [
+        "Track visible range with scroll position",
+        "Maintain a position cache for variable heights",
+        "Handle resize and orientation changes"
+      ],
+      "idealAnswer": "Maintain an offset array storing cumulative heights for each row (measured or estimated). On scroll: binary search the offset array to find visible range (start, end). Render only visible items plus a buffer zone (overscan). Use absolute positioning or transform: translateY for positioning. Measure rendered items and update offset array for accurate scrolling. Handle dynamic content loading by appending to the offset array. Debounce resize handler to recalculate positions. Use ResizeObserver on rendered items for dynamic height changes. Implement smooth scrolling and momentum preservation."
+    },
+    {
+      "category": "system-design",
+      "question": "Design Netflix's video player architecture for web, including adaptive bitrate streaming and DRM.",
+      "hints": [
+        "MSE and EME APIs",
+        "ABR algorithm considerations",
+        "Buffer management strategies"
+      ],
+      "idealAnswer": "Use Media Source Extensions (MSE) for programmatic video feeding and Encrypted Media Extensions (EME) for DRM (Widevine on Chrome, FairPlay on Safari). ABR algorithm: monitor bandwidth (exponential moving average of segment download times), buffer level, and device capabilities. Switch bitrates at segment boundaries to avoid artifacts. Buffer management: maintain 30-60 seconds forward buffer, implement buffer-based algorithm (BBA) or throughput-based with fallback. Handle stalls with aggressive downshift. Implement client-side metrics collection (rebuffer rate, start time, bitrate switches). Use a manifest parser for DASH/HLS. Handle trick play (fast forward, rewind) with I-frame only tracks."
+    },
+    {
+      "category": "behavioral",
+      "question": "Tell me about a time you made a significant technical decision with limited guidance. How did you evaluate the options?",
+      "hints": [
+        "Show independent judgment",
+        "Demonstrate Netflix's 'freedom and responsibility' value",
+        "Quantify the outcome"
+      ],
+      "idealAnswer": "Describe a situation where you had significant autonomy. Show how you gathered context (data, stakeholder input, industry research), evaluated options with a framework (e.g., weighted criteria matrix), made a decision, and took ownership of the outcome. Demonstrate Netflix's values of independent decision-making, informed by context rather than requiring control or approval. Show what happened and what you would do differently."
+    },
+    {
+      "category": "coding",
+      "question": "Implement a debounced search with request cancellation, caching, and error handling. Results should update as the user types.",
+      "hints": [
+        "Use AbortController for request cancellation",
+        "LRU cache for previous queries",
+        "Handle race conditions between responses"
+      ],
+      "idealAnswer": "Debounce input with configurable delay (300ms). On trigger: check LRU cache first (return immediately if hit). Cancel in-flight request using AbortController. Issue new fetch with abort signal. On response: validate it's for the current query (not stale), cache result, update UI. Handle errors: distinguish AbortError (ignore) from network errors (show error state with retry). Implement loading states. Consider: minimum query length, optimistic UI with cached prefix results, and progressive search refinement."
+    }
+  ],
+  "interviewProcess": {
+    "rounds": 4,
+    "stages": [
+      "Recruiter Screen + Culture Discussion",
+      "Technical Phone Screen (coding)",
+      "Onsite (3-4 rounds: 2 coding/technical, 1 system design, 1 values/behavioral)",
+      "Hiring Manager Final Conversation"
+    ],
+    "timeline": "3-5 weeks",
+    "tips": [
+      "Netflix pays top of market with no RSU cliff — compensation is heavily cash-weighted",
+      "The culture memo is required reading — understand 'freedom and responsibility' deeply",
+      "Netflix interviews assess if you're a 'stunning colleague' — show high performance AND collaboration",
+      "Technical depth matters more than breadth — know your domain inside out",
+      "Be prepared to discuss how you handle ambiguity and make independent decisions",
+      "Netflix values candor — be honest about mistakes and learnings"
+    ]
+  },
+  "salaryRange": {
+    "currency": "USD",
+    "base": [250000, 400000],
+    "totalComp": [250000, 400000],
+    "source": "levels.fyi",
+    "year": 2026
+  },
+  "tags": [
+    "react",
+    "node.js",
+    "video-streaming",
+    "performance",
+    "a-b-testing",
+    "javascript"
+  ],
+  "contributor": "community",
+  "updatedAt": "2026-04-06"
+}
